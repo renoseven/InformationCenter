@@ -42,7 +42,7 @@
                         <EditText
                             android:textAppearance="?android:attr/textAppearanceMedium"
                             android:id="@+id/txt_sender_name"
-                            android:tag="app.forwarding.mail.sender.name"
+                            android:tag="mail.forwarding.sender.name"
                             android:inputType="text"
                             android:layout_column="1"
                             android:hint="@string/hint_sender_name"
@@ -62,7 +62,7 @@
                         <EditText
                             android:textAppearance="?android:attr/textAppearanceMedium"
                             android:id="@+id/txt_sender"
-                            android:tag="app.forwarding.mail.sender"
+                            android:tag="mail.forwarding.sender"
                             android:layout_column="1"
                             android:inputType="textEmailAddress"
                             android:hint="@string/hint_sender"
@@ -83,7 +83,7 @@
                         <EditText
                             android:textAppearance="?android:attr/textAppearanceMedium"
                             android:id="@+id/txt_receiver_name"
-                            android:tag="app.forwarding.mail.receiver.name"
+                            android:tag="mail.forwarding.receiver.name"
                             android:layout_column="1"
                             android:inputType="text"
                             android:hint="@string/hint_receiver_name"
@@ -103,7 +103,7 @@
                         <EditText
                             android:textAppearance="?android:attr/textAppearanceMedium"
                             android:id="@+id/txt_receiver"
-                            android:tag="app.forwarding.mail.receiver"
+                            android:tag="mail.forwarding.receiver"
                             android:layout_column="1"
                             android:inputType="textEmailAddress"
                             android:hint="@string/hint_receiver"

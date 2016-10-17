@@ -2,16 +2,13 @@ package net.renoseven.informationcenter.task;
 
 import android.util.Log;
 
-import com.sun.mail.smtp.SMTPSendFailedException;
-
 import net.renoseven.informationcenter.message.MessageHolder;
 import net.renoseven.informationcenter.message.MessageType;
+import net.renoseven.informationcenter.preference.ApplicationPreferences;
 
 import java.util.Date;
 import java.util.Properties;
 
-import javax.mail.AuthenticationFailedException;
-import javax.mail.MessagingException;
 import javax.mail.Session;
 import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
@@ -22,8 +19,6 @@ import javax.mail.internet.MimeMessage;
  * Created by RenoSeven on 2016/9/9.
  */
 public class MailSendingTask implements Runnable {
-    private final static String CONFIG_SMTP_USERNAME = "mail.auth.username";
-    private final static String CONFIG_SMTP_PASSWORD = "mail.auth.password";
 
     private final String TAG = this.getClass().getSimpleName() + "@" + this.hashCode();
     private Properties serverConfig;
@@ -58,7 +53,7 @@ public class MailSendingTask implements Runnable {
 
             Log.v(TAG, "Connecting to server...");
             Transport transport = session.getTransport();
-            transport.connect(serverConfig.getProperty(CONFIG_SMTP_USERNAME), serverConfig.getProperty(CONFIG_SMTP_PASSWORD));
+            transport.connect(serverConfig.getProperty(ApplicationPreferences.CONFIG_MAIL_AUTH_USERNAME), serverConfig.getProperty(ApplicationPreferences.CONFIG_MAIL_AUTH_PASSWORD));
 
             Log.v(TAG, "Sending mail...");
             transport.sendMessage(mail, mail.getAllRecipients());

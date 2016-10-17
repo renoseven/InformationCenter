@@ -4,6 +4,7 @@ import android.util.Log;
 
 import net.renoseven.informationcenter.message.MessageHolder;
 import net.renoseven.informationcenter.message.MessageType;
+import net.renoseven.informationcenter.preference.ApplicationPreferences;
 import net.renoseven.informationcenter.task.MailSendingTask;
 import net.renoseven.informationcenter.task.SMSSendingTask;
 
@@ -17,12 +18,6 @@ import java.util.concurrent.Executors;
  */
 public class SMSMessageProcessor implements MessageProcessor {
     private final static String TAG = SMSMessageProcessor.class.getSimpleName();
-
-//    private final static String CONFIG_FORWARDING_ENABLED = "app.forwarding.mail.enabled";
-    private final static String CONFIG_FORWARDING_SENDER_NAME = "app.forwarding.mail.sender.name";
-    private final static String CONFIG_FORWARDING_SENDER = "app.forwarding.mail.sender";
-    private final static String CONFIG_FORWARDING_RECEIVER_NAME = "app.forwarding.mail.receiver.name";
-    private final static String CONFIG_FORWARDING_RECEIVER = "app.forwarding.mail.receiver";
 
     private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
@@ -64,10 +59,10 @@ public class SMSMessageProcessor implements MessageProcessor {
                 mail.setCharset(msg.getCharset());
                 mail.setTimeStamp(msg.getTimeStamp());
                 mail.setSubject(msg.getSender());
-                mail.setSenderName(settings.getProperty(CONFIG_FORWARDING_SENDER_NAME));
-                mail.setSender(settings.getProperty(CONFIG_FORWARDING_SENDER));
-                mail.setReceiverName(settings.getProperty(CONFIG_FORWARDING_RECEIVER_NAME));
-                mail.setReceiver(settings.getProperty(CONFIG_FORWARDING_RECEIVER));
+                mail.setSenderName(settings.getProperty(ApplicationPreferences.CONFIG_MAIL_FORWARDING_SENDER_NAME));
+                mail.setSender(settings.getProperty(ApplicationPreferences.CONFIG_MAIL_FORWARDING_SENDER));
+                mail.setReceiverName(settings.getProperty(ApplicationPreferences.CONFIG_MAIL_FORWARDING_RECEIVER_NAME));
+                mail.setReceiver(settings.getProperty(ApplicationPreferences.CONFIG_MAIL_FORWARDING_RECEIVER));
                 mail.setText(msg.getText());
                 Log.i(TAG, mail.toString());
 
