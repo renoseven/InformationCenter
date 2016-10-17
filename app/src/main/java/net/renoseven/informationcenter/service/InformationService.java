@@ -5,6 +5,7 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 
+import net.grandcentrix.tray.AppPreferences;
 import net.renoseven.framework.NIAService;
 import net.renoseven.informationcenter.message.MessageHolder;
 import net.renoseven.informationcenter.message.MessageType;
@@ -13,7 +14,7 @@ import net.renoseven.informationcenter.processor.MessageProcessor;
 import net.renoseven.informationcenter.processor.SMSMessageProcessor;
 import net.renoseven.informationcenter.receiver.MessageReceiver;
 import net.renoseven.informationcenter.receiver.SMSReceiver;
-import net.renoseven.util.PreferencesUtil;
+import net.renoseven.util.ApplicationPreferencesUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,16 +25,14 @@ import java.util.Properties;
  * Created by RenoSeven on 2016/9/8.
  */
 public class InformationService extends NIAService {
-
     private final BroadcastReceiver messageReceiver;
     private final BroadcastReceiver smsReceiver;
+    private final Map<MessageType, MessageProcessor> messageProcessors;
 
     private Properties applicationSettings;
-    private Map<MessageType, MessageProcessor> messageProcessors;
 
     public InformationService() {
         super();
-
         smsReceiver  = new SMSReceiver();
         messageReceiver = new MessageReceiver() {
             @Override
@@ -42,6 +41,7 @@ public class InformationService extends NIAService {
                 processMessage(msg);
             }
         };
+        messageProcessors = new HashMap<>();
     }
 
     @Override
@@ -49,7 +49,7 @@ public class InformationService extends NIAService {
         // load configurations
         Log.v(TAG, "Loading settings...");
         applicationSettings = new Properties();
-        PreferencesUtil.convert(getSharedPreferences("app", MODE_PRIVATE), applicationSettings);
+        ApplicationPreferencesUtil.convert(new AppPreferences(this), applicationSettings);
         Log.d(TAG, applicationSettings.toString());
 
         // register receivers
@@ -64,7 +64,6 @@ public class InformationService extends NIAService {
 
         // register message processors
         Log.v(TAG, "Registering message processors...");
-        messageProcessors = new HashMap<>();
         messageProcessors.put(MessageType.SMS, SMSMessageProcessor.getInstance());
         messageProcessors.put(MessageType.MAIL, MailProcessor.getInstance());
     }
