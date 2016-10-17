@@ -40,7 +40,7 @@ public abstract class NIAService extends Service implements NIAActivityListener 
         super.onCreate();
         registerReceiver(serviceReceiver, serviceReceiver.getActionFilter());
         onServiceBorn();
-        Log.d(TAG, "Service Started");
+        Log.i(TAG, "Service Started");
         broadcastMessage(SERVICE_STATE_BORN);
     }
 
@@ -50,7 +50,7 @@ public abstract class NIAService extends Service implements NIAActivityListener 
         onServiceDead();
         unregisterReceiver(serviceReceiver);
         super.onDestroy();
-        Log.d(TAG, "Service Stopped");
+        Log.i(TAG, "Service Stopped");
         broadcastMessage(SERVICE_STATE_DEAD);
     }
 
