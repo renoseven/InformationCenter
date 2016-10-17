@@ -6,6 +6,10 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
+/**
+ * Basic Non-Interactive Service Activity
+ * Created by RenoSeven on 2016/9/9.
+ */
 public abstract class NIAActivity extends AppCompatActivity implements NIAServiceController {
     protected final String TAG;
     private final String SERVICE_CLASS_NAME;
