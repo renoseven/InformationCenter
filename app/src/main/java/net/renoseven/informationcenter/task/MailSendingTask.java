@@ -25,7 +25,7 @@ public class MailSendingTask implements Runnable {
     private final static String CONFIG_SMTP_USERNAME = "mail.auth.username";
     private final static String CONFIG_SMTP_PASSWORD = "mail.auth.password";
 
-    protected final String TAG = this.toString();
+    private final String TAG = this.getClass().getSimpleName() + "@" + this.hashCode();
     private Properties serverConfig;
     private MessageHolder message;
 
@@ -37,16 +37,16 @@ public class MailSendingTask implements Runnable {
     @Override
     public void run() {
         if (message.getMsgType() != MessageType.MAIL) {
-            Log.w(TAG, "Wrong message type");
+            Log.e(TAG, "Wrong message type");
             return;
         }
         //TODO: show mail sending status
         try {
-            Log.d(TAG, "Applying settings...");
+            Log.v(TAG, "Applying settings...");
 //            serverConfig.setProperty("mail.debug", "true");
             serverConfig.setProperty("mail.transport.protocol", "smtp");
 
-            Log.d(TAG, "Starting session...");
+            Log.v(TAG, "Starting session...");
             Session session = Session.getInstance(serverConfig);
 
             MimeMessage mail = new MimeMessage(session);
@@ -56,11 +56,11 @@ public class MailSendingTask implements Runnable {
             mail.setSentDate(new Date(message.getTimeStamp()));
             mail.setContent(message.getText(), "text/html;charset=" + message.getCharset());
 
-            Log.d(TAG, "Connecting to server...");
+            Log.v(TAG, "Connecting to server...");
             Transport transport = session.getTransport();
             transport.connect(serverConfig.getProperty(CONFIG_SMTP_USERNAME), serverConfig.getProperty(CONFIG_SMTP_PASSWORD));
 
-            Log.d(TAG, "Sending mail...");
+            Log.v(TAG, "Sending mail...");
             transport.sendMessage(mail, mail.getAllRecipients());
 
             transport.close();

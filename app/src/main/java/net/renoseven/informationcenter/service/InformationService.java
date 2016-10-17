@@ -47,13 +47,13 @@ public class InformationService extends NIAService {
     @Override
     protected void onServiceBorn() {
         // load configurations
-        Log.d(TAG, "Loading settings...");
+        Log.v(TAG, "Loading settings...");
         applicationSettings = new Properties();
         PreferencesUtil.convert(getSharedPreferences("app", MODE_PRIVATE), applicationSettings);
         Log.d(TAG, applicationSettings.toString());
 
         // register receivers
-        Log.d(TAG, "Registering receivers...");
+        Log.v(TAG, "Registering receivers...");
         IntentFilter smsActionFilter = new IntentFilter();
         smsActionFilter.addAction(SMSReceiver.SMS_RECEIVED);
         registerReceiver(smsReceiver, smsActionFilter);
@@ -63,7 +63,7 @@ public class InformationService extends NIAService {
         registerReceiver(messageReceiver, messageActionFilter);
 
         // register message processors
-        Log.d(TAG, "Registering message processors...");
+        Log.v(TAG, "Registering message processors...");
         messageProcessors = new HashMap<>();
         messageProcessors.put(MessageType.SMS, SMSMessageProcessor.getInstance());
         messageProcessors.put(MessageType.MAIL, MailProcessor.getInstance());
@@ -71,7 +71,7 @@ public class InformationService extends NIAService {
 
     @Override
     protected void onServiceDead() {
-        Log.d(TAG, "Unregistering receivers...");
+        Log.v(TAG, "Unregistering receivers...");
         unregisterReceiver(smsReceiver);
         unregisterReceiver(messageReceiver);
     }

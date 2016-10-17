@@ -16,13 +16,15 @@ import java.util.concurrent.Executors;
  * Created by RenoSeven on 2016/9/22.
  */
 public class SMSMessageProcessor implements MessageProcessor {
-    private final static String TAG = SMSMessageProcessor.class.getName();
-    private final ExecutorService executorService = Executors.newSingleThreadExecutor();
+    private final static String TAG = SMSMessageProcessor.class.getSimpleName();
+
 //    private final static String CONFIG_FORWARDING_ENABLED = "app.forwarding.mail.enabled";
     private final static String CONFIG_FORWARDING_SENDER_NAME = "app.forwarding.mail.sender.name";
     private final static String CONFIG_FORWARDING_SENDER = "app.forwarding.mail.sender";
     private final static String CONFIG_FORWARDING_RECEIVER_NAME = "app.forwarding.mail.receiver.name";
     private final static String CONFIG_FORWARDING_RECEIVER = "app.forwarding.mail.receiver";
+
+    private final ExecutorService executorService = Executors.newSingleThreadExecutor();
 
     private static class SingletonHolder {
         private static final MessageProcessor INSTANCE = new SMSMessageProcessor();
@@ -69,7 +71,7 @@ public class SMSMessageProcessor implements MessageProcessor {
                 mail.setText(msg.getText());
                 Log.i(TAG, mail.toString());
 
-                Log.d(TAG, "Starting Job...");
+                Log.d(TAG, "Starting job...");
                 executorService.execute(new MailSendingTask(settings, mail));
             } catch (CloneNotSupportedException e) {
                 e.printStackTrace();

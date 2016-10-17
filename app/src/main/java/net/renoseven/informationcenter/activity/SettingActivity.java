@@ -19,7 +19,7 @@ public class SettingActivity extends AppCompatActivity {
     private SharedPreferences applicationPref;
 
     public  SettingActivity() {
-        TAG = this.toString();
+        TAG = this.getClass().getSimpleName();
     }
 
     @Override
@@ -40,7 +40,7 @@ public class SettingActivity extends AppCompatActivity {
                 ((Switch) view).setChecked(Boolean.valueOf(applicationPref.getString(viewTag, null)));
             }
         }
-        Log.d(TAG, "Settings loaded");
+        Log.i(TAG, "Settings loaded");
     }
 
     @Override
@@ -59,7 +59,7 @@ public class SettingActivity extends AppCompatActivity {
             }
         }
         appEditor.apply();
-        Log.d(TAG, "Changes saved");
+        Log.i(TAG, "Changes saved");
 
         super.onDestroy();
     }

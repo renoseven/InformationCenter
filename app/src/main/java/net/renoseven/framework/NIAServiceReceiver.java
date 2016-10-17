@@ -22,16 +22,16 @@ public class NIAServiceReceiver extends DynamicClassReceiver {
         String actionName = intent.getAction();
 
         if(actionName.equals(getFullActionName(NIAService.SERVICE_ACTION_SUBMIT))) {
-            Log.i(TAG, "Service Updated");
+            Log.i(TAG, "Service updated");
             // read data from bundles
             stateListener.onServiceSubmit(intent.getExtras());
         }
         else if(actionName.equals(getFullActionName(NIAService.SERVICE_STATE_BORN))) {
-            Log.i(TAG, "Service Started");
+            Log.i(TAG, "Service started");
             stateListener.onServiceBorn();
         }
         else if(actionName.equals(getFullActionName(NIAService.SERVICE_STATE_DEAD))) {
-            Log.i(TAG, "Service Stopped");
+            Log.i(TAG, "Service stopped");
             stateListener.onServiceDead();
         }
     }

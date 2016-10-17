@@ -36,21 +36,21 @@ public abstract class NIAService extends Service implements NIAActivityListener 
 
     @Override
     public void onCreate() {
-        Log.d(TAG, "Starting Service...");
+        Log.d(TAG, "Starting service...");
         super.onCreate();
         registerReceiver(serviceReceiver, serviceReceiver.getActionFilter());
         onServiceBorn();
-        Log.i(TAG, "Service Started");
+        Log.i(TAG, "Service started");
         broadcastMessage(SERVICE_STATE_BORN);
     }
 
     @Override
     public void onDestroy() {
-        Log.d(TAG, "Stopping Service...");
+        Log.d(TAG, "Stopping service...");
         onServiceDead();
         unregisterReceiver(serviceReceiver);
         super.onDestroy();
-        Log.i(TAG, "Service Stopped");
+        Log.i(TAG, "Service stopped");
         broadcastMessage(SERVICE_STATE_DEAD);
     }
 
@@ -91,7 +91,9 @@ public abstract class NIAService extends Service implements NIAActivityListener 
      * */
     @Override
     public void onRequestedUpdate(@Nullable Bundle request) {
-        broadcastMessage(SERVICE_ACTION_SUBMIT, onServiceUpdate(request));
+        Bundle reply = onServiceUpdate(request);
+        Log.i(TAG, "Service updated");
+        broadcastMessage(SERVICE_ACTION_SUBMIT, reply);
     }
 
     /**

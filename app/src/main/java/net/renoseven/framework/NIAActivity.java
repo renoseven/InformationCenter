@@ -55,7 +55,7 @@ public abstract class NIAActivity extends AppCompatActivity implements NIAServic
      * */
     @Override
     public void onServiceSubmit(@Nullable Bundle reply) {
-        Log.d(TAG, "Service Submit");
+        Log.d(TAG, "Service submit");
         onServiceAlive();
     }
 
@@ -69,7 +69,7 @@ public abstract class NIAActivity extends AppCompatActivity implements NIAServic
         updateService(null);
     }
     public void updateService(@Nullable Bundle request) {
-        Log.i(TAG, "Request Service Update");
+        Log.d(TAG, "Request service update");
         broadcastMessage(NIAService.SERVICE_ACTION_UPDATE, request);
     }
 
@@ -80,7 +80,7 @@ public abstract class NIAActivity extends AppCompatActivity implements NIAServic
      * Return: void
      * */
     protected void stopService() {
-        Log.i(TAG, "Request Service Stop");
+        Log.d(TAG, "Request service stop");
         broadcastMessage(NIAService.SERVICE_ACTION_STOP);
     }
 

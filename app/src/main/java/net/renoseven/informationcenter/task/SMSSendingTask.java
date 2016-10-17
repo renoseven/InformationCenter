@@ -12,7 +12,7 @@ import java.util.List;
  * Created by RenoSeven on 2016/9/9.
  */
 public class SMSSendingTask implements Runnable {
-    protected final String TAG = this.toString();
+    private final String TAG = this.getClass().getSimpleName() + "@" + this.hashCode();
 
     private MessageHolder message;
 
@@ -24,7 +24,7 @@ public class SMSSendingTask implements Runnable {
     @Override
     public void run() {
         //TODO: show sms sending status
-        Log.d(TAG, "Sending SMS...");
+        Log.v(TAG, "Sending SMS...");
         SmsManager smsManager = SmsManager.getDefault();
         List<String> textContents = smsManager.divideMessage(message.getText());
         for (String text : textContents) {
