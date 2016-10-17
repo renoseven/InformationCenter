@@ -3,7 +3,7 @@ package net.renoseven.util;
 import android.content.Context;
 import android.widget.Toast;
 
-public class ToastUtil {
+public abstract class ToastUtil {
 	private static Toast showingToast;
 
 	public static void showToast(final Context context, final String tips) {
