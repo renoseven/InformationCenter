@@ -22,18 +22,9 @@ public abstract class NIAService extends Service implements NIAActivityListener 
     private final String SERVICE_CLASS_NAME;
     private final DynamicClassReceiver serviceReceiver;
 
-    protected abstract void onServiceBorn();
-    protected abstract void onServiceDead();
-    /**
-     * Function: onServiceUpdate()
-     * Description: submit service changes as a bundle to UI.
-     * Return: void
-     * */
-    protected abstract Bundle onServiceUpdate(Bundle request);
-
     public NIAService() {
         super();
-        TAG = this.toString();
+        TAG = this.getClass().getSimpleName();
         SERVICE_CLASS_NAME = this.getClass().getName();
         serviceReceiver = new NIAActivityReceiver(SERVICE_CLASS_NAME, this);
     }
@@ -50,7 +41,7 @@ public abstract class NIAService extends Service implements NIAActivityListener 
         registerReceiver(serviceReceiver, serviceReceiver.getActionFilter());
         onServiceBorn();
         Log.d(TAG, "Service Started");
-        broadcastState(SERVICE_STATE_BORN);
+        broadcastMessage(SERVICE_STATE_BORN);
     }
 
     @Override
@@ -60,12 +51,42 @@ public abstract class NIAService extends Service implements NIAActivityListener 
         unregisterReceiver(serviceReceiver);
         super.onDestroy();
         Log.d(TAG, "Service Stopped");
-        broadcastState(SERVICE_STATE_DEAD);
+        broadcastMessage(SERVICE_STATE_DEAD);
+    }
+
+    @Override
+    public IBinder onBind(Intent intent) {
+        return null;
     }
 
     /**
-     * Function: onRequestedUpdate()
-     * Description: submit data as an intent to receiver.
+     * Function: onServiceBorn
+     * Params: void
+     * Description: triggers when service starts
+     * Return: void
+     * */
+    protected abstract void onServiceBorn();
+
+    /**
+     * Function: onServiceBorn
+     * Params: void
+     * Description: triggers when service dies
+     * Return: void
+     * */
+    protected abstract void onServiceDead();
+
+    /**
+     * Function: onServiceUpdate
+     * Params: Bundle request (optional)
+     * Description: update service & return changes as a bundle.
+     * Return: Bundle reply (optional)
+     * */
+    protected abstract @Nullable Bundle onServiceUpdate(@Nullable Bundle request);
+
+    /**
+     * Function: onRequestedUpdate
+     * Params: Bundle request (optional)
+     * Description: response to service update request from UI
      * Return: void
      * */
     @Override
@@ -73,15 +94,27 @@ public abstract class NIAService extends Service implements NIAActivityListener 
         broadcastMessage(SERVICE_ACTION_SUBMIT, onServiceUpdate(request));
     }
 
+    /**
+     * Function: onRequestedStop
+     * Params: void
+     * Description: response to service stop request from UI
+     * Return: void
+     * */
     @Override
     public void onRequestedStop() {
         this.stopSelf();
     }
 
-    protected void broadcastState(String actionName) {
+    /**
+     * Function: broadcastMessage
+     * Params: String actionName
+     *         Bundle bundle (optional)
+     * Description: broadcast service action with additional message (optional)
+     * Return: void
+     * */
+    protected void broadcastMessage(String actionName) {
         broadcastMessage(actionName, null);
     }
-
     protected void broadcastMessage(String actionName, @Nullable Bundle bundle) {
         Intent intent = new Intent();
         intent.setAction(SERVICE_CLASS_NAME + actionName);
@@ -91,8 +124,4 @@ public abstract class NIAService extends Service implements NIAActivityListener 
         sendBroadcast(intent);
     }
 
-    @Override
-    public IBinder onBind(Intent intent) {
-        return null;
-    }
 }

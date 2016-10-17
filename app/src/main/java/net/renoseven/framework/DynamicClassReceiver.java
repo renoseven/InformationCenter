@@ -12,7 +12,7 @@ public abstract class DynamicClassReceiver extends BroadcastReceiver {
     private final String SERVICE_CLASS_NAME;
 
     public DynamicClassReceiver(String serviceClassName) {
-        TAG = this.toString();
+        TAG = this.getClass().getSimpleName();
         SERVICE_CLASS_NAME = serviceClassName;
     }
 

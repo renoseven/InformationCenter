@@ -10,9 +10,9 @@ import android.util.Log;
  * Created by RenoSeven on 2016/9/9.
  */
 public class NIAServiceReceiver extends DynamicClassReceiver {
-    private final NIAServiceListener stateListener;
+    private final NIAServiceController stateListener;
 
-    public NIAServiceReceiver(String serviceClassName, NIAServiceListener stateListener) {
+    public NIAServiceReceiver(String serviceClassName, NIAServiceController stateListener) {
         super(serviceClassName);
         this.stateListener = stateListener;
     }
