@@ -15,9 +15,9 @@ import net.renoseven.informationcenter.message.MessageType;
  */
 
 public class SMSReceiver extends BroadcastReceiver {
+    protected static String TAG = SMSReceiver.class.getSimpleName();
     public final static String SMS_RECEIVED = "android.provider.Telephony.SMS_RECEIVED";
     public final static String SMS_SENT = "android.provider.Telephony.SMS_SENT";
-    protected final String TAG = this.toString();
 
     @Override
     public void onReceive(Context context, Intent intent) {

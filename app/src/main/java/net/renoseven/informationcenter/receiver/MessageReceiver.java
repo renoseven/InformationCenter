@@ -11,11 +11,10 @@ import net.renoseven.informationcenter.message.MessageHolder;
  * Created by RenoSeven on 2016/9/8.
  */
 public abstract class MessageReceiver extends BroadcastReceiver {
+    protected final static String TAG = MessageReceiver.class.getSimpleName();
     protected final static String CLASS_NAME = MessageReceiver.class.getName();
     public final static String MESSAGE_RECEIVED = CLASS_NAME + ".MESSAGE_RECEIVED";
     public final static String MESSAGE_CONTENT = CLASS_NAME + ".MESSAGE_CONTENT";
-
-    protected final String TAG = this.toString();
 
     protected abstract void onMessageReceived(MessageHolder msg);
 
