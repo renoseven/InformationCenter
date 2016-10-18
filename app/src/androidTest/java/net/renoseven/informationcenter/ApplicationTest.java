@@ -15,10 +15,4 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
     public ApplicationTest() {
         super(Application.class);
     }
-
-    public void test() {
-        ContentResolver contentResolver = getContext().getContentResolver();
-        Uri uri = Uri.parse("content://net.renoseven.informationcenter.provider.DataBaseProvider");
-        System.out.println(contentResolver.delete(uri, null, null));
-    }
 }
