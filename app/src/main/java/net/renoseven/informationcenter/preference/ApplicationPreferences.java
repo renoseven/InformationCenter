@@ -2,13 +2,16 @@ package net.renoseven.informationcenter.preference;
 
 import android.content.Context;
 
-import net.grandcentrix.tray.AppPreferences;
+import net.grandcentrix.tray.TrayPreferences;
 
 /**
+ * Application Preferences
  * Created by RenoSeven on 2016/10/17.
  */
+public class ApplicationPreferences extends TrayPreferences {
+    private final static String MODULE_NAME = ApplicationPreferences.class.getSimpleName();
+    private final static int DB_VERSION = 1;
 
-public class ApplicationPreferences extends AppPreferences {
     public final static String CONFIG_MAIL_DEBUG                    = "mail.debug";
     public final static String CONFIG_MAIL_SMTP_HOST                = "mail.smtp.host";
     public final static String CONFIG_MAIL_SMTP_PORT                = "mail.smtp.port";
@@ -21,6 +24,6 @@ public class ApplicationPreferences extends AppPreferences {
     public final static String CONFIG_MAIL_FORWARDING_RECEIVER_NAME = "mail.forwarding.receiver.name";
 
     public ApplicationPreferences(Context context) {
-        super(context);
+        super(context, MODULE_NAME, DB_VERSION);
     }
 }

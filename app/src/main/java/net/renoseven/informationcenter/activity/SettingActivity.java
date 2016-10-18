@@ -8,15 +8,16 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.Switch;
 
-import net.grandcentrix.tray.AppPreferences;
+import net.grandcentrix.tray.TrayPreferences;
 import net.renoseven.informationcenter.R;
+import net.renoseven.informationcenter.preference.ApplicationPreferences;
 
 import java.util.HashSet;
 import java.util.Set;
 
 public class SettingActivity extends AppCompatActivity {
     private final String TAG;
-    private AppPreferences appPreferences;
+    private TrayPreferences appPreferences;
 
     public SettingActivity() {
         TAG = this.getClass().getSimpleName();
@@ -28,7 +29,7 @@ public class SettingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_setting);
 
         Log.d(TAG, "Reading settings...");
-        appPreferences = new AppPreferences(this);
+        appPreferences = new ApplicationPreferences(this);
 
         Set<View> viewSet = findViews((ViewGroup) findViewById(R.id.scrollView));
         for(View view : viewSet) {

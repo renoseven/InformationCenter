@@ -5,16 +5,16 @@ import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 
-import net.grandcentrix.tray.AppPreferences;
 import net.renoseven.framework.NIAService;
 import net.renoseven.informationcenter.message.MessageHolder;
 import net.renoseven.informationcenter.message.MessageType;
+import net.renoseven.informationcenter.preference.ApplicationPreferences;
 import net.renoseven.informationcenter.processor.MailProcessor;
 import net.renoseven.informationcenter.processor.MessageProcessor;
 import net.renoseven.informationcenter.processor.SMSMessageProcessor;
 import net.renoseven.informationcenter.receiver.MessageReceiver;
 import net.renoseven.informationcenter.receiver.SMSReceiver;
-import net.renoseven.util.ApplicationPreferencesUtil;
+import net.renoseven.util.PreferencesUtil;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -49,7 +49,7 @@ public class InformationService extends NIAService {
         // load configurations
         Log.v(TAG, "Loading settings...");
         applicationSettings = new Properties();
-        ApplicationPreferencesUtil.convert(new AppPreferences(this), applicationSettings);
+        PreferencesUtil.convert(new ApplicationPreferences(this), applicationSettings);
         Log.d(TAG, applicationSettings.toString());
 
         // register receivers
