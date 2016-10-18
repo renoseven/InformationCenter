@@ -1,111 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/scrollView"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="@dimen/activity_margin"
-    android:id="@+id/scrollView"
-    tools:context=".activity.SettingActivity" >
+    tools:context=".activity.SettingActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="@dimen/activity_margin">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lbl_receiver"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical" >
+            android:orientation="vertical"
+            android:layout_margin="@dimen/activity_margin_small" >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Switch
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:tag="receiver.sms.enable"
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/lbl_receiver_sms_enable"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <Switch
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:tag="receiver.mail.enable"
+                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/lbl_receiver_mail_enable"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
+            </RelativeLayout>
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/lbl_forwarding"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_margin="@dimen/activity_margin_small" >
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
 
-                <TextView
+                <RelativeLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:text="@string/lbl_mail_setting" />
+                    android:layout_height="match_parent">
+
+                    <Switch
+                        android:id="@+id/sw_sms_forwarding_enable"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:tag="forwarding.sms.enable"
+                        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:text="@string/lbl_forwarding_sms_enable"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
+                </RelativeLayout>
 
                 <TableLayout
+                    android:id="@+id/layout_sms_forwarding_setting"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/activity_margin_small" >
 
                     <TableRow
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
+                        android:layout_height="wrap_content" >
 
                         <TextView
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:text="@string/lbl_sender_name"
-                            android:layout_column="0" />
+                            android:layout_column="0"
+                            android:text="@string/lbl_forwarding_sms_receiver"
+                            android:textAppearance="?android:attr/textAppearanceSmall" />
 
                         <EditText
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:id="@+id/txt_sender_name"
-                            android:tag="forwarding.mail.sender.name"
+                            android:layout_column="1"
+                            android:layout_marginStart="@dimen/activity_margin"
+                            android:hint="@string/lbl_forwarding_sms_receiver_hint"
                             android:inputType="text"
-                            android:layout_column="1"
-                            android:hint="@string/hint_sender_name"
-                            android:layout_marginLeft="@dimen/activity_margin"
-                            android:layout_marginStart="@dimen/activity_margin" />
-                    </TableRow>
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:text="@string/lbl_sender"
-                            android:layout_column="0" />
-
-                        <EditText
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:id="@+id/txt_sender"
-                            android:tag="forwarding.mail.sender"
-                            android:layout_column="1"
-                            android:inputType="textEmailAddress"
-                            android:hint="@string/hint_sender"
-                            android:layout_marginLeft="@dimen/activity_margin"
-                            android:layout_marginStart="@dimen/activity_margin" />
-                    </TableRow>
-
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:text="@string/lbl_receiver_name"
-                            android:layout_column="0" />
-
-                        <EditText
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:id="@+id/txt_receiver_name"
-                            android:tag="forwarding.mail.receiver.name"
-                            android:layout_column="1"
-                            android:inputType="text"
-                            android:hint="@string/hint_receiver_name"
-                            android:layout_marginLeft="@dimen/activity_margin"
-                            android:layout_marginStart="@dimen/activity_margin" />
-                    </TableRow>
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:text="@string/lbl_receiver"
-                            android:layout_column="0" />
-
-                        <EditText
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:id="@+id/txt_receiver"
-                            android:tag="forwarding.mail.receiver"
-                            android:layout_column="1"
-                            android:inputType="textEmailAddress"
-                            android:hint="@string/hint_receiver"
-                            android:layout_marginLeft="@dimen/activity_margin"
-                            android:layout_marginStart="@dimen/activity_margin" />
+                            android:tag="forwarding.sms.sender"
+                            android:textAppearance="?android:attr/textAppearanceSmall" />
                     </TableRow>
                 </TableLayout>
             </LinearLayout>
@@ -114,132 +133,219 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical" >
-                <TextView
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <Switch
+                        android:id="@+id/sw_mail_forwarding_enable"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentEnd="true"
+                        android:tag="forwarding.mail.enable"
+                        android:textAppearance="?android:attr/textAppearanceMedium"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/lbl_forwarding_mail_enable"
+                        android:textAppearance="?android:attr/textAppearanceMedium"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentStart="true"
+                        android:id="@+id/textView" />
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:id="@+id/layout_mail_forwarding_setting"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:textAppearance="?android:attr/textAppearanceLarge"
-                    android:layout_marginTop="@dimen/activity_margin"
-                    android:text="@string/lbl_server_setting"
-                    />
-                <TableLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:orientation="vertical"
+                    android:padding="@dimen/activity_margin_small">
 
-                    <TableRow
+                    <TableLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content">
 
-                        <TextView
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:text="@string/lbl_smtp_host"
-                            android:layout_column="0" />
-
-                        <EditText
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:id="@+id/txt_server_address"
-                            android:tag="mail.smtp.host"
-                            android:layout_column="1"
-                            android:inputType="textUri"
-                            android:hint="@string/hint_smtp_host"
-                            android:layout_marginLeft="@dimen/activity_margin"
-                            android:layout_marginStart="@dimen/activity_margin" />
-                    </TableRow>
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:text="@string/lbl_smtp_port"
-                            android:layout_column="0" />
-
-                        <EditText
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:id="@+id/txt_server_port"
-                            android:tag="mail.smtp.port"
-                            android:inputType="numberDecimal"
-                            android:layout_column="1"
-                            android:hint="@string/hint_smtp_port"
-                            android:layout_marginLeft="@dimen/activity_margin"
-                            android:layout_marginStart="@dimen/activity_margin" />
-                    </TableRow>
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:text="@string/lbl_username"
-                            android:layout_column="0" />
-
-                        <EditText
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:id="@+id/txt_username"
-                            android:tag="mail.auth.username"
-                            android:layout_column="1"
-                            android:inputType="textEmailAddress"
-                            android:hint="@string/hint_username"
-                            android:layout_marginLeft="@dimen/activity_margin"
-                            android:layout_marginStart="@dimen/activity_margin" />
-                    </TableRow>
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <TextView
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:text="@string/lbl_password"
-                            android:layout_column="0" />
-
-                        <EditText
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:id="@+id/txt_password"
-                            android:tag="mail.auth.password"
-                            android:layout_column="1"
-                            android:inputType="textPassword"
-                            android:hint="@string/hint_password"
-                            android:layout_marginLeft="@dimen/activity_margin"
-                            android:layout_marginStart="@dimen/activity_margin" />
-                    </TableRow>
-
-                    <TableRow
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-                        <TextView
-                            android:textAppearance="?android:attr/textAppearanceMedium"
-                            android:text="@string/lbl_security"
-                            android:layout_column="0" />
-
-                        <RelativeLayout
+                        <TableRow
                             android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_column="0"
+                                android:text="@string/lbl_forwarding_mail_sender_name"
+                                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                            <EditText
+                                android:layout_column="1"
+                                android:layout_marginStart="@dimen/activity_margin"
+                                android:hint="@string/lbl_forwarding_mail_sender_name_hint"
+                                android:inputType="text"
+                                android:tag="forwarding.mail.sender.name"
+                                android:textAppearance="?android:attr/textAppearanceSmall" />
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_column="0"
+                                android:text="@string/lbl_forwarding_mail_sender"
+                                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                            <EditText
+                                android:layout_column="1"
+                                android:layout_marginStart="@dimen/activity_margin"
+                                android:hint="@string/lbl_forwarding_mail_sender_hint"
+                                android:inputType="textEmailAddress"
+                                android:tag="forwarding.mail.sender"
+                                android:textAppearance="?android:attr/textAppearanceSmall" />
+                        </TableRow>
+
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_column="0"
+                                android:text="@string/lbl_forwarding_mail_receiver_name"
+                                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                            <EditText
+                                android:layout_column="1"
+                                android:layout_marginStart="@dimen/activity_margin"
+                                android:hint="@string/lbl_forwarding_mail_receiver_name_hint"
+                                android:inputType="text"
+                                android:tag="forwarding.mail.receiver.name"
+                                android:textAppearance="?android:attr/textAppearanceSmall" />
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_column="0"
+                                android:text="@string/lbl_forwarding_mail_receiver"
+                                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                            <EditText
+                                android:layout_column="1"
+                                android:layout_marginStart="@dimen/activity_margin"
+                                android:hint="@string/lbl_forwarding_mail_receiver_hint"
+                                android:inputType="textEmailAddress"
+                                android:tag="forwarding.mail.receiver"
+                                android:textAppearance="?android:attr/textAppearanceSmall" />
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_column="0"
+                                android:text="@string/lbl_mail_smtp_host"
+                                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                            <EditText
+                                android:layout_column="1"
+                                android:layout_marginStart="@dimen/activity_margin"
+                                android:hint="@string/lbl_mail_smtp_host_hint"
+                                android:inputType="textUri"
+                                android:tag="mail.smtp.host"
+                                android:textAppearance="?android:attr/textAppearanceSmall" />
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_column="0"
+                                android:text="@string/lbl_mail_smtp_port"
+                                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                            <EditText
+                                android:layout_column="1"
+                                android:layout_marginStart="@dimen/activity_margin"
+                                android:hint="@string/lbl_mail_smtp_port_hint"
+                                android:inputType="numberDecimal"
+                                android:tag="mail.smtp.port"
+                                android:textAppearance="?android:attr/textAppearanceSmall" />
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_column="0"
+                                android:text="@string/lbl_mail_auth_username"
+                                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                            <EditText
+                                android:layout_column="1"
+                                android:layout_marginStart="@dimen/activity_margin"
+                                android:hint="@string/lbl_mail_auth_username_hint"
+                                android:inputType="textEmailAddress"
+                                android:tag="mail.auth.username"
+                                android:textAppearance="?android:attr/textAppearanceSmall" />
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_column="0"
+                                android:text="@string/lbl_mail_auth_password"
+                                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                            <EditText
+                                android:layout_column="1"
+                                android:layout_marginStart="@dimen/activity_margin"
+                                android:hint="@string/lbl_mail_auth_password_hint"
+                                android:inputType="textPassword"
+                                android:tag="mail.auth.password"
+                                android:textAppearance="?android:attr/textAppearanceSmall" />
+                        </TableRow>
+                    </TableLayout>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <Switch
+                            android:id="@+id/sw_mail_smtp_ssl_enable"
+                            android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_column="1"
-                            android:layout_marginLeft="@dimen/activity_margin"
-                            android:layout_marginStart="@dimen/activity_margin">
-                            <Switch
-                                android:id="@+id/sw_ssl"
-                                android:tag="mail.smtp.ssl.enable"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/lbl_ssl" />
-                            <Switch
-                                android:id="@+id/sw_tls"
-                                android:tag="mail.smtp.tls.enable"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/lbl_tls"
-                                android:layout_alignParentTop="true"
-                                android:layout_toRightOf="@+id/sw_ssl"
-                                android:layout_toEndOf="@+id/sw_ssl"
-                                android:layout_marginLeft="@dimen/activity_margin"
-                                android:layout_marginStart="@dimen/activity_margin" />
-                        </RelativeLayout>
-                    </TableRow>
-                </TableLayout>
+                            android:layout_marginEnd="@dimen/activity_margin_small"
+                            android:layout_alignParentStart="true"
+                            android:layout_alignParentTop="true"
+                            android:switchPadding="@dimen/activity_margin_small"
+                            android:tag="mail.smtp.ssl.enable"
+                            android:text="@string/lbl_mail_smtp_ssl_enable"
+                            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                        <Switch
+                            android:id="@+id/sw_mail_smtp_tls_enable"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginStart="@dimen/activity_margin_small"
+                            android:layout_alignParentTop="true"
+                            android:layout_toEndOf="@+id/sw_mail_smtp_ssl_enable"
+                            android:switchPadding="@dimen/activity_margin_small"
+                            android:tag="mail.smtp.tls.enable"
+                            android:text="@string/lbl_mail_smtp_tls_enable"
+                            android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                    </RelativeLayout>
+                </LinearLayout>
             </LinearLayout>
 
         </LinearLayout>
+
+    </LinearLayout>
 </ScrollView>
