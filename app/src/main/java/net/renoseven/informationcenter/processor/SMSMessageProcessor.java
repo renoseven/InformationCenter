@@ -59,10 +59,10 @@ public class SMSMessageProcessor implements MessageProcessor {
                 mail.setCharset(msg.getCharset());
                 mail.setTimeStamp(msg.getTimeStamp());
                 mail.setSubject(msg.getSender());
-                mail.setSenderName(settings.getProperty(ApplicationPreferences.CONFIG_MAIL_FORWARDING_SENDER_NAME));
-                mail.setSender(settings.getProperty(ApplicationPreferences.CONFIG_MAIL_FORWARDING_SENDER));
-                mail.setReceiverName(settings.getProperty(ApplicationPreferences.CONFIG_MAIL_FORWARDING_RECEIVER_NAME));
-                mail.setReceiver(settings.getProperty(ApplicationPreferences.CONFIG_MAIL_FORWARDING_RECEIVER));
+                mail.setSenderName(settings.getProperty(ApplicationPreferences.CONFIG_FORWARDING_MAIL_SENDER_NAME));
+                mail.setSender(settings.getProperty(ApplicationPreferences.CONFIG_FORWARDING_MAIL_SENDER));
+                mail.setReceiverName(settings.getProperty(ApplicationPreferences.CONFIG_FORWARDING_MAIL_RECEIVER_NAME));
+                mail.setReceiver(settings.getProperty(ApplicationPreferences.CONFIG_FORWARDING_MAIL_RECEIVER));
                 mail.setText(msg.getText());
                 Log.i(TAG, mail.toString());
 

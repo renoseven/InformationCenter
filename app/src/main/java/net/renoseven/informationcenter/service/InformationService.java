@@ -33,7 +33,7 @@ public class InformationService extends NIAService {
 
     public InformationService() {
         super();
-        smsReceiver  = new SMSReceiver();
+        smsReceiver = new SMSReceiver();
         messageReceiver = new MessageReceiver() {
             @Override
             protected void onMessageReceived(MessageHolder msg) {

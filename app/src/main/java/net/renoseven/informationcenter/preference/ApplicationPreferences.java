@@ -12,16 +12,25 @@ public class ApplicationPreferences extends TrayPreferences {
     private final static String MODULE_NAME = ApplicationPreferences.class.getSimpleName();
     private final static int DB_VERSION = 1;
 
-    public final static String CONFIG_MAIL_DEBUG                    = "mail.debug";
+    // Receiver settings
+    public final static String CONFIG_RECEIVER_SMS_ENABLED          = "receiver.sms.enabled";
+    public final static String CONFIG_RECEIVER_MAIL_ENABLED         = "mail.receiver.enabled";
+
+    // Mail settings
     public final static String CONFIG_MAIL_SMTP_HOST                = "mail.smtp.host";
     public final static String CONFIG_MAIL_SMTP_PORT                = "mail.smtp.port";
     public final static String CONFIG_MAIL_AUTH_USERNAME            = "mail.auth.username";
     public final static String CONFIG_MAIL_AUTH_PASSWORD            = "mail.auth.password";
-    public final static String CONFIG_MAIL_FORWARDING_MAIL_ENABLED  = "mail.forwarding.enabled";
-    public final static String CONFIG_MAIL_FORWARDING_SENDER        = "mail.forwarding.sender";
-    public final static String CONFIG_MAIL_FORWARDING_SENDER_NAME   = "mail.forwarding.sender.name";
-    public final static String CONFIG_MAIL_FORWARDING_RECEIVER      = "mail.forwarding.receiver";
-    public final static String CONFIG_MAIL_FORWARDING_RECEIVER_NAME = "mail.forwarding.receiver.name";
+
+    // Forwarding settings
+    public final static String CONFIG_FORWARDING_SMS_ENABLED        = "forwarding.sms.enabled";
+    public final static String CONFIG_FORWARDING_SMS_RECEIVER       = "forwarding.sms.receiver";
+
+    public final static String CONFIG_FORWARDING_MAIL_ENABLED       = "forwarding.mail.enabled";
+    public final static String CONFIG_FORWARDING_MAIL_SENDER        = "forwarding.mail.sender";
+    public final static String CONFIG_FORWARDING_MAIL_SENDER_NAME   = "forwarding.mail.sender.name";
+    public final static String CONFIG_FORWARDING_MAIL_RECEIVER      = "forwarding.mail.receiver";
+    public final static String CONFIG_FORWARDING_MAIL_RECEIVER_NAME = "forwarding.mail.receiver.name";
 
     public ApplicationPreferences(Context context) {
         super(context, MODULE_NAME, DB_VERSION);
