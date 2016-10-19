@@ -21,15 +21,13 @@ public class NIAServiceReceiver extends DynamicClassReceiver {
     public void onReceive(Context context, Intent intent) {
         String actionName = intent.getAction();
 
-        if(actionName.equals(getFullActionName(NIAService.SERVICE_ACTION_SUBMIT))) {
+        if (actionName.equals(getFullActionName(NIAService.SERVICE_ACTION_SUBMIT))) {
             Log.d(TAG, "Received service submit");
             // read data from bundles
             stateListener.onServiceSubmit(intent.getExtras());
-        }
-        else if(actionName.equals(getFullActionName(NIAService.SERVICE_STATE_BORN))) {
+        } else if (actionName.equals(getFullActionName(NIAService.SERVICE_STATE_BORN))) {
             stateListener.onServiceBorn();
-        }
-        else if(actionName.equals(getFullActionName(NIAService.SERVICE_STATE_DEAD))) {
+        } else if (actionName.equals(getFullActionName(NIAService.SERVICE_STATE_DEAD))) {
             stateListener.onServiceDead();
         }
     }

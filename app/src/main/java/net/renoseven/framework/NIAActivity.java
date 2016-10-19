@@ -37,7 +37,7 @@ public abstract class NIAActivity extends AppCompatActivity implements NIAServic
     @Override
     public void onResume() {
         super.onResume();
-        if(isServiceRunning) {
+        if (isServiceRunning) {
             updateService();
         }
         updateUI(null);
@@ -68,7 +68,7 @@ public abstract class NIAActivity extends AppCompatActivity implements NIAServic
      * Params: void
      * Description: triggers when a service submits data.
      * Return: String
-     * */
+     */
     protected abstract String getServiceClassName();
 
     /**
@@ -76,7 +76,7 @@ public abstract class NIAActivity extends AppCompatActivity implements NIAServic
      * Params: Bundle bundle ()
      * Description: update UI by additional data (optional).
      * Return: void
-     * */
+     */
     protected abstract void updateUI(@Nullable Bundle bundle);
 
     /**
@@ -84,7 +84,7 @@ public abstract class NIAActivity extends AppCompatActivity implements NIAServic
      * Params: void
      * Description: show if service is alive
      * Return: boolean
-     * */
+     */
     protected boolean isServiceAlive() {
         return isServiceRunning;
     }
@@ -94,10 +94,11 @@ public abstract class NIAActivity extends AppCompatActivity implements NIAServic
      * Params: Bundle request (optional)
      * Description: send a service update request
      * Return: void
-     * */
+     */
     protected void updateService() {
         updateService(null);
     }
+
     protected void updateService(@Nullable Bundle request) {
         Log.d(TAG, "Request service update");
         broadcastMessage(NIAService.SERVICE_ACTION_UPDATE, request);
@@ -108,7 +109,7 @@ public abstract class NIAActivity extends AppCompatActivity implements NIAServic
      * Params: void
      * Description: send a service stop request
      * Return: void
-     * */
+     */
     protected void stopService() {
         Log.d(TAG, "Request service stop");
         broadcastMessage(NIAService.SERVICE_ACTION_STOP);
@@ -117,17 +118,18 @@ public abstract class NIAActivity extends AppCompatActivity implements NIAServic
     /**
      * Function: broadcastMessage
      * Params: String actionName
-     *         Bundle bundle (optional)
+     * Bundle bundle (optional)
      * Description: broadcast service state
      * Return: void
-     * */
+     */
     protected void broadcastMessage(String actionName) {
         broadcastMessage(actionName, null);
     }
+
     protected void broadcastMessage(String actionName, @Nullable Bundle bundle) {
         Intent intent = new Intent();
         intent.setAction(SERVICE_CLASS_NAME + actionName);
-        if(bundle != null) {
+        if (bundle != null) {
             intent.putExtras(bundle);
         }
         sendBroadcast(intent);

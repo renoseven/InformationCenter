@@ -13,10 +13,10 @@ import android.util.Log;
  */
 public abstract class NIAService extends Service implements NIAActivityListener {
     public final static String SERVICE_ACTION_UPDATE = ".SERVICE_ACTION_UPDATE";
-    public final static String SERVICE_ACTION_SUBMIT =  ".SERVICE_ACTION_SUBMIT";
+    public final static String SERVICE_ACTION_SUBMIT = ".SERVICE_ACTION_SUBMIT";
     public final static String SERVICE_ACTION_STOP = ".SERVICE_ACTION_STOP";
-    public final static String SERVICE_STATE_BORN =  ".SERVICE_STATE_BORN";
-    public final static String SERVICE_STATE_DEAD =  ".SERVICE_STATE_DEAD";
+    public final static String SERVICE_STATE_BORN = ".SERVICE_STATE_BORN";
+    public final static String SERVICE_STATE_DEAD = ".SERVICE_STATE_DEAD";
 
     protected final String TAG;
     private final String SERVICE_CLASS_NAME;
@@ -64,7 +64,7 @@ public abstract class NIAService extends Service implements NIAActivityListener 
      * Params: void
      * Description: triggers when service starts
      * Return: void
-     * */
+     */
     protected abstract void onServiceBorn();
 
     /**
@@ -72,7 +72,7 @@ public abstract class NIAService extends Service implements NIAActivityListener 
      * Params: void
      * Description: triggers when service dies
      * Return: void
-     * */
+     */
     protected abstract void onServiceDead();
 
     /**
@@ -80,15 +80,17 @@ public abstract class NIAService extends Service implements NIAActivityListener 
      * Params: Bundle request (optional)
      * Description: update service & return changes as a bundle.
      * Return: Bundle reply (optional)
-     * */
-    protected abstract @Nullable Bundle onServiceUpdate(@Nullable Bundle request);
+     */
+    protected abstract
+    @Nullable
+    Bundle onServiceUpdate(@Nullable Bundle request);
 
     /**
      * Function: onRequestedUpdate
      * Params: Bundle request (optional)
      * Description: response to service update request from UI
      * Return: void
-     * */
+     */
     @Override
     public void onRequestedUpdate(@Nullable Bundle request) {
         Bundle reply = onServiceUpdate(request);
@@ -101,7 +103,7 @@ public abstract class NIAService extends Service implements NIAActivityListener 
      * Params: void
      * Description: response to service stop request from UI
      * Return: void
-     * */
+     */
     @Override
     public void onRequestedStop() {
         this.stopSelf();
@@ -110,17 +112,18 @@ public abstract class NIAService extends Service implements NIAActivityListener 
     /**
      * Function: broadcastMessage
      * Params: String actionName
-     *         Bundle bundle (optional)
+     * Bundle bundle (optional)
      * Description: broadcast service action with additional message (optional)
      * Return: void
-     * */
+     */
     protected void broadcastMessage(String actionName) {
         broadcastMessage(actionName, null);
     }
+
     protected void broadcastMessage(String actionName, @Nullable Bundle bundle) {
         Intent intent = new Intent();
         intent.setAction(SERVICE_CLASS_NAME + actionName);
-        if(bundle != null) {
+        if (bundle != null) {
             intent.putExtras(bundle);
         }
         sendBroadcast(intent);

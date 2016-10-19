@@ -14,7 +14,7 @@ interface NIAActivityListener {
      * Params: void
      * Description: response to service stop request from UI
      * Return: void
-     * */
+     */
     void onRequestedStop();
 
     /**
@@ -22,6 +22,6 @@ interface NIAActivityListener {
      * Params: Bundle request (optional)
      * Description: response to service update request from UI
      * Return: void
-     * */
+     */
     void onRequestedUpdate(@Nullable Bundle request);
 }

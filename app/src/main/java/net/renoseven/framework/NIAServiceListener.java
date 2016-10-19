@@ -14,7 +14,7 @@ interface NIAServiceListener {
      * Params: void
      * Description: triggers when service starts
      * Return: void
-     * */
+     */
     void onServiceBorn();
 
     /**
@@ -22,7 +22,7 @@ interface NIAServiceListener {
      * Params: void
      * Description: triggers when service dies
      * Return: void
-     * */
+     */
     void onServiceDead();
 
     /**
@@ -30,6 +30,6 @@ interface NIAServiceListener {
      * Params: Bundle reply (optional)
      * Description: triggers when a service submits data.
      * Return: void
-     * */
+     */
     void onServiceSubmit(@Nullable Bundle reply);
 }
