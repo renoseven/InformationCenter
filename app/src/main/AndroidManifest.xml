@@ -13,10 +13,16 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
+        <service
+            android:name=".service.InformationService"
+            android:process=":InformationService" />
+
         <activity android:name=".activity.MainActivity">
+            <meta-data
+                android:name="bindService"
+                android:value=".service.InformationService" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
@@ -24,11 +30,7 @@
         <activity
             android:name=".activity.SettingActivity"
             android:label="@string/title_activity_setting"
-            android:theme="@style/AppTheme"/>
-
-        <service
-            android:name=".service.InformationService"
-            android:process=":InformationService" />
+            android:theme="@style/AppTheme" />
 
     </application>
 

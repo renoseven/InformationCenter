@@ -1,6 +1,8 @@
 package net.renoseven.framework;
 
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -12,19 +14,29 @@ import android.util.Log;
  */
 public abstract class NIAActivity extends AppCompatActivity implements NIAServiceListener {
     protected final String TAG;
-    private final String SERVICE_CLASS_NAME;
-    private final DynamicClassReceiver serviceStateReceiver;
+    private final static String META_KEY_BIND_SERVICE = "bindService";
+
+    private String serviceClassName;
+    private DynamicClassReceiver serviceStateReceiver;
     private boolean isServiceRunning;
 
     public NIAActivity() {
         TAG = this.getClass().getSimpleName();
-        SERVICE_CLASS_NAME = getServiceClassName();
-        serviceStateReceiver = new NIAServiceReceiver(SERVICE_CLASS_NAME, this);
     }
 
     @Override
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
+
+        String packageName = getPackageName();
+        serviceClassName = getMetaValue(META_KEY_BIND_SERVICE);
+        // complete package name
+        if (!serviceClassName.startsWith(packageName)) {
+            serviceClassName = packageName + serviceClassName;
+        }
+        serviceStateReceiver = new NIAServiceReceiver(serviceClassName, this);
+        Log.d(TAG, "Bind service: " + serviceClassName);
+
         registerReceiver(serviceStateReceiver, serviceStateReceiver.getActionFilter());
     }
 
@@ -62,14 +74,6 @@ public abstract class NIAActivity extends AppCompatActivity implements NIAServic
         Log.i(TAG, "Service updated");
         updateUI(reply);
     }
-
-    /**
-     * Function: getServiceClassName
-     * Params: void
-     * Description: triggers when a service submits data.
-     * Return: String
-     */
-    protected abstract String getServiceClassName();
 
     /**
      * Function: updateUI
@@ -128,10 +132,30 @@ public abstract class NIAActivity extends AppCompatActivity implements NIAServic
 
     protected void broadcastMessage(String actionName, @Nullable Bundle bundle) {
         Intent intent = new Intent();
-        intent.setAction(SERVICE_CLASS_NAME + actionName);
+        intent.setAction(serviceClassName + actionName);
         if (bundle != null) {
             intent.putExtras(bundle);
         }
         sendBroadcast(intent);
+    }
+
+    /**
+     * Function: getMetaValue
+     * Params: String metaKey
+     * Description: read meta data from AndroidManifest.xml
+     * Return: String
+     */
+    protected String getMetaValue(String metaKey) {
+        String value = null;
+        try {
+            ActivityInfo info = getPackageManager().getActivityInfo(getComponentName(), PackageManager.GET_META_DATA);
+            value = info.metaData.getString(metaKey);
+        } catch (PackageManager.NameNotFoundException e) {
+            e.printStackTrace();
+        }
+        if (value == null) {
+            throw new RuntimeException("Cannot read meta data: " + metaKey);
+        }
+        return value;
     }
 }
