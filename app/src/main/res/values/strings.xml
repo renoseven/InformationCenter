@@ -16,7 +16,6 @@
     <string name="service_state_up">Running</string>
     <string name="service_state_down">Stop</string>
 
-
     <string name="title_activity_setting">Settings</string>
 
     <string name="lbl_receiver">Monitoring</string>
@@ -46,6 +45,25 @@
     <string name="lbl_mail_smtp_host_hint">smtp.host.com</string>
     <string name="lbl_mail_smtp_port">Port:</string>
     <string name="lbl_mail_smtp_port_hint">25</string>
-    <string name="lbl_mail_smtp_ssl_enable">SSL:</string>
-    <string name="lbl_mail_smtp_tls_enable">TLS:</string>
+    <string name="lbl_mail_smtp_ssl_enable">SSL</string>
+    <string name="lbl_mail_smtp_tls_enable">TLS</string>
+
+    <string name="tag_receiver_sms_enable">receiver.sms.enable</string>
+    <string name="tag_receiver_mail_enable">receiver.mail.enable</string>
+
+    <string name="tag_forwarding_sms_enable">forwarding.sms.enable</string>
+    <string name="tag_forwarding_sms_receiver">forwarding.sms.receiver</string>
+    <string name="tag_forwarding_mail_enable">forwarding.mail.enable</string>
+    <string name="tag_forwarding_mail_sender">forwarding.mail.sender</string>
+    <string name="tag_forwarding_mail_sender_name">forwarding.mail.sender.name</string>
+    <string name="tag_forwarding_mail_receiver">forwarding.mail.receiver</string>
+    <string name="tag_forwarding_mail_receiver_name">forwarding.mail.receiver.name</string>
+
+    <string name="tag_mail_auth_username">mail.auth.username</string>
+    <string name="tag_mail_auth_password">mail.auth.password</string>
+
+    <string name="tag_mail_smtp_host">mail.smtp.host</string>
+    <string name="tag_mail_smtp_port">mail.smtp.port</string>
+    <string name="tag_mail_smtp_ssl_enable">mail.smtp.ssl.enable</string>
+    <string name="tag_mail_smtp_tls_enable">mail.smtp.tls.enable</string>
 </resources>

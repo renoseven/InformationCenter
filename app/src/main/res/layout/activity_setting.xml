@@ -21,8 +21,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_margin="@dimen/activity_margin_small" >
+            android:layout_margin="@dimen/activity_margin_small"
+            android:orientation="vertical">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -32,8 +32,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:tag="receiver.sms.enable"
-                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+                    android:tag="@string/tag_receiver_sms_enable"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -52,8 +52,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:tag="receiver.mail.enable"
-                    android:textAppearance="?android:attr/textAppearanceMedium"/>
+                    android:tag="@string/tag_receiver_mail_enable"
+                    android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -74,13 +74,13 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_margin="@dimen/activity_margin_small" >
+            android:layout_margin="@dimen/activity_margin_small"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -91,8 +91,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:tag="forwarding.sms.enable"
-                        android:textAppearance="?android:attr/textAppearanceMedium"/>
+                        android:tag="@string/tag_forwarding_sms_enable"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -107,11 +107,11 @@
                     android:id="@+id/layout_sms_forwarding_setting"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/activity_margin_small" >
+                    android:layout_margin="@dimen/activity_margin_small">
 
                     <TableRow
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content" >
+                        android:layout_height="wrap_content">
 
                         <TextView
                             android:layout_column="0"
@@ -123,7 +123,7 @@
                             android:layout_marginStart="@dimen/activity_margin"
                             android:hint="@string/lbl_forwarding_sms_receiver_hint"
                             android:inputType="text"
-                            android:tag="forwarding.sms.sender"
+                            android:tag="@string/tag_forwarding_sms_receiver"
                             android:textAppearance="?android:attr/textAppearanceSmall" />
                     </TableRow>
                 </TableLayout>
@@ -132,7 +132,7 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical">
 
                 <RelativeLayout
                     android:layout_width="match_parent"
@@ -143,17 +143,16 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_alignParentEnd="true"
-                        android:tag="forwarding.mail.enable"
-                        android:textAppearance="?android:attr/textAppearanceMedium"/>
+                        android:tag="@string/tag_forwarding_mail_enable"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="@string/lbl_forwarding_mail_enable"
-                        android:textAppearance="?android:attr/textAppearanceMedium"
-                        android:layout_centerVertical="true"
                         android:layout_alignParentStart="true"
-                        android:id="@+id/textView" />
+                        android:layout_centerVertical="true"
+                        android:text="@string/lbl_forwarding_mail_enable"
+                        android:textAppearance="?android:attr/textAppearanceMedium" />
                 </RelativeLayout>
 
                 <LinearLayout
@@ -181,7 +180,7 @@
                                 android:layout_marginStart="@dimen/activity_margin"
                                 android:hint="@string/lbl_forwarding_mail_sender_name_hint"
                                 android:inputType="text"
-                                android:tag="forwarding.mail.sender.name"
+                                android:tag="@string/tag_forwarding_mail_sender_name"
                                 android:textAppearance="?android:attr/textAppearanceSmall" />
                         </TableRow>
 
@@ -199,7 +198,7 @@
                                 android:layout_marginStart="@dimen/activity_margin"
                                 android:hint="@string/lbl_forwarding_mail_sender_hint"
                                 android:inputType="textEmailAddress"
-                                android:tag="forwarding.mail.sender"
+                                android:tag="@string/tag_forwarding_mail_sender"
                                 android:textAppearance="?android:attr/textAppearanceSmall" />
                         </TableRow>
 
@@ -218,7 +217,7 @@
                                 android:layout_marginStart="@dimen/activity_margin"
                                 android:hint="@string/lbl_forwarding_mail_receiver_name_hint"
                                 android:inputType="text"
-                                android:tag="forwarding.mail.receiver.name"
+                                android:tag="@string/tag_forwarding_mail_receiver_name"
                                 android:textAppearance="?android:attr/textAppearanceSmall" />
                         </TableRow>
 
@@ -236,7 +235,7 @@
                                 android:layout_marginStart="@dimen/activity_margin"
                                 android:hint="@string/lbl_forwarding_mail_receiver_hint"
                                 android:inputType="textEmailAddress"
-                                android:tag="forwarding.mail.receiver"
+                                android:tag="@string/tag_forwarding_mail_receiver"
                                 android:textAppearance="?android:attr/textAppearanceSmall" />
                         </TableRow>
 
@@ -254,7 +253,7 @@
                                 android:layout_marginStart="@dimen/activity_margin"
                                 android:hint="@string/lbl_mail_smtp_host_hint"
                                 android:inputType="textUri"
-                                android:tag="mail.smtp.host"
+                                android:tag="@string/tag_mail_smtp_host"
                                 android:textAppearance="?android:attr/textAppearanceSmall" />
                         </TableRow>
 
@@ -272,7 +271,7 @@
                                 android:layout_marginStart="@dimen/activity_margin"
                                 android:hint="@string/lbl_mail_smtp_port_hint"
                                 android:inputType="numberDecimal"
-                                android:tag="mail.smtp.port"
+                                android:tag="@string/tag_mail_smtp_port"
                                 android:textAppearance="?android:attr/textAppearanceSmall" />
                         </TableRow>
 
@@ -290,7 +289,7 @@
                                 android:layout_marginStart="@dimen/activity_margin"
                                 android:hint="@string/lbl_mail_auth_username_hint"
                                 android:inputType="textEmailAddress"
-                                android:tag="mail.auth.username"
+                                android:tag="@string/tag_mail_auth_username"
                                 android:textAppearance="?android:attr/textAppearanceSmall" />
                         </TableRow>
 
@@ -308,7 +307,7 @@
                                 android:layout_marginStart="@dimen/activity_margin"
                                 android:hint="@string/lbl_mail_auth_password_hint"
                                 android:inputType="textPassword"
-                                android:tag="mail.auth.password"
+                                android:tag="@string/tag_mail_auth_password"
                                 android:textAppearance="?android:attr/textAppearanceSmall" />
                         </TableRow>
                     </TableLayout>
@@ -321,11 +320,11 @@
                             android:id="@+id/sw_mail_smtp_ssl_enable"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="@dimen/activity_margin_small"
                             android:layout_alignParentStart="true"
                             android:layout_alignParentTop="true"
+                            android:layout_marginEnd="@dimen/activity_margin_small"
                             android:switchPadding="@dimen/activity_margin_small"
-                            android:tag="mail.smtp.ssl.enable"
+                            android:tag="@string/tag_mail_smtp_ssl_enable"
                             android:text="@string/lbl_mail_smtp_ssl_enable"
                             android:textAppearance="?android:attr/textAppearanceSmall" />
 
@@ -333,19 +332,17 @@
                             android:id="@+id/sw_mail_smtp_tls_enable"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginStart="@dimen/activity_margin_small"
                             android:layout_alignParentTop="true"
+                            android:layout_marginStart="@dimen/activity_margin_small"
                             android:layout_toEndOf="@+id/sw_mail_smtp_ssl_enable"
                             android:switchPadding="@dimen/activity_margin_small"
-                            android:tag="mail.smtp.tls.enable"
+                            android:tag="@string/tag_mail_smtp_tls_enable"
                             android:text="@string/lbl_mail_smtp_tls_enable"
                             android:textAppearance="?android:attr/textAppearanceSmall" />
 
                     </RelativeLayout>
                 </LinearLayout>
             </LinearLayout>
-
         </LinearLayout>
-
     </LinearLayout>
 </ScrollView>
