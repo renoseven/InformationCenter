@@ -7,7 +7,7 @@ import android.support.annotation.Nullable;
  * NIAService State Listener
  * Created by RenoSeven on 2016/9/10.
  */
-interface NIAServiceController {
+interface NIAServiceListener {
 
     /**
      * Function: onServiceBorn
@@ -24,22 +24,6 @@ interface NIAServiceController {
      * Return: void
      * */
     void onServiceDead();
-
-    /**
-     * Function: onServiceAlive
-     * Params: void
-     * Description: triggers when service updates
-     * Return: void
-     * */
-    void onServiceAlive();
-
-    /**
-     * Function: updateService
-     * Params: Bundle request (optional)
-     * Description: send a service update request
-     * Return: void
-     * */
-    void updateService(@Nullable Bundle request);
 
     /**
      * Function: onServiceSubmit

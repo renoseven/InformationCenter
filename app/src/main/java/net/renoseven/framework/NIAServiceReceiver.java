@@ -10,9 +10,9 @@ import android.util.Log;
  * Created by RenoSeven on 2016/9/9.
  */
 public class NIAServiceReceiver extends DynamicClassReceiver {
-    private final NIAServiceController stateListener;
+    private final NIAServiceListener stateListener;
 
-    public NIAServiceReceiver(String serviceClassName, NIAServiceController stateListener) {
+    public NIAServiceReceiver(String serviceClassName, NIAServiceListener stateListener) {
         super(serviceClassName);
         this.stateListener = stateListener;
     }
@@ -22,16 +22,14 @@ public class NIAServiceReceiver extends DynamicClassReceiver {
         String actionName = intent.getAction();
 
         if(actionName.equals(getFullActionName(NIAService.SERVICE_ACTION_SUBMIT))) {
-            Log.i(TAG, "Service updated");
+            Log.d(TAG, "Received service submit");
             // read data from bundles
             stateListener.onServiceSubmit(intent.getExtras());
         }
         else if(actionName.equals(getFullActionName(NIAService.SERVICE_STATE_BORN))) {
-            Log.i(TAG, "Service started");
             stateListener.onServiceBorn();
         }
         else if(actionName.equals(getFullActionName(NIAService.SERVICE_STATE_DEAD))) {
-            Log.i(TAG, "Service stopped");
             stateListener.onServiceDead();
         }
     }

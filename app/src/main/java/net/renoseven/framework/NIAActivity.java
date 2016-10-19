@@ -10,10 +10,11 @@ import android.util.Log;
  * Basic Non-Interactive Service Activity
  * Created by RenoSeven on 2016/9/9.
  */
-public abstract class NIAActivity extends AppCompatActivity implements NIAServiceController {
+public abstract class NIAActivity extends AppCompatActivity implements NIAServiceListener {
     protected final String TAG;
     private final String SERVICE_CLASS_NAME;
     private final DynamicClassReceiver serviceStateReceiver;
+    private boolean isServiceRunning;
 
     public NIAActivity() {
         TAG = this.getClass().getSimpleName();
@@ -36,7 +37,30 @@ public abstract class NIAActivity extends AppCompatActivity implements NIAServic
     @Override
     public void onResume() {
         super.onResume();
-        updateService();
+        if(isServiceRunning) {
+            updateService();
+        }
+        updateUI(null);
+    }
+
+    @Override
+    public void onServiceBorn() {
+        Log.i(TAG, "Service started");
+        isServiceRunning = true;
+        updateUI(null);
+    }
+
+    @Override
+    public void onServiceDead() {
+        Log.i(TAG, "Service stopped");
+        isServiceRunning = false;
+        updateUI(null);
+    }
+
+    @Override
+    public void onServiceSubmit(@Nullable Bundle reply) {
+        Log.i(TAG, "Service updated");
+        updateUI(reply);
     }
 
     /**
@@ -48,15 +72,21 @@ public abstract class NIAActivity extends AppCompatActivity implements NIAServic
     protected abstract String getServiceClassName();
 
     /**
-     * Function: onServiceSubmit
-     * Params: Bundle reply (optional)
-     * Description: triggers when a service submits data.
+     * Function: updateUI
+     * Params: Bundle bundle ()
+     * Description: update UI by additional data (optional).
      * Return: void
      * */
-    @Override
-    public void onServiceSubmit(@Nullable Bundle reply) {
-        Log.d(TAG, "Service submit");
-        onServiceAlive();
+    protected abstract void updateUI(@Nullable Bundle bundle);
+
+    /**
+     * Function: isServiceAlive
+     * Params: void
+     * Description: show if service is alive
+     * Return: boolean
+     * */
+    protected boolean isServiceAlive() {
+        return isServiceRunning;
     }
 
     /**
@@ -65,10 +95,10 @@ public abstract class NIAActivity extends AppCompatActivity implements NIAServic
      * Description: send a service update request
      * Return: void
      * */
-    public void updateService() {
+    protected void updateService() {
         updateService(null);
     }
-    public void updateService(@Nullable Bundle request) {
+    protected void updateService(@Nullable Bundle request) {
         Log.d(TAG, "Request service update");
         broadcastMessage(NIAService.SERVICE_ACTION_UPDATE, request);
     }
