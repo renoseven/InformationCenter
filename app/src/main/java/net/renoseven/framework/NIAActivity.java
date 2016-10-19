@@ -42,17 +42,17 @@ public abstract class NIAActivity extends AppCompatActivity implements NIAServic
 
     @Override
     protected void onDestroy() {
-        super.onDestroy();
         unregisterReceiver(serviceStateReceiver);
+        super.onDestroy();
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (isServiceRunning) {
-            updateService();
+        if (!isServiceRunning) {
+            updateUI(null);
         }
-        updateUI(null);
+        updateService();
     }
 
     @Override
@@ -72,6 +72,7 @@ public abstract class NIAActivity extends AppCompatActivity implements NIAServic
     @Override
     public void onServiceSubmit(@Nullable Bundle reply) {
         Log.i(TAG, "Service updated");
+        isServiceRunning = true;
         updateUI(reply);
     }
 
