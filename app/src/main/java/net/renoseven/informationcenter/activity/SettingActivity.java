@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.EditText;
-import android.widget.Switch;
 
 import net.grandcentrix.tray.TrayPreferences;
 import net.renoseven.informationcenter.R;
@@ -21,10 +20,10 @@ public class SettingActivity extends AppCompatActivity {
     private TrayPreferences appPreferences;
 
     private View smsForwardingSettings;
-    private Switch smsForwardingEnable;
+    private CompoundButton smsForwardingEnable;
 
     private View mailForwardingSettings;
-    private Switch mailForwardingEnable;
+    private CompoundButton mailForwardingEnable;
 
     public SettingActivity() {
         TAG = this.getClass().getSimpleName();
@@ -34,30 +33,21 @@ public class SettingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
-
-        Log.d(TAG, "Reading settings...");
         appPreferences = new ApplicationPreferences(this);
-
-        Set<View> viewSet = findViews((ViewGroup) findViewById(R.id.scrollView));
-        for (View view : viewSet) {
-            String viewTag = (String) view.getTag();
-            if (view instanceof EditText) {
-                Log.d(TAG, viewTag + "=" + appPreferences.getString(viewTag, null));
-                ((EditText) view).setText(appPreferences.getString(viewTag, null));
-            } else if (view instanceof Switch) {
-                Log.d(TAG, viewTag + "=" + appPreferences.getBoolean(viewTag, false));
-                ((Switch) view).setChecked(appPreferences.getBoolean(viewTag, false));
-            }
-        }
-        Log.i(TAG, "Settings loaded");
-
+        loadSettings();
         initComponents();
+    }
+
+    @Override
+    protected void onDestroy() {
+        saveSettings();
+        super.onDestroy();
     }
 
     private void initComponents() {
         // sms forwarding settings
         smsForwardingSettings = findViewById(R.id.layout_sms_forwarding_setting);
-        smsForwardingEnable = (Switch) findViewById(R.id.sw_sms_forwarding_enable);
+        smsForwardingEnable = (CompoundButton) findViewById(R.id.sw_sms_forwarding_enable);
         smsForwardingEnable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -67,7 +57,7 @@ public class SettingActivity extends AppCompatActivity {
 
         // mail forwarding settings
         mailForwardingSettings = findViewById(R.id.layout_mail_forwarding_setting);
-        mailForwardingEnable = (Switch) findViewById(R.id.sw_mail_forwarding_enable);
+        mailForwardingEnable = (CompoundButton) findViewById(R.id.sw_mail_forwarding_enable);
         mailForwardingEnable.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
@@ -93,8 +83,23 @@ public class SettingActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    protected void onDestroy() {
+    private void loadSettings() {
+        Log.d(TAG, "Reading settings...");
+        Set<View> viewSet = findViews((ViewGroup) findViewById(R.id.scrollView));
+        for (View view : viewSet) {
+            String viewTag = (String) view.getTag();
+            if (view instanceof EditText) {
+                Log.d(TAG, viewTag + "=" + appPreferences.getString(viewTag, null));
+                ((EditText) view).setText(appPreferences.getString(viewTag, null));
+            } else if (view instanceof CompoundButton) {
+                Log.d(TAG, viewTag + "=" + appPreferences.getBoolean(viewTag, false));
+                ((CompoundButton) view).setChecked(appPreferences.getBoolean(viewTag, false));
+            }
+        }
+        Log.i(TAG, "Settings loaded");
+    }
+
+    private void saveSettings() {
         Log.d(TAG, "Saving changes...");
 
         Set<View> viewSet = findViews((ViewGroup) findViewById(R.id.scrollView));
@@ -103,14 +108,13 @@ public class SettingActivity extends AppCompatActivity {
             if (view instanceof EditText) {
                 appPreferences.put(viewTag, ((EditText) view).getText().toString());
                 Log.d(TAG, viewTag + "=" + appPreferences.getString(viewTag, null));
-            } else if (view instanceof Switch) {
-                appPreferences.put(viewTag, ((Switch) view).isChecked());
+            } else if (view instanceof CompoundButton) {
+                appPreferences.put(viewTag, ((CompoundButton) view).isChecked());
                 Log.d(TAG, viewTag + "=" + appPreferences.getBoolean(viewTag, false));
             }
         }
         Log.i(TAG, "Changes saved");
 
-        super.onDestroy();
     }
 
     private Set<View> findViews(ViewGroup g) {

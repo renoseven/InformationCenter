@@ -40,8 +40,7 @@
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
                 android:text="@string/text_statistics"
-                android:layout_column="0"
-                />
+                android:layout_column="0" />
         </TableRow>
 
         <TableRow

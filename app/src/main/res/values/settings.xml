@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="pref_stat_service_uptime">stat.uptime</string>
+    <string name="pref_stat_message_received">stat.message.received</string>
+    <string name="pref_stat_sms_sent">stat.sms.sent</string>
+    <string name="pref_stat_mail_sent">stat.mail.sent</string>
+
+    <string name="pref_stat_total_service_uptime">stat.total.uptime</string>
+    <string name="pref_stat_total_message_received">stat.total.message.received</string>
+    <string name="pref_stat_total_sma_sent">stat.total.sms.sent</string>
+    <string name="pref_stat_total_mail_sent">stat.total.mail.sent</string>
+
     <string name="pref_receiver_sms_enable">receiver.sms.enable</string>
     <string name="pref_receiver_mail_enable">receiver.mail.enable</string>
 
