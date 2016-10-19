@@ -3,13 +3,13 @@
     <string name="app_name">Information Center</string>
 
     <string name="title_activity_main">Information Center</string>
-    <string name="label_statistics">Service Statistics</string>
-    <string name="label_service_state">Service State:</string>
-    <string name="label_service_uptime">Running time:</string>
-    <string name="label_message_received">Message received:</string>
-    <string name="label_sms_sent">SMS sent:</string>
-    <string name="label_mail_sent">Mail sent:</string>
-    <string name="label_total_statistics">Total Statistics</string>
+    <string name="text_statistics">Service Statistics</string>
+    <string name="text_service_state">Service State:</string>
+    <string name="text_service_uptime">Running time:</string>
+    <string name="text_message_received">Message received:</string>
+    <string name="text_sms_sent">SMS sent:</string>
+    <string name="text_mail_sent">Mail sent:</string>
+    <string name="text_total_statistics">Total Statistics</string>
     <string name="button_start_service">Start</string>
     <string name="button_stop_service">Stop</string>
     <string name="button_settings">Settings</string>
@@ -18,52 +18,33 @@
 
     <string name="title_activity_setting">Settings</string>
 
-    <string name="lbl_receiver">Monitoring</string>
-    <string name="lbl_receiver_sms_enable">SMS Monitoring</string>
-    <string name="lbl_receiver_mail_enable">Mail Monitoring</string>
+    <string name="text_receiver">Monitoring</string>
+    <string name="text_receiver_sms_enable">SMS Monitoring</string>
+    <string name="text_receiver_mail_enable">Mail Monitoring</string>
 
-    <string name="lbl_forwarding">Forwarding</string>
-    <string name="lbl_forwarding_sms_enable">Forward as SMS</string>
-    <string name="lbl_forwarding_sms_receiver">Phone number:</string>
-    <string name="lbl_forwarding_sms_receiver_hint">+11234567890</string>
-    <string name="lbl_forwarding_mail_enable">Forward as Mail</string>
-    <string name="lbl_forwarding_mail_sender_name">Sender name:</string>
-    <string name="lbl_forwarding_mail_sender_name_hint">Information Service</string>
-    <string name="lbl_forwarding_mail_sender">Sender email:</string>
-    <string name="lbl_forwarding_mail_sender_hint">sender@host.com</string>
-    <string name="lbl_forwarding_mail_receiver_name">Receiver name:</string>
-    <string name="lbl_forwarding_mail_receiver_name_hint">Virtual PBX</string>
-    <string name="lbl_forwarding_mail_receiver">Receiver email:</string>
-    <string name="lbl_forwarding_mail_receiver_hint">receiver@host.com</string>
+    <string name="text_forwarding">Forwarding</string>
+    <string name="text_forwarding_sms_enable">Forward as SMS</string>
+    <string name="text_forwarding_sms_receiver">Phone number:</string>
+    <string name="text_forwarding_sms_receiver_hint">+11234567890</string>
+    <string name="text_forwarding_mail_enable">Forward as Mail</string>
+    <string name="text_forwarding_mail_sender_name">Sender name:</string>
+    <string name="text_forwarding_mail_sender_name_hint">Information Service</string>
+    <string name="text_forwarding_mail_sender">Sender email:</string>
+    <string name="text_forwarding_mail_sender_hint">sender@host.com</string>
+    <string name="text_forwarding_mail_receiver_name">Receiver name:</string>
+    <string name="text_forwarding_mail_receiver_name_hint">Virtual PBX</string>
+    <string name="text_forwarding_mail_receiver">Receiver email:</string>
+    <string name="text_forwarding_mail_receiver_hint">receiver@host.com</string>
 
-    <string name="lbl_mail_auth_username">Username:</string>
-    <string name="lbl_mail_auth_username_hint">yourname@host.com</string>
-    <string name="lbl_mail_auth_password">Password:</string>
-    <string name="lbl_mail_auth_password_hint">yourpassword</string>
+    <string name="text_mail_auth_username">Username:</string>
+    <string name="text_mail_auth_username_hint">yourname@host.com</string>
+    <string name="text_mail_auth_password">Password:</string>
+    <string name="text_mail_auth_password_hint">yourpassword</string>
 
-    <string name="lbl_mail_smtp_host">SMTP Server:</string>
-    <string name="lbl_mail_smtp_host_hint">smtp.host.com</string>
-    <string name="lbl_mail_smtp_port">Port:</string>
-    <string name="lbl_mail_smtp_port_hint">25</string>
-    <string name="lbl_mail_smtp_ssl_enable">SSL</string>
-    <string name="lbl_mail_smtp_tls_enable">TLS</string>
-
-    <string name="tag_receiver_sms_enable">receiver.sms.enable</string>
-    <string name="tag_receiver_mail_enable">receiver.mail.enable</string>
-
-    <string name="tag_forwarding_sms_enable">forwarding.sms.enable</string>
-    <string name="tag_forwarding_sms_receiver">forwarding.sms.receiver</string>
-    <string name="tag_forwarding_mail_enable">forwarding.mail.enable</string>
-    <string name="tag_forwarding_mail_sender">forwarding.mail.sender</string>
-    <string name="tag_forwarding_mail_sender_name">forwarding.mail.sender.name</string>
-    <string name="tag_forwarding_mail_receiver">forwarding.mail.receiver</string>
-    <string name="tag_forwarding_mail_receiver_name">forwarding.mail.receiver.name</string>
-
-    <string name="tag_mail_auth_username">mail.auth.username</string>
-    <string name="tag_mail_auth_password">mail.auth.password</string>
-
-    <string name="tag_mail_smtp_host">mail.smtp.host</string>
-    <string name="tag_mail_smtp_port">mail.smtp.port</string>
-    <string name="tag_mail_smtp_ssl_enable">mail.smtp.ssl.enable</string>
-    <string name="tag_mail_smtp_tls_enable">mail.smtp.tls.enable</string>
+    <string name="text_mail_smtp_host">SMTP Server:</string>
+    <string name="text_mail_smtp_host_hint">smtp.host.com</string>
+    <string name="text_mail_smtp_port">Port:</string>
+    <string name="text_mail_smtp_port_hint">25</string>
+    <string name="text_mail_smtp_ssl_enable">SSL</string>
+    <string name="text_mail_smtp_tls_enable">TLS</string>
 </resources>

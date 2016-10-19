@@ -1,8 +1,10 @@
 package net.renoseven.informationcenter.preference;
 
 import android.content.Context;
+import android.content.res.Resources;
 
 import net.grandcentrix.tray.TrayPreferences;
+import net.renoseven.informationcenter.R;
 
 /**
  * Application Preferences
@@ -11,6 +13,8 @@ import net.grandcentrix.tray.TrayPreferences;
 public class ApplicationPreferences extends TrayPreferences {
     private final static String MODULE_NAME = ApplicationPreferences.class.getSimpleName();
     private final static int DB_VERSION = 1;
+
+    // values should match to strings.xml
 
     // Receiver settings
     public final static String CONFIG_RECEIVER_SMS_ENABLED          = "receiver.sms.enable";

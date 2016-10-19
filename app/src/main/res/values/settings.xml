@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="pref_receiver_sms_enable">receiver.sms.enable</string>
+    <string name="pref_receiver_mail_enable">receiver.mail.enable</string>
+
+    <string name="pref_forwarding_sms_enable">forwarding.sms.enable</string>
+    <string name="pref_forwarding_sms_receiver">forwarding.sms.receiver</string>
+    <string name="pref_forwarding_mail_enable">forwarding.mail.enable</string>
+    <string name="pref_forwarding_mail_sender">forwarding.mail.sender</string>
+    <string name="pref_forwarding_mail_sender_name">forwarding.mail.sender.name</string>
+    <string name="pref_forwarding_mail_receiver">forwarding.mail.receiver</string>
+    <string name="pref_forwarding_mail_receiver_name">forwarding.mail.receiver.name</string>
+
+    <string name="pref_mail_auth_username">mail.auth.username</string>
+    <string name="pref_mail_auth_password">mail.auth.password</string>
+
+    <string name="pref_mail_smtp_host">mail.smtp.host</string>
+    <string name="pref_mail_smtp_port">mail.smtp.port</string>
+    <string name="pref_mail_smtp_ssl_enable">mail.smtp.ssl.enable</string>
+    <string name="pref_mail_smtp_tls_enable">mail.smtp.tls.enable</string>
+</resources>

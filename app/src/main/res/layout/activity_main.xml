@@ -39,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/label_statistics"
+                android:text="@string/text_statistics"
                 android:layout_column="0"
                 />
         </TableRow>
@@ -50,7 +50,7 @@
 
             <TextView
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/label_service_state"
+                android:text="@string/text_service_state"
                 android:layout_column="0" />
 
             <TextView
@@ -67,7 +67,7 @@
 
             <TextView
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/label_service_uptime"
+                android:text="@string/text_service_uptime"
                 android:layout_column="0" />
 
             <TextView
@@ -83,7 +83,7 @@
 
             <TextView
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/label_message_received"
+                android:text="@string/text_message_received"
                 android:layout_column="0" />
 
             <TextView
@@ -99,7 +99,7 @@
 
             <TextView
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/label_sms_sent"
+                android:text="@string/text_sms_sent"
                 android:layout_column="0" />
 
             <TextView
@@ -115,7 +115,7 @@
 
             <TextView
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/label_mail_sent"
+                android:text="@string/text_mail_sent"
                 android:layout_column="0" />
 
             <TextView
@@ -131,7 +131,7 @@
 
             <TextView
                 android:textAppearance="?android:attr/textAppearanceLarge"
-                android:text="@string/label_total_statistics"
+                android:text="@string/text_total_statistics"
                 android:layout_column="0"
                 android:layout_marginTop="@dimen/activity_margin" />
         </TableRow>
@@ -142,7 +142,7 @@
 
             <TextView
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/label_service_uptime"
+                android:text="@string/text_service_uptime"
                 android:layout_column="0" />
 
             <TextView
@@ -158,7 +158,7 @@
 
             <TextView
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/label_message_received"
+                android:text="@string/text_message_received"
                 android:layout_column="0" />
 
             <TextView
@@ -174,7 +174,7 @@
 
             <TextView
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/label_sms_sent"
+                android:text="@string/text_sms_sent"
                 android:layout_column="0" />
 
             <TextView
@@ -190,7 +190,7 @@
 
             <TextView
                 android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/label_mail_sent"
+                android:text="@string/text_mail_sent"
                 android:layout_column="0" />
 
             <TextView
