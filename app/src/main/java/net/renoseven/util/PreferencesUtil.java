@@ -1,6 +1,5 @@
 package net.renoseven.util;
 
-import net.grandcentrix.tray.AppPreferences;
 import net.grandcentrix.tray.TrayPreferences;
 import net.grandcentrix.tray.core.TrayItem;
 
@@ -16,7 +15,7 @@ public abstract class PreferencesUtil {
     public static void convert(final TrayPreferences from, final Properties to) {
         to.clear();
         Collection<TrayItem> records = from.getAll();
-        for(TrayItem record : records) {
+        for (TrayItem record : records) {
             to.setProperty(record.key(), record.value());
         }
     }
