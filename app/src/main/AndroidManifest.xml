@@ -19,7 +19,7 @@
 
         <activity android:name=".activity.MainActivity">
             <meta-data
-                android:name="bindService"
+                android:name="service"
                 android:value=".service.InformationService" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

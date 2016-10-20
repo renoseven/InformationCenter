@@ -14,7 +14,7 @@ import android.util.Log;
  */
 public abstract class NIAActivity extends AppCompatActivity implements NIAServiceListener {
     protected final String TAG;
-    private final static String META_KEY_BIND_SERVICE = "bindService";
+    private final static String META_KEY_BIND_SERVICE = "service";
 
     private String serviceClassName;
     private DynamicClassReceiver serviceStateReceiver;
@@ -35,13 +35,15 @@ public abstract class NIAActivity extends AppCompatActivity implements NIAServic
             serviceClassName = packageName + serviceClassName;
         }
         serviceStateReceiver = new NIAServiceReceiver(serviceClassName, this);
-        Log.d(TAG, "Bind service: " + serviceClassName);
+        Log.d(TAG, "service: " + serviceClassName);
 
+        // bind service
         registerReceiver(serviceStateReceiver, serviceStateReceiver.getActionFilter());
     }
 
     @Override
     protected void onDestroy() {
+        // unbind service
         unregisterReceiver(serviceStateReceiver);
         super.onDestroy();
     }
@@ -49,9 +51,11 @@ public abstract class NIAActivity extends AppCompatActivity implements NIAServic
     @Override
     public void onResume() {
         super.onResume();
+        // first start
         if (!isServiceRunning) {
             updateUI(null);
         }
+        // try updating service to check if it is running
         updateService();
     }
 
@@ -153,9 +157,6 @@ public abstract class NIAActivity extends AppCompatActivity implements NIAServic
             value = info.metaData.getString(metaKey);
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
-        }
-        if (value == null) {
-            throw new RuntimeException("Cannot read meta data: " + metaKey);
         }
         return value;
     }
