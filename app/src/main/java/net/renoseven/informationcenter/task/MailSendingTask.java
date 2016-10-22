@@ -1,5 +1,7 @@
 package net.renoseven.informationcenter.task;
 
+import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import net.renoseven.informationcenter.message.MessageHolder;
@@ -20,24 +22,24 @@ import static net.renoseven.informationcenter.preference.MailPreferences.CONFIG_
  * Task of sending an email
  * Created by RenoSeven on 2016/9/9.
  */
-public class MailSendingTask implements Runnable {
+public class MailSendingTask extends BaseTask {
     public final static String MAIL_SENT = MailSendingTask.class.getName() + ".MAIL_SENT";
-    private final String TAG = this.getClass().getSimpleName() + "@" + this.hashCode();
+
     private Properties serverConfig;
     private MessageHolder message;
 
-    public MailSendingTask(final Properties mailConfig, final MessageHolder message) {
+    public MailSendingTask(final Context base, final Properties mailConfig, final MessageHolder message) {
+        super(base);
         this.serverConfig = mailConfig;
         this.message = message;
     }
 
     @Override
-    public void run() {
+    public boolean doTask() {
+        boolean result = false;
         if (message.getMsgType() != MessageType.MAIL) {
             Log.e(TAG, "Wrong message type");
-            return;
         }
-        //TODO: show mail sending status
         try {
             Log.v(TAG, "Starting session...");
             Session session = Session.getInstance(serverConfig);
@@ -57,10 +59,21 @@ public class MailSendingTask implements Runnable {
             transport.sendMessage(mail, mail.getAllRecipients());
 
             transport.close();
-            Log.i(TAG, "Mail sent");
+            result = true;
         } catch (Exception e) {
             Log.e(TAG, e.toString());
         }
+        return result;
     }
 
+    @Override
+    protected void onTaskFinished() {
+        Log.i(TAG, "Mail sent");
+        sendBroadcast(new Intent(MAIL_SENT));
+    }
+
+    @Override
+    protected void onTaskFailed() {
+        Log.e(TAG, "Mail sending failed");
+    }
 }

@@ -1,5 +1,6 @@
 package net.renoseven.informationcenter.processor;
 
+import android.content.Context;
 import android.util.Log;
 
 import net.grandcentrix.tray.TrayPreferences;
@@ -12,27 +13,15 @@ import net.renoseven.util.PreferencesUtil;
 
 import java.util.Map;
 import java.util.Properties;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
- * Singleton Mail Forwarding Processor
+ * Mail Forwarding Processor
  * Created by RenoSeven on 2016/9/22.
  */
-public class MailForwardingProcessor implements MessageProcessor {
-    private final static String TAG = MailForwardingProcessor.class.getSimpleName();
+public class MailForwardingProcessor extends BaseMessageProcessor implements MessageProcessor {
 
-    private final ExecutorService executorService = Executors.newSingleThreadExecutor();
-
-    private static class SingletonHolder {
-        private static final MessageProcessor INSTANCE = new MailForwardingProcessor();
-    }
-
-    private MailForwardingProcessor() {
-    }
-
-    public static MessageProcessor getInstance() {
-        return SingletonHolder.INSTANCE;
+    public MailForwardingProcessor(Context base) {
+        super(base);
     }
 
     @Override
@@ -57,9 +46,9 @@ public class MailForwardingProcessor implements MessageProcessor {
             Log.i(TAG, mail.toString());
 
             Log.d(TAG, "Starting job...");
-            executorService.execute(new MailSendingTask(mailSendingConfig, mail));
+            this.runTask(new MailSendingTask(getBaseContext(), mailSendingConfig, mail));
         } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
+            Log.e(TAG, e.toString());
         }
     }
 }

@@ -67,7 +67,7 @@ public class MainActivity extends NIAActivity implements View.OnClickListener, O
     @Override
     public void onTrayPreferenceChanged(Collection<TrayItem> items) {
         Log.d(TAG, "Statistics changed");
-        for(TrayItem item : items) {
+        for (TrayItem item : items) {
             Log.d(TAG, item.key() + "=" + item.value());
         }
     }

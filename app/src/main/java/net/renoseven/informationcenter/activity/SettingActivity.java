@@ -153,8 +153,7 @@ public class SettingActivity extends AppCompatActivity implements CompoundButton
             View child = parent.getChildAt(i);
             if (child instanceof ViewGroup) {
                 set.addAll(findViews((ViewGroup) child, viewClass));
-            }
-            else if (viewClass.isAssignableFrom(child.getClass())) {
+            } else if (viewClass.isAssignableFrom(child.getClass())) {
                 set.add(child);
             }
         }

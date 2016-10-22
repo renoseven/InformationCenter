@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import net.grandcentrix.tray.TrayPreferences;
+import net.renoseven.framework.FilteredBroadcastReceiver;
 import net.renoseven.framework.NIAService;
 import net.renoseven.informationcenter.message.MessageHolder;
 import net.renoseven.informationcenter.preference.ApplicationPreferences;
@@ -13,7 +14,6 @@ import net.renoseven.informationcenter.preference.StatisticsPreferences;
 import net.renoseven.informationcenter.processor.MailForwardingProcessor;
 import net.renoseven.informationcenter.processor.MessageProcessor;
 import net.renoseven.informationcenter.processor.SMSForwardingProcessor;
-import net.renoseven.framework.FilteredBroadcastReceiver;
 import net.renoseven.informationcenter.receiver.ForwardingStateReceiver;
 import net.renoseven.informationcenter.receiver.MessageReceiver;
 import net.renoseven.informationcenter.receiver.SMSReceiver;
@@ -71,10 +71,10 @@ public class InformationService extends NIAService {
         // register message processors
         Log.v(TAG, "Registering processors...");
         if (appPref.getBoolean(CONFIG_FORWARDING_SMS_ENABLED, false)) {
-            messageProcessors.add(SMSForwardingProcessor.getInstance());
+            messageProcessors.add(new SMSForwardingProcessor(this));
         }
         if (appPref.getBoolean(CONFIG_FORWARDING_MAIL_ENABLED, false)) {
-            messageProcessors.add(MailForwardingProcessor.getInstance());
+            messageProcessors.add(new MailForwardingProcessor(this));
         }
     }
 
