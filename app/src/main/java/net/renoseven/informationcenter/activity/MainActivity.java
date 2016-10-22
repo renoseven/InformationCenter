@@ -3,6 +3,7 @@ package net.renoseven.informationcenter.activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -65,7 +66,10 @@ public class MainActivity extends NIAActivity implements View.OnClickListener, O
 
     @Override
     public void onTrayPreferenceChanged(Collection<TrayItem> items) {
-
+        Log.d(TAG, "Statistics changed");
+        for(TrayItem item : items) {
+            Log.d(TAG, item.key() + "=" + item.value());
+        }
     }
 
     @Override
@@ -81,5 +85,6 @@ public class MainActivity extends NIAActivity implements View.OnClickListener, O
             btnSettings.setEnabled(true);
             txtServiceState.setText(R.string.service_state_down);
         }
+        Log.d(TAG, "UI updated");
     }
 }
