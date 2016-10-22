@@ -3,6 +3,7 @@ package net.renoseven.framework;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.support.annotation.NonNull;
 import android.util.Log;
 
 /**
@@ -32,7 +33,9 @@ public class NIAServiceReceiver extends DynamicClassReceiver {
         }
     }
 
-    public IntentFilter getActionFilter() {
+    @NonNull
+    @Override
+    public IntentFilter getIntentFilter() {
         IntentFilter actionFilter = new IntentFilter();
         actionFilter.addAction(getFullActionName(NIAService.SERVICE_ACTION_SUBMIT));
         actionFilter.addAction(getFullActionName(NIAService.SERVICE_STATE_BORN));

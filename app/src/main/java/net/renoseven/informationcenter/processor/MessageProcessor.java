@@ -1,8 +1,9 @@
 package net.renoseven.informationcenter.processor;
 
+import net.grandcentrix.tray.TrayPreferences;
 import net.renoseven.informationcenter.message.MessageHolder;
 
-import java.util.Properties;
+import java.util.Map;
 
 /**
  * Message Processor Interface
@@ -10,5 +11,5 @@ import java.util.Properties;
  */
 
 public interface MessageProcessor {
-    void processMessage(final Properties settings, MessageHolder message);
+    void processMessage(final Map<String, TrayPreferences> preferencesMap, MessageHolder message);
 }

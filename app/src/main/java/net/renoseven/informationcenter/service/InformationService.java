@@ -1,78 +1,89 @@
 package net.renoseven.informationcenter.service;
 
 import android.content.BroadcastReceiver;
-import android.content.IntentFilter;
 import android.os.Bundle;
 import android.util.Log;
 
+import net.grandcentrix.tray.TrayPreferences;
 import net.renoseven.framework.NIAService;
 import net.renoseven.informationcenter.message.MessageHolder;
-import net.renoseven.informationcenter.message.MessageType;
 import net.renoseven.informationcenter.preference.ApplicationPreferences;
-import net.renoseven.informationcenter.processor.MailProcessor;
+import net.renoseven.informationcenter.preference.MailPreferences;
+import net.renoseven.informationcenter.preference.StatisticsPreferences;
+import net.renoseven.informationcenter.processor.MailForwardingProcessor;
 import net.renoseven.informationcenter.processor.MessageProcessor;
-import net.renoseven.informationcenter.processor.SMSMessageProcessor;
+import net.renoseven.informationcenter.processor.SMSForwardingProcessor;
+import net.renoseven.framework.FilteredBroadcastReceiver;
+import net.renoseven.informationcenter.receiver.ForwardingStateReceiver;
 import net.renoseven.informationcenter.receiver.MessageReceiver;
 import net.renoseven.informationcenter.receiver.SMSReceiver;
-import net.renoseven.util.PreferencesUtil;
 
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
-import java.util.Properties;
+import java.util.Set;
+
+import static net.renoseven.informationcenter.preference.ApplicationPreferences.CONFIG_FORWARDING_MAIL_ENABLED;
+import static net.renoseven.informationcenter.preference.ApplicationPreferences.CONFIG_FORWARDING_SMS_ENABLED;
+import static net.renoseven.informationcenter.preference.ApplicationPreferences.CONFIG_RECEIVER_SMS_ENABLED;
 
 /**
  * Core Service Implementation
  * Created by RenoSeven on 2016/9/8.
  */
 public class InformationService extends NIAService {
-    private final BroadcastReceiver messageReceiver;
-    private final BroadcastReceiver smsReceiver;
-    private final Map<MessageType, MessageProcessor> messageProcessors;
+    private final Map<String, TrayPreferences> preferencesMap = new HashMap<>();
+    private final Set<MessageProcessor> messageProcessors = new HashSet<>();
+    private final Set<BroadcastReceiver> broadcastReceivers = new HashSet<>();
 
-    private Properties applicationSettings;
+    @Override
+    protected void onServiceBorn() {
+        // load configurations
+        Log.v(TAG, "Loading settings...");
+        TrayPreferences appPref = new ApplicationPreferences(this);
+        TrayPreferences statPref = new StatisticsPreferences(this);
+        preferencesMap.put(ApplicationPreferences.MODULE_NAME, appPref);
+        preferencesMap.put(StatisticsPreferences.MODULE_NAME, statPref);
+        preferencesMap.put(MailPreferences.MODULE_NAME, new MailPreferences(this));
 
-    public InformationService() {
-        super();
-        smsReceiver = new SMSReceiver();
-        messageReceiver = new MessageReceiver() {
+        // register broadcastReceivers
+        Log.v(TAG, "Registering receivers...");
+        FilteredBroadcastReceiver messageReceiver = new MessageReceiver() {
             @Override
             protected void onMessageReceived(MessageHolder msg) {
                 Log.i(TAG, "Message received");
                 processMessage(msg);
             }
         };
-        messageProcessors = new HashMap<>();
-    }
+        registerReceiver(messageReceiver, messageReceiver.getIntentFilter());
+        broadcastReceivers.add(messageReceiver);
 
-    @Override
-    protected void onServiceBorn() {
-        // load configurations
-        Log.v(TAG, "Loading settings...");
-        applicationSettings = new Properties();
-        PreferencesUtil.convert(new ApplicationPreferences(this), applicationSettings);
-        Log.d(TAG, applicationSettings.toString());
+        FilteredBroadcastReceiver forwardingStateReceiver = new ForwardingStateReceiver(statPref);
+        registerReceiver(forwardingStateReceiver, forwardingStateReceiver.getIntentFilter());
+        broadcastReceivers.add(forwardingStateReceiver);
 
-        // register receivers
-        Log.v(TAG, "Registering receivers...");
-        IntentFilter smsActionFilter = new IntentFilter();
-        smsActionFilter.addAction(SMSReceiver.SMS_RECEIVED);
-        registerReceiver(smsReceiver, smsActionFilter);
-
-        IntentFilter messageActionFilter = new IntentFilter();
-        messageActionFilter.addAction(MessageReceiver.MESSAGE_RECEIVED);
-        registerReceiver(messageReceiver, messageActionFilter);
+        if (appPref.getBoolean(CONFIG_RECEIVER_SMS_ENABLED, false)) {
+            FilteredBroadcastReceiver smsReceiver = new SMSReceiver();
+            broadcastReceivers.add(smsReceiver);
+            registerReceiver(smsReceiver, smsReceiver.getIntentFilter());
+        }
 
         // register message processors
-        Log.v(TAG, "Registering message processors...");
-        messageProcessors.put(MessageType.SMS, SMSMessageProcessor.getInstance());
-        messageProcessors.put(MessageType.MAIL, MailProcessor.getInstance());
+        Log.v(TAG, "Registering processors...");
+        if (appPref.getBoolean(CONFIG_FORWARDING_SMS_ENABLED, false)) {
+            messageProcessors.add(SMSForwardingProcessor.getInstance());
+        }
+        if (appPref.getBoolean(CONFIG_FORWARDING_MAIL_ENABLED, false)) {
+            messageProcessors.add(MailForwardingProcessor.getInstance());
+        }
     }
 
     @Override
     protected void onServiceDead() {
-        Log.v(TAG, "Unregistering receivers...");
-        unregisterReceiver(smsReceiver);
-        unregisterReceiver(messageReceiver);
+        Log.v(TAG, "Unregistering message receivers...");
+        for (BroadcastReceiver receiver : broadcastReceivers) {
+            unregisterReceiver(receiver);
+        }
     }
 
     @Override
@@ -83,16 +94,8 @@ public class InformationService extends NIAService {
     private void processMessage(MessageHolder msg) {
         Log.i(TAG, msg.toString());
 
-        MessageType type = msg.getMsgType();
-        Log.d(TAG, "Message Type: "+ type.toString());
-
-        MessageProcessor processor = messageProcessors.get(type);
-        if(processor != null) {
-            Log.d(TAG, "Processor: "+ processor);
-            processor.processMessage(applicationSettings, msg);
-        }
-        else {
-            Log.e(TAG, "Unsupported message type");
+        for (MessageProcessor processor : messageProcessors) {
+            processor.processMessage(preferencesMap, msg);
         }
     }
 }

@@ -12,6 +12,7 @@ import java.util.List;
  * Created by RenoSeven on 2016/9/9.
  */
 public class SMSSendingTask implements Runnable {
+    public final static String SMS_SENT = "android.provider.Telephony.SMS_SENT";
     private final String TAG = this.getClass().getSimpleName() + "@" + this.hashCode();
 
     private MessageHolder message;
@@ -23,12 +24,12 @@ public class SMSSendingTask implements Runnable {
 
     @Override
     public void run() {
-        //TODO: show sms sending status
         Log.v(TAG, "Sending SMS...");
         SmsManager smsManager = SmsManager.getDefault();
         List<String> textContents = smsManager.divideMessage(message.getText());
         for (String text : textContents) {
             smsManager.sendTextMessage(message.getReceiver(), null, text, null, null);
         }
+        Log.i(TAG, "SMS sent");
     }
 }

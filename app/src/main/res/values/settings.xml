@@ -5,16 +5,16 @@
     <string name="pref_stat_sms_sent">stat.sms.sent</string>
     <string name="pref_stat_mail_sent">stat.mail.sent</string>
 
-    <string name="pref_receiver_sms_enable">receiver.sms.enable</string>
-    <string name="pref_receiver_mail_enable">receiver.mail.enable</string>
+    <string name="pref_app_receiver_sms_enable">app.receiver.sms.enable</string>
+    <string name="pref_app_receiver_mail_enable">app.receiver.mail.enable</string>
 
-    <string name="pref_forwarding_sms_enable">forwarding.sms.enable</string>
-    <string name="pref_forwarding_sms_receiver">forwarding.sms.receiver</string>
-    <string name="pref_forwarding_mail_enable">forwarding.mail.enable</string>
-    <string name="pref_forwarding_mail_sender">forwarding.mail.sender</string>
-    <string name="pref_forwarding_mail_sender_name">forwarding.mail.sender.name</string>
-    <string name="pref_forwarding_mail_receiver">forwarding.mail.receiver</string>
-    <string name="pref_forwarding_mail_receiver_name">forwarding.mail.receiver.name</string>
+    <string name="pref_app_forwarding_sms_enable">app.forwarding.sms.enable</string>
+    <string name="pref_app_forwarding_sms_receiver">app.forwarding.sms.receiver</string>
+    <string name="pref_app_forwarding_mail_enable">app.forwarding.mail.enable</string>
+    <string name="pref_app_forwarding_mail_sender">app.forwarding.mail.sender</string>
+    <string name="pref_app_forwarding_mail_sender_name">app.forwarding.mail.sender.name</string>
+    <string name="pref_app_forwarding_mail_receiver">app.forwarding.mail.receiver</string>
+    <string name="pref_app_forwarding_mail_receiver_name">app.forwarding.mail.receiver.name</string>
 
     <string name="pref_mail_auth_username">mail.auth.username</string>
     <string name="pref_mail_auth_password">mail.auth.password</string>

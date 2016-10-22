@@ -12,11 +12,12 @@ import java.util.Properties;
  */
 public abstract class PreferencesUtil {
 
-    public static void convert(final TrayPreferences from, final Properties to) {
-        to.clear();
+    public static Properties convertToProperties(final TrayPreferences from) {
+        Properties properties = new Properties();
         Collection<TrayItem> records = from.getAll();
         for (TrayItem record : records) {
-            to.setProperty(record.key(), record.value());
+            properties.setProperty(record.key(), record.value());
         }
+        return properties;
     }
 }

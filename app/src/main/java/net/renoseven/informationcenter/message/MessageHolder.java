@@ -109,7 +109,7 @@ public class MessageHolder implements Serializable, Cloneable {
 
     @Override
     public String toString() {
-        return "[" + msgType.toString() + "] " + new Date(timeStamp).toString() + " Subject: "  + subject + " From: " + senderName + "(" + sender + ")" + " To: " + receiverName + "(" + receiver + ") " + text;
+        return "[" + msgType.toString() + "] " + new Date(timeStamp).toString() + " Subject: " + subject + " From: " + senderName + "(" + sender + ")" + " To: " + receiverName + "(" + receiver + ") " + text;
     }
 
     @Override

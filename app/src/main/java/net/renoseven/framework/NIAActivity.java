@@ -38,7 +38,7 @@ public abstract class NIAActivity extends AppCompatActivity implements NIAServic
         Log.d(TAG, "service: " + serviceClassName);
 
         // bind service
-        registerReceiver(serviceStateReceiver, serviceStateReceiver.getActionFilter());
+        registerReceiver(serviceStateReceiver, serviceStateReceiver.getIntentFilter());
     }
 
     @Override

@@ -38,7 +38,7 @@ public abstract class NIAService extends Service implements NIAActivityListener 
     public void onCreate() {
         Log.d(TAG, "Starting service...");
         super.onCreate();
-        registerReceiver(serviceReceiver, serviceReceiver.getActionFilter());
+        registerReceiver(serviceReceiver, serviceReceiver.getIntentFilter());
         onServiceBorn();
         Log.i(TAG, "Service started");
         broadcastMessage(SERVICE_STATE_BORN);

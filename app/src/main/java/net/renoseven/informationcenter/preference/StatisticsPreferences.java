@@ -9,13 +9,13 @@ import net.grandcentrix.tray.TrayPreferences;
  * Created by RenoSeven on 2016/10/17.
  */
 public class StatisticsPreferences extends TrayPreferences {
-    private final static String MODULE_NAME = StatisticsPreferences.class.getSimpleName();
+    public final static String MODULE_NAME = "stat";
     private final static int DB_VERSION = 1;
 
-    public final static String STAT_RUNNING_TIME = "stat.uptime";
-    public final static String STAT_MESSAGE_RECEIVED = "stat.message.received";
-    public final static String STAT_SMS_SENT = "stat.sms.sent";
-    public final static String STAT_MAIL_SENT = "stat.mail.sent";
+    public final static String STAT_RUNNING_TIME        = MODULE_NAME + ".uptime";
+    public final static String STAT_MESSAGE_RECEIVED    = MODULE_NAME + ".message.received";
+    public final static String STAT_SMS_SENT            = MODULE_NAME + ".sms.sent";
+    public final static String STAT_MAIL_SENT           = MODULE_NAME + ".mail.sent";
 
     public StatisticsPreferences(Context context) {
         super(context, MODULE_NAME, DB_VERSION);
