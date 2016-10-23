@@ -1,25 +1,23 @@
 package net.renoseven.informationcenter.activity;
 
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 
 import net.grandcentrix.tray.TrayPreferences;
+import net.renoseven.framework.ExtendedActivity;
 import net.renoseven.informationcenter.R;
 import net.renoseven.informationcenter.preference.ApplicationPreferences;
 import net.renoseven.informationcenter.preference.MailPreferences;
 
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-public class SettingActivity extends AppCompatActivity implements CompoundButton.OnCheckedChangeListener {
-    private final String TAG;
+public class SettingActivity extends ExtendedActivity implements CompoundButton.OnCheckedChangeListener {
+    private final String TAG = SettingActivity.class.getSimpleName();
     private final Map<String, TrayPreferences> preferencesMap;
 
     private View smsForwardingSettings;
@@ -28,7 +26,6 @@ public class SettingActivity extends AppCompatActivity implements CompoundButton
     private CompoundButton mailForwardingEnable;
 
     public SettingActivity() {
-        TAG = this.getClass().getSimpleName();
         preferencesMap = new HashMap<>();
     }
 
@@ -86,7 +83,7 @@ public class SettingActivity extends AppCompatActivity implements CompoundButton
 
     private void loadSettings() {
         Log.d(TAG, "Reading settings...");
-        Set<View> textSet = findViews(EditText.class);
+        Set<View> textSet = findViewsByClass(EditText.class);
         for (View view : textSet) {
             String viewTag = (String) view.getTag();
             for (String moduleName : preferencesMap.keySet()) {
@@ -99,7 +96,7 @@ public class SettingActivity extends AppCompatActivity implements CompoundButton
             }
         }
 
-        Set<View> buttonSet = findViews(CompoundButton.class);
+        Set<View> buttonSet = findViewsByClass(CompoundButton.class);
         for (View view : buttonSet) {
             String viewTag = (String) view.getTag();
             for (String moduleName : preferencesMap.keySet()) {
@@ -116,7 +113,7 @@ public class SettingActivity extends AppCompatActivity implements CompoundButton
 
     private void saveSettings() {
         Log.d(TAG, "Saving changes...");
-        Set<View> textSet = findViews(EditText.class);
+        Set<View> textSet = findViewsByClass(EditText.class);
         for (View view : textSet) {
             String viewTag = (String) view.getTag();
             for (String moduleName : preferencesMap.keySet()) {
@@ -128,7 +125,7 @@ public class SettingActivity extends AppCompatActivity implements CompoundButton
                 }
             }
         }
-        Set<View> buttonSet = findViews(CompoundButton.class);
+        Set<View> buttonSet = findViewsByClass(CompoundButton.class);
         for (View view : buttonSet) {
             String viewTag = (String) view.getTag();
             for (String moduleName : preferencesMap.keySet()) {
@@ -141,22 +138,5 @@ public class SettingActivity extends AppCompatActivity implements CompoundButton
             }
         }
         Log.i(TAG, "Changes saved");
-    }
-
-    private Set<View> findViews(Class<?> viewClass) {
-        return findViews((ViewGroup) findViewById(R.id.scrollView), viewClass);
-    }
-
-    private Set<View> findViews(ViewGroup parent, Class<?> viewClass) {
-        Set<View> set = new HashSet<>();
-        for (int i = 0; i < parent.getChildCount(); i++) {
-            View child = parent.getChildAt(i);
-            if (child instanceof ViewGroup) {
-                set.addAll(findViews((ViewGroup) child, viewClass));
-            } else if (viewClass.isAssignableFrom(child.getClass())) {
-                set.add(child);
-            }
-        }
-        return set;
     }
 }

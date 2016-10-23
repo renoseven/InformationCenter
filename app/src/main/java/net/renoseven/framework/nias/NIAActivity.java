@@ -1,20 +1,18 @@
 package net.renoseven.framework.nias;
 
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 
 import net.renoseven.framework.DynamicClassReceiver;
+import net.renoseven.framework.ExtendedActivity;
 
 /**
  * Basic Non-Interactive Service Activity
  * Created by RenoSeven on 2016/9/9.
  */
-public abstract class NIAActivity extends AppCompatActivity implements NIAServiceListener {
+public abstract class NIAActivity extends ExtendedActivity implements NIAServiceListener {
     protected final String TAG;
     private final static String META_KEY_BIND_SERVICE = "service";
 
@@ -144,22 +142,5 @@ public abstract class NIAActivity extends AppCompatActivity implements NIAServic
             intent.putExtras(bundle);
         }
         sendBroadcast(intent);
-    }
-
-    /**
-     * Function: getMetaValue
-     * Params: String metaKey
-     * Description: read meta data from AndroidManifest.xml
-     * Return: String
-     */
-    protected String getMetaValue(String metaKey) {
-        String value = null;
-        try {
-            ActivityInfo info = getPackageManager().getActivityInfo(getComponentName(), PackageManager.GET_META_DATA);
-            value = info.metaData.getString(metaKey);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        return value;
     }
 }

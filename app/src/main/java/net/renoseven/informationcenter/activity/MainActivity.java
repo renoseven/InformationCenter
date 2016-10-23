@@ -17,6 +17,7 @@ import net.renoseven.informationcenter.preference.StatisticsPreferences;
 import net.renoseven.informationcenter.service.InformationService;
 
 import java.util.Collection;
+import java.util.Set;
 
 public class MainActivity extends NIAActivity implements View.OnClickListener, OnTrayPreferenceChangeListener {
     private TrayPreferences statPreferences;
@@ -33,6 +34,8 @@ public class MainActivity extends NIAActivity implements View.OnClickListener, O
 
         statPreferences = new StatisticsPreferences(this);
         statPreferences.registerOnTrayPreferenceChangeListener(this);
+
+        loadSettings();
 
         btnStartService = (Button) findViewById(R.id.btn_start_service);
         btnStopService = (Button) findViewById(R.id.btn_stop_service);
@@ -68,7 +71,13 @@ public class MainActivity extends NIAActivity implements View.OnClickListener, O
     public void onTrayPreferenceChanged(Collection<TrayItem> items) {
         Log.d(TAG, "Statistics changed");
         for (TrayItem item : items) {
-            Log.d(TAG, item.key() + "=" + item.value());
+            String key = item.key();
+            String value = item.value();
+            Log.v(TAG, key + "=" + value);
+            TextView text = (TextView) findViewByTag(key);
+            if (text != null) {
+                text.setText(value);
+            }
         }
     }
 
@@ -86,5 +95,19 @@ public class MainActivity extends NIAActivity implements View.OnClickListener, O
             txtServiceState.setText(R.string.service_state_down);
         }
         Log.d(TAG, "UI updated");
+    }
+
+    private void loadSettings() {
+        Log.d(TAG, "Reading settings...");
+        Set<View> textSet = findViewsByClass(TextView.class);
+        for (View view : textSet) {
+            String viewTag = (String) view.getTag();
+            if (viewTag != null) {
+                String value = statPreferences.getString(viewTag, null);
+                ((TextView) view).setText(value);
+                Log.v(TAG, viewTag + "=" + value);
+            }
+        }
+        Log.i(TAG, "Settings loaded");
     }
 }
