@@ -12,7 +12,6 @@ public class StatisticsPreferences extends TrayPreferences {
     public final static String MODULE_NAME = "stat";
     private final static int DB_VERSION = 1;
 
-    public final static String STAT_RUNNING_TIME        = MODULE_NAME + ".uptime";
     public final static String STAT_MESSAGE_RECEIVED    = MODULE_NAME + ".message.received";
     public final static String STAT_SMS_SENT            = MODULE_NAME + ".sms.sent";
     public final static String STAT_MAIL_SENT           = MODULE_NAME + ".mail.sent";
