@@ -1,14 +1,13 @@
 package net.renoseven.framework;
 
+import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-
 
 import java.util.HashSet;
 import java.util.Set;
@@ -18,7 +17,7 @@ import java.util.Set;
  * Created by RenoSeven on 2016/10/23.
  */
 
-public class ExtendedActivity extends AppCompatActivity {
+public class ExtendedActivity extends Activity {
     protected final String TAG;
     protected View rootView;
 
@@ -52,7 +51,7 @@ public class ExtendedActivity extends AppCompatActivity {
     /**
      * Function: findViewsByClass
      * Params: ViewGroup parent
-     *         Class<?> viewClass
+     * Class<?> viewClass
      * Description: find views by specific class
      * Return: Set<View>
      */
@@ -76,7 +75,7 @@ public class ExtendedActivity extends AppCompatActivity {
     /**
      * Function: findViewByTag
      * Params: ViewGroup parent
-     *         Class<?> viewClass
+     * Class<?> viewClass
      * Description: find views by specific tag
      * Return: View
      */

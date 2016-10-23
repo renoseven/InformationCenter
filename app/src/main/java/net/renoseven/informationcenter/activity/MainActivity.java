@@ -103,8 +103,8 @@ public class MainActivity extends NIAActivity implements View.OnClickListener, O
         for (View view : textSet) {
             String viewTag = (String) view.getTag();
             if (viewTag != null) {
-                String value = statPreferences.getString(viewTag, null);
-                ((TextView) view).setText(value);
+                int value = statPreferences.getInt(viewTag, 0);
+                ((TextView) view).setText(String.valueOf(value));
                 Log.v(TAG, viewTag + "=" + value);
             }
         }

@@ -1,7 +1,7 @@
 package net.renoseven.informationcenter.service;
 
+import android.app.Notification;
 import android.content.BroadcastReceiver;
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -78,6 +78,10 @@ public class InformationService extends NIAService {
         if (appPref.getBoolean(CONFIG_FORWARDING_MAIL_ENABLED, false)) {
             messageProcessors.add(new MailForwardingProcessor(this));
         }
+
+        // start as foreground
+        Notification notification = new Notification();
+        startForeground(1, notification);
     }
 
     @Override
