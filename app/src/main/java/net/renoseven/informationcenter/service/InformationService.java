@@ -37,6 +37,7 @@ public class InformationService extends NIAService {
     private final Map<String, TrayPreferences> preferencesMap = new HashMap<>();
     private final Set<MessageProcessor> messageProcessors = new HashSet<>();
     private final Set<BroadcastReceiver> broadcastReceivers = new HashSet<>();
+    private final int pid = android.os.Process.myPid();
 
     @Override
     protected void onServiceBorn() {
@@ -80,8 +81,7 @@ public class InformationService extends NIAService {
         }
 
         // start as foreground
-        Notification notification = new Notification();
-        startForeground(1, notification);
+        startForeground(pid, new Notification());
     }
 
     @Override
