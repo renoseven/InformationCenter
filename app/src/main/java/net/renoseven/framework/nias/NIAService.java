@@ -1,4 +1,4 @@
-package net.renoseven.framework;
+package net.renoseven.framework.nias;
 
 import android.app.Service;
 import android.content.Intent;
@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.os.IBinder;
 import android.support.annotation.Nullable;
 import android.util.Log;
+
+import net.renoseven.framework.DynamicClassReceiver;
 
 /**
  * Basic Non-Interactive Service

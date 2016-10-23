@@ -94,7 +94,7 @@ public class SettingActivity extends AppCompatActivity implements CompoundButton
                     TrayPreferences pref = preferencesMap.get(moduleName);
                     String text = pref.getString(viewTag, null);
                     ((EditText) view).setText(text);
-                    Log.d(TAG, viewTag + "=" + text);
+                    Log.v(TAG, viewTag + "=" + text);
                 }
             }
         }
@@ -107,7 +107,7 @@ public class SettingActivity extends AppCompatActivity implements CompoundButton
                     TrayPreferences pref = preferencesMap.get(moduleName);
                     boolean value = pref.getBoolean(viewTag, false);
                     ((CompoundButton) view).setChecked(value);
-                    Log.d(TAG, viewTag + "=" + value);
+                    Log.v(TAG, viewTag + "=" + value);
                 }
             }
         }
@@ -124,7 +124,7 @@ public class SettingActivity extends AppCompatActivity implements CompoundButton
                     TrayPreferences pref = preferencesMap.get(moduleName);
                     String text = ((EditText) view).getText().toString();
                     pref.put(viewTag, text);
-                    Log.d(TAG, viewTag + "=" + text);
+                    Log.v(TAG, viewTag + "=" + text);
                 }
             }
         }
@@ -136,7 +136,7 @@ public class SettingActivity extends AppCompatActivity implements CompoundButton
                     TrayPreferences pref = preferencesMap.get(moduleName);
                     boolean value = ((CompoundButton) view).isChecked();
                     pref.put(viewTag, ((CompoundButton) view).isChecked());
-                    Log.d(TAG, viewTag + "=" + value);
+                    Log.v(TAG, viewTag + "=" + value);
                 }
             }
         }

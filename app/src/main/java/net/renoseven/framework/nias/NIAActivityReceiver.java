@@ -1,10 +1,12 @@
-package net.renoseven.framework;
+package net.renoseven.framework.nias;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.annotation.NonNull;
 import android.util.Log;
+
+import net.renoseven.framework.DynamicClassReceiver;
 
 /**
  * Service Controller (Used in Service)

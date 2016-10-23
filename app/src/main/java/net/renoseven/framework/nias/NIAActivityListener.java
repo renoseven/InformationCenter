@@ -1,4 +1,4 @@
-package net.renoseven.framework;
+package net.renoseven.framework.nias;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

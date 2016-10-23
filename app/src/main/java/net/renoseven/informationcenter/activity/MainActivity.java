@@ -11,7 +11,7 @@ import android.widget.TextView;
 import net.grandcentrix.tray.TrayPreferences;
 import net.grandcentrix.tray.core.OnTrayPreferenceChangeListener;
 import net.grandcentrix.tray.core.TrayItem;
-import net.renoseven.framework.NIAActivity;
+import net.renoseven.framework.nias.NIAActivity;
 import net.renoseven.informationcenter.R;
 import net.renoseven.informationcenter.preference.StatisticsPreferences;
 import net.renoseven.informationcenter.service.InformationService;

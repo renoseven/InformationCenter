@@ -1,4 +1,4 @@
-package net.renoseven.framework;
+package net.renoseven.framework.nias;
 
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+
+import net.renoseven.framework.DynamicClassReceiver;
 
 /**
  * Basic Non-Interactive Service Activity

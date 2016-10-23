@@ -1,12 +1,13 @@
 package net.renoseven.informationcenter.service;
 
 import android.content.BroadcastReceiver;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
 import net.grandcentrix.tray.TrayPreferences;
 import net.renoseven.framework.FilteredBroadcastReceiver;
-import net.renoseven.framework.NIAService;
+import net.renoseven.framework.nias.NIAService;
 import net.renoseven.informationcenter.message.MessageHolder;
 import net.renoseven.informationcenter.preference.ApplicationPreferences;
 import net.renoseven.informationcenter.preference.MailPreferences;
@@ -14,7 +15,7 @@ import net.renoseven.informationcenter.preference.StatisticsPreferences;
 import net.renoseven.informationcenter.processor.MailForwardingProcessor;
 import net.renoseven.informationcenter.processor.MessageProcessor;
 import net.renoseven.informationcenter.processor.SMSForwardingProcessor;
-import net.renoseven.informationcenter.receiver.ForwardingStateReceiver;
+import net.renoseven.informationcenter.receiver.ApplicationStateReceiver;
 import net.renoseven.informationcenter.receiver.MessageReceiver;
 import net.renoseven.informationcenter.receiver.SMSReceiver;
 
@@ -32,6 +33,7 @@ import static net.renoseven.informationcenter.preference.ApplicationPreferences.
  * Created by RenoSeven on 2016/9/8.
  */
 public class InformationService extends NIAService {
+
     private final Map<String, TrayPreferences> preferencesMap = new HashMap<>();
     private final Set<MessageProcessor> messageProcessors = new HashSet<>();
     private final Set<BroadcastReceiver> broadcastReceivers = new HashSet<>();
@@ -58,9 +60,9 @@ public class InformationService extends NIAService {
         registerReceiver(messageReceiver, messageReceiver.getIntentFilter());
         broadcastReceivers.add(messageReceiver);
 
-        FilteredBroadcastReceiver forwardingStateReceiver = new ForwardingStateReceiver(statPref);
-        registerReceiver(forwardingStateReceiver, forwardingStateReceiver.getIntentFilter());
-        broadcastReceivers.add(forwardingStateReceiver);
+        FilteredBroadcastReceiver applicationStateReceiver = new ApplicationStateReceiver(statPref);
+        registerReceiver(applicationStateReceiver, applicationStateReceiver.getIntentFilter());
+        broadcastReceivers.add(applicationStateReceiver);
 
         if (appPref.getBoolean(CONFIG_RECEIVER_SMS_ENABLED, false)) {
             FilteredBroadcastReceiver smsReceiver = new SMSReceiver();
@@ -93,7 +95,6 @@ public class InformationService extends NIAService {
 
     private void processMessage(MessageHolder msg) {
         Log.i(TAG, msg.toString());
-
         for (MessageProcessor processor : messageProcessors) {
             processor.processMessage(preferencesMap, msg);
         }
