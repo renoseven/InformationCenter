@@ -45,6 +45,6 @@
     <string name="text_mail_smtp_host_hint">smtp.host.com</string>
     <string name="text_mail_smtp_port">Port:</string>
     <string name="text_mail_smtp_port_hint">25</string>
-    <string name="text_mail_smtp_ssl_enable">SSL</string>
-    <string name="text_mail_smtp_tls_enable">TLS</string>
+    <string name="text_mail_smtp_ssl_enable">Enable SSL:</string>
+    <string name="text_mail_smtp_tls_enable">Enable TLS:</string>
 </resources>

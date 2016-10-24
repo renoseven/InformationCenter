@@ -35,9 +35,9 @@
     <TableLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:baselineAligned="false"
+        android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true">
+        android:baselineAligned="false">
 
         <TableRow
             android:layout_width="match_parent"
@@ -46,7 +46,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_column="0"
+                android:layout_weight="1"
                 android:text="@string/text_statistics"
                 android:textAppearance="?android:attr/textAppearanceLarge" />
         </TableRow>
@@ -56,15 +56,13 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:layout_column="0"
                 android:text="@string/text_service_state"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
                 android:id="@+id/txt_service_state"
-                android:layout_column="1"
                 android:layout_marginStart="@dimen/activity_margin"
-                android:text=""
+                android:layout_weight="1"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
         </TableRow>
 
@@ -73,13 +71,14 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:layout_column="0"
+
                 android:text="@string/text_message_received"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
-                android:layout_column="1"
+
                 android:layout_marginStart="@dimen/activity_margin"
+                android:layout_weight="1"
                 android:tag="@string/pref_stat_message_received"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
         </TableRow>
@@ -89,13 +88,12 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:layout_column="0"
                 android:text="@string/text_sms_sent"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
-                android:layout_column="1"
                 android:layout_marginStart="@dimen/activity_margin"
+                android:layout_weight="1"
                 android:tag="@string/pref_stat_sms_sent"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
         </TableRow>
@@ -105,13 +103,12 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:layout_column="0"
                 android:text="@string/text_mail_sent"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
 
             <TextView
-                android:layout_column="1"
                 android:layout_marginStart="@dimen/activity_margin"
+                android:layout_weight="1"
                 android:tag="@string/pref_stat_mail_sent"
                 android:textAppearance="?android:attr/textAppearanceMedium" />
         </TableRow>

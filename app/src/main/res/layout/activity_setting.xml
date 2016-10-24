@@ -52,8 +52,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
-                    android:tag="@string/pref_app_receiver_mail_enable"
                     android:enabled="false"
+                    android:tag="@string/pref_app_receiver_mail_enable"
                     android:textAppearance="?android:attr/textAppearanceMedium" />
 
                 <TextView
@@ -115,17 +115,17 @@
                         android:layout_height="wrap_content">
 
                         <TextView
-                            android:layout_column="0"
                             android:text="@string/text_forwarding_sms_receiver"
                             android:textAppearance="?android:attr/textAppearanceSmall" />
 
                         <EditText
-                            android:layout_column="1"
-                            android:layout_marginStart="@dimen/activity_margin"
+                            android:layout_marginStart="@dimen/activity_margin_small"
+                            android:layout_weight="1"
                             android:hint="@string/text_forwarding_sms_receiver_hint"
-                            android:inputType="text"
+                            android:inputType="phone"
                             android:tag="@string/pref_app_forwarding_sms_receiver"
                             android:textAppearance="?android:attr/textAppearanceSmall" />
+
                     </TableRow>
                 </TableLayout>
             </LinearLayout>
@@ -172,13 +172,12 @@
                             android:layout_height="wrap_content">
 
                             <TextView
-                                android:layout_column="0"
                                 android:text="@string/text_forwarding_mail_sender_name"
                                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
                             <EditText
-                                android:layout_column="1"
-                                android:layout_marginStart="@dimen/activity_margin"
+                                android:layout_marginStart="@dimen/activity_margin_small"
+                                android:layout_weight="1"
                                 android:hint="@string/text_forwarding_mail_sender_name_hint"
                                 android:inputType="text"
                                 android:tag="@string/pref_app_forwarding_mail_sender_name"
@@ -190,13 +189,12 @@
                             android:layout_height="wrap_content">
 
                             <TextView
-                                android:layout_column="0"
                                 android:text="@string/text_forwarding_mail_sender"
                                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
                             <EditText
-                                android:layout_column="1"
-                                android:layout_marginStart="@dimen/activity_margin"
+                                android:layout_marginStart="@dimen/activity_margin_small"
+                                android:layout_weight="1"
                                 android:hint="@string/text_forwarding_mail_sender_hint"
                                 android:inputType="textEmailAddress"
                                 android:tag="@string/pref_app_forwarding_mail_sender"
@@ -209,13 +207,12 @@
                             android:layout_height="wrap_content">
 
                             <TextView
-                                android:layout_column="0"
                                 android:text="@string/text_forwarding_mail_receiver_name"
                                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
                             <EditText
-                                android:layout_column="1"
-                                android:layout_marginStart="@dimen/activity_margin"
+                                android:layout_marginStart="@dimen/activity_margin_small"
+                                android:layout_weight="1"
                                 android:hint="@string/text_forwarding_mail_receiver_name_hint"
                                 android:inputType="text"
                                 android:tag="@string/pref_app_forwarding_mail_receiver_name"
@@ -227,13 +224,12 @@
                             android:layout_height="wrap_content">
 
                             <TextView
-                                android:layout_column="0"
                                 android:text="@string/text_forwarding_mail_receiver"
                                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
                             <EditText
-                                android:layout_column="1"
-                                android:layout_marginStart="@dimen/activity_margin"
+                                android:layout_marginStart="@dimen/activity_margin_small"
+                                android:layout_weight="1"
                                 android:hint="@string/text_forwarding_mail_receiver_hint"
                                 android:inputType="textEmailAddress"
                                 android:tag="@string/pref_app_forwarding_mail_receiver"
@@ -245,13 +241,12 @@
                             android:layout_height="wrap_content">
 
                             <TextView
-                                android:layout_column="0"
                                 android:text="@string/text_mail_smtp_host"
                                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
                             <EditText
-                                android:layout_column="1"
-                                android:layout_marginStart="@dimen/activity_margin"
+                                android:layout_marginStart="@dimen/activity_margin_small"
+                                android:layout_weight="1"
                                 android:hint="@string/text_mail_smtp_host_hint"
                                 android:inputType="textUri"
                                 android:tag="@string/pref_mail_smtp_host"
@@ -263,13 +258,12 @@
                             android:layout_height="wrap_content">
 
                             <TextView
-                                android:layout_column="0"
                                 android:text="@string/text_mail_smtp_port"
                                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
                             <EditText
-                                android:layout_column="1"
-                                android:layout_marginStart="@dimen/activity_margin"
+                                android:layout_marginStart="@dimen/activity_margin_small"
+                                android:layout_weight="1"
                                 android:hint="@string/text_mail_smtp_port_hint"
                                 android:inputType="numberDecimal"
                                 android:tag="@string/pref_mail_smtp_port"
@@ -281,13 +275,12 @@
                             android:layout_height="wrap_content">
 
                             <TextView
-                                android:layout_column="0"
                                 android:text="@string/text_mail_auth_username"
                                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
                             <EditText
-                                android:layout_column="1"
-                                android:layout_marginStart="@dimen/activity_margin"
+                                android:layout_marginStart="@dimen/activity_margin_small"
+                                android:layout_weight="1"
                                 android:hint="@string/text_mail_auth_username_hint"
                                 android:inputType="textEmailAddress"
                                 android:tag="@string/pref_mail_auth_username"
@@ -299,51 +292,57 @@
                             android:layout_height="wrap_content">
 
                             <TextView
-                                android:layout_column="0"
                                 android:text="@string/text_mail_auth_password"
                                 android:textAppearance="?android:attr/textAppearanceSmall" />
 
                             <EditText
-                                android:layout_column="1"
-                                android:layout_marginStart="@dimen/activity_margin"
+                                android:layout_marginStart="@dimen/activity_margin_small"
+                                android:layout_weight="1"
                                 android:hint="@string/text_mail_auth_password_hint"
                                 android:inputType="textPassword"
                                 android:tag="@string/pref_mail_auth_password"
                                 android:textAppearance="?android:attr/textAppearanceSmall" />
                         </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:text="@string/text_mail_smtp_ssl_enable"
+                                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                            <Switch
+                                android:layout_width="wrap_content"
+                                android:layout_weight="1"
+                                android:tag="@string/pref_mail_smtp_ssl_enable"
+                                android:textAppearance="?android:attr/textAppearanceSmall" />
+                        </TableRow>
+
+                        <TableRow
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <TextView
+                                android:layout_column="0"
+                                android:text="@string/text_mail_smtp_tls_enable"
+                                android:textAppearance="?android:attr/textAppearanceSmall" />
+
+                            <Switch
+                                android:layout_width="wrap_content"
+                                android:layout_weight="1"
+                                android:tag="@string/pref_mail_smtp_tls_enable"
+                                android:textAppearance="?android:attr/textAppearanceSmall" />
+                        </TableRow>
+
                     </TableLayout>
 
-                    <RelativeLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content">
-
-                        <Switch
-                            android:id="@+id/sw_mail_smtp_ssl_enable"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentStart="true"
-                            android:layout_alignParentTop="true"
-                            android:layout_marginEnd="@dimen/activity_margin_small"
-                            android:switchPadding="@dimen/activity_margin_small"
-                            android:tag="@string/pref_mail_smtp_ssl_enable"
-                            android:text="@string/text_mail_smtp_ssl_enable"
-                            android:textAppearance="?android:attr/textAppearanceSmall" />
-
-                        <Switch
-                            android:id="@+id/sw_mail_smtp_tls_enable"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_alignParentTop="true"
-                            android:layout_marginStart="@dimen/activity_margin_small"
-                            android:layout_toEndOf="@+id/sw_mail_smtp_ssl_enable"
-                            android:switchPadding="@dimen/activity_margin_small"
-                            android:tag="@string/pref_mail_smtp_tls_enable"
-                            android:text="@string/text_mail_smtp_tls_enable"
-                            android:textAppearance="?android:attr/textAppearanceSmall" />
-
-                    </RelativeLayout>
                 </LinearLayout>
+
             </LinearLayout>
+
         </LinearLayout>
+
     </LinearLayout>
+
 </ScrollView>
