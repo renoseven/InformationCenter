@@ -2,7 +2,7 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion '24.0.3'
+    buildToolsVersion '25.0.0'
 
     defaultConfig {
         applicationId "net.renoseven.informationcenter"
@@ -30,7 +30,6 @@ android {
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
     testCompile 'junit:junit:4.12'
-    compile 'com.android.support:design:25.0.0'
     compile 'com.sun.mail:android-mail:1.5.6'
     compile 'com.sun.mail:android-activation:1.5.6'
     compile 'net.grandcentrix.tray:tray:0.11.0'
