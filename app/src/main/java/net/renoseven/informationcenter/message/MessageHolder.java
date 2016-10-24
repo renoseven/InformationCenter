@@ -23,18 +23,6 @@ public class MessageHolder implements Serializable, Cloneable {
         this.msgType = msgType;
     }
 
-    public MessageHolder(MessageType msgType, long timeStamp, String charset, String sender, String senderName, String receiver, String receiverName, String subject, String text) {
-        this.msgType = msgType;
-        this.timeStamp = timeStamp;
-        this.charset = charset;
-        this.sender = sender;
-        this.senderName = senderName;
-        this.receiver = receiver;
-        this.receiverName = receiverName;
-        this.subject = subject;
-        this.text = text;
-    }
-
     public MessageType getMsgType() {
         return msgType;
     }

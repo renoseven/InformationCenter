@@ -3,6 +3,7 @@ package net.renoseven.informationcenter.receiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.provider.Telephony;
 import android.support.annotation.NonNull;
 import android.telephony.SmsMessage;
 import android.util.Log;
@@ -24,32 +25,24 @@ public class SMSReceiver extends FilteredBroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction().equals(SMS_RECEIVED)) {
             Log.d(TAG, "Incoming SMS");
-            processSMS(context, intent);
+            SmsMessage[] messages = Telephony.Sms.Intents.getMessagesFromIntent(intent);
+
+            StringBuilder content = new StringBuilder();
+            for (SmsMessage msg : messages) {
+                content.append(msg.getDisplayMessageBody());
+            }
+
+            MessageHolder msg = new MessageHolder(MessageType.SMS);
+            msg.setTimeStamp(messages[0].getTimestampMillis());
+            msg.setSender(messages[0].getOriginatingAddress());
+            msg.setCharset("utf-8");
+            msg.setText(content.toString());
+
+            Intent msgIntent = new Intent();
+            msgIntent.setAction(MessageReceiver.MESSAGE_RECEIVED);
+            msgIntent.putExtra(MessageReceiver.MESSAGE_CONTENT, msg);
+            context.sendBroadcast(msgIntent);
         }
-    }
-
-    private void processSMS(Context context, Intent intent) {
-        Object[] pdus = (Object[]) intent.getSerializableExtra("pdus");
-
-        SmsMessage[] messages = new SmsMessage[pdus.length];
-
-        for (int i = 0; i < pdus.length; i++) {
-            messages[i] = SmsMessage.createFromPdu((byte[]) pdus[i]);
-        }
-
-        long timeStamp = messages[0].getTimestampMillis();
-        String sender = messages[0].getOriginatingAddress();
-        StringBuilder content = new StringBuilder();
-        for (SmsMessage msg : messages) {
-            content.append(msg.getMessageBody());
-        }
-
-        MessageHolder msg = new MessageHolder(MessageType.SMS, timeStamp, "utf-8", sender, null, null, null, null, content.toString());
-
-        Intent msgIntent = new Intent();
-        msgIntent.setAction(MessageReceiver.MESSAGE_RECEIVED);
-        msgIntent.putExtra(MessageReceiver.MESSAGE_CONTENT, msg);
-        context.sendBroadcast(msgIntent);
     }
 
     @NonNull
