@@ -36,39 +36,38 @@ public class InformationService extends NIAService {
 
     private final Map<String, TrayPreferences> preferencesMap = new HashMap<>();
     private final Set<MessageProcessor> messageProcessors = new HashSet<>();
-    private final Set<BroadcastReceiver> broadcastReceivers = new HashSet<>();
+    private final Set<FilteredBroadcastReceiver> broadcastReceivers = new HashSet<>();
     private final int pid = android.os.Process.myPid();
 
     @Override
     protected void onServiceBorn() {
         // load configurations
         Log.v(TAG, "Loading settings...");
-        TrayPreferences appPref = new ApplicationPreferences(this);
-        TrayPreferences statPref = new StatisticsPreferences(this);
+        final TrayPreferences appPref = new ApplicationPreferences(this);
+        final TrayPreferences statsPref = new StatisticsPreferences(this);
         preferencesMap.put(ApplicationPreferences.MODULE_NAME, appPref);
-        preferencesMap.put(StatisticsPreferences.MODULE_NAME, statPref);
+        preferencesMap.put(StatisticsPreferences.MODULE_NAME, statsPref);
         preferencesMap.put(MailPreferences.MODULE_NAME, new MailPreferences(this));
 
-        // register broadcastReceivers
-        Log.v(TAG, "Registering receivers...");
-        FilteredBroadcastReceiver messageReceiver = new MessageReceiver() {
+        // init broadcastReceivers
+        Log.v(TAG, "Initializing receivers...");
+        broadcastReceivers.add(new MessageReceiver() {
             @Override
             protected void onMessageReceived(MessageHolder msg) {
                 Log.i(TAG, "Message received");
                 processMessage(msg);
             }
-        };
-        registerReceiver(messageReceiver, messageReceiver.getIntentFilter());
-        broadcastReceivers.add(messageReceiver);
-
-        FilteredBroadcastReceiver applicationStateReceiver = new ApplicationStateReceiver(statPref);
-        registerReceiver(applicationStateReceiver, applicationStateReceiver.getIntentFilter());
-        broadcastReceivers.add(applicationStateReceiver);
+        });
+        broadcastReceivers.add(new ApplicationStateReceiver(statsPref));
 
         if (appPref.getBoolean(CONFIG_RECEIVER_SMS_ENABLED, false)) {
-            FilteredBroadcastReceiver smsReceiver = new SMSReceiver();
-            broadcastReceivers.add(smsReceiver);
-            registerReceiver(smsReceiver, smsReceiver.getIntentFilter());
+            broadcastReceivers.add(new SMSReceiver());
+        }
+
+        // register broadcastReceivers
+        Log.v(TAG, "Registering receivers...");
+        for (FilteredBroadcastReceiver receiver : broadcastReceivers) {
+            registerReceiver(receiver, receiver.getIntentFilter());
         }
 
         // register message processors
@@ -80,12 +79,15 @@ public class InformationService extends NIAService {
             messageProcessors.add(new MailForwardingProcessor(this));
         }
 
-        // start as foreground
+        // start foreground w/ notification
         startForeground(pid, new Notification());
     }
 
     @Override
     protected void onServiceDead() {
+        // remove notification
+        stopForeground(true);
+
         Log.v(TAG, "Unregistering message receivers...");
         for (BroadcastReceiver receiver : broadcastReceivers) {
             unregisterReceiver(receiver);
