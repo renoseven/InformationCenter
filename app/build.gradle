@@ -2,15 +2,15 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion 25
-    buildToolsVersion '25.0.0'
+    buildToolsVersion '25.0.2'
 
     defaultConfig {
         applicationId "net.renoseven.informationcenter"
         resValue "string", "tray__authority", "${applicationId}.tray"
         minSdkVersion 19
-        targetSdkVersion 25
+        targetSdkVersion "Build.VERSION_CODES"
         versionCode 1
-        versionName "0.01 (pre-alpha)"
+        versionName "0.01 (alpha)"
     }
     buildTypes {
         release {
