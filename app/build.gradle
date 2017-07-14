@@ -8,7 +8,7 @@ android {
         applicationId "net.renoseven.informationcenter"
         resValue "string", "tray__authority", "${applicationId}.tray"
         minSdkVersion 19
-        targetSdkVersion "Build.VERSION_CODES"
+        targetSdkVersion 25
         versionCode 1
         versionName "0.01 (alpha)"
     }
