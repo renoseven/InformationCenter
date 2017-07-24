@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.support.annotation.NonNull;
+import android.util.Log;
 
 import net.renoseven.framework.FilteredBroadcastReceiver;
 import net.renoseven.util.ToastUtil;
@@ -16,16 +17,19 @@ import net.renoseven.util.ToastUtil;
 
 public class MailForwardingStateReceiver extends FilteredBroadcastReceiver {
     public final static String MAIL_SENDING_RESULT = MailForwardingStateReceiver.class.getName() + ".SMS_SENDING_RESULT";
+    protected final static String TAG = MailForwardingStateReceiver.class.getSimpleName();
 
     @Override
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction().equals(MAIL_SENDING_RESULT)) {
             switch (getResultCode()) {
                 case Activity.RESULT_OK:
-                    ToastUtil.showToast(context, "Mail Sent");
+                    Log.i(TAG, "Mail sent");
+                    ToastUtil.showToast(context, "Mail sent");
                     break;
                 default:
-                    ToastUtil.showToast(context, "Mail Sending failed");
+                    Log.i(TAG, "Mail sending failed");
+                    ToastUtil.showToast(context, "Mail sending failed");
                     break;
             }
         }
