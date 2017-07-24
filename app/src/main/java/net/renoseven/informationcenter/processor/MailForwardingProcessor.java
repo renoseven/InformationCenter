@@ -72,12 +72,12 @@ public class MailForwardingProcessor extends BaseMessageProcessor {
     protected void onTaskFinished() {
         Log.i(TAG, "Mail sent");
         context.sendBroadcast(new Intent(MAIL_SENT));
-        ToastUtil.showToast(context, "Mail Sent");
+       // ToastUtil.showToast(context, "Mail Sent");
     }
 
     @Override
     protected void onTaskFailed(Exception e) {
         Log.e(TAG, "Mail sending failed: " + e.getMessage());
-        ToastUtil.showToast(context, "Mail sending failed");
+        //ToastUtil.showToast(context, "Mail sending failed");
     }
 }
