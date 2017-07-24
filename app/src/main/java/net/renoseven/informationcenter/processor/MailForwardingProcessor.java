@@ -77,6 +77,6 @@ public class MailForwardingProcessor extends BaseMessageProcessor {
 
     @Override
     protected void onTaskFailed(Exception e) {
-        Log.e(TAG, "Mail sending failed");
+        Log.e(TAG, "Mail sending failed: " + e.getMessage());
     }
 }

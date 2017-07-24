@@ -41,6 +41,6 @@ public class SMSForwardingProcessor extends BaseMessageProcessor {
 
     @Override
     protected void onTaskFailed(Exception e) {
-
+        Log.e(TAG, "SMS sending failed: " + e.getMessage());
     }
 }
