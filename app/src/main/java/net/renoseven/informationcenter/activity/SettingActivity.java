@@ -50,12 +50,12 @@ public class SettingActivity extends ExtendedActivity implements CompoundButton.
     private void initComponents() {
         // sms forwarding settings
         smsForwardingSettings = findViewById(R.id.layout_sms_forwarding_setting);
-        smsForwardingEnable = (CompoundButton) findViewById(R.id.sw_sms_forwarding_enable);
+        smsForwardingEnable = findViewById(R.id.sw_sms_forwarding_enable);
         smsForwardingEnable.setOnCheckedChangeListener(this);
 
         // mail forwarding settings
         mailForwardingSettings = findViewById(R.id.layout_mail_forwarding_setting);
-        mailForwardingEnable = (CompoundButton) findViewById(R.id.sw_mail_forwarding_enable);
+        mailForwardingEnable = findViewById(R.id.sw_mail_forwarding_enable);
         mailForwardingEnable.setOnCheckedChangeListener(this);
 
         updateUI();
