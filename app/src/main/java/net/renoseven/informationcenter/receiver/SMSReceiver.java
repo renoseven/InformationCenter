@@ -1,5 +1,6 @@
 package net.renoseven.informationcenter.receiver;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -11,6 +12,9 @@ import android.util.Log;
 import net.renoseven.framework.FilteredBroadcastReceiver;
 import net.renoseven.informationcenter.message.MessageHolder;
 import net.renoseven.informationcenter.message.MessageType;
+import net.renoseven.util.ToastUtil;
+
+import static net.renoseven.informationcenter.processor.SMSForwardingProcessor.SMS_SENDING_RESULT;
 
 /**
  * SMS Receiver
@@ -23,7 +27,8 @@ public class SMSReceiver extends FilteredBroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        if (intent.getAction().equals(SMS_RECEIVED)) {
+        String intentAction = intent.getAction();
+        if (intentAction.equals(SMS_RECEIVED)) {
             Log.d(TAG, "Incoming SMS");
             SmsMessage[] messages = Telephony.Sms.Intents.getMessagesFromIntent(intent);
 
@@ -43,11 +48,25 @@ public class SMSReceiver extends FilteredBroadcastReceiver {
             msgIntent.putExtra(MessageReceiver.MESSAGE_CONTENT, msg);
             context.sendBroadcast(msgIntent);
         }
+        else if(intentAction.equals(SMS_SENDING_RESULT)) {
+            switch (getResultCode()) {
+                case Activity.RESULT_OK:
+                    ToastUtil.showToast(context, "SMS Sent");
+                    break;
+                default:
+                    ToastUtil.showToast(context, "SMS Send failed");
+                    break;
+            }
+        }
     }
 
     @NonNull
     @Override
-    public IntentFilter getIntentFilter() {
-        return new IntentFilter(SMS_RECEIVED);
+    public IntentFilter getIntentFilter()
+    {
+        IntentFilter intentFilter = new IntentFilter();
+        intentFilter.addAction(SMS_RECEIVED);
+        intentFilter.addAction(SMS_SENDING_RESULT);
+        return intentFilter;
     }
 }

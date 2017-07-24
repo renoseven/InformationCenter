@@ -1,5 +1,6 @@
 package net.renoseven.informationcenter.processor;
 
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.telephony.SmsManager;
 import android.util.Log;
@@ -15,11 +16,12 @@ import java.util.List;
  */
 
 public class SMSForwardingProcessor extends BaseMessageProcessor {
-    public final static String SMS_SENT = SMSForwardingProcessor.class.getName() + ".SMS_SENT";
+    public final static String SMS_SENDING_RESULT = SMSForwardingProcessor.class.getName() + ".SMS_SENDING_RESULT";
 
+    private static int messageID = 0;
 
     @Override
-    protected void doTask() throws Exception {
+    protected synchronized void doTask() throws Exception {
         Log.i(TAG, "Forward as SMS");
         TrayPreferences appPref = preferencesMap.get(ApplicationPreferences.MODULE_NAME);
         String receiver = appPref.getString(ApplicationPreferences.CONFIG_FORWARDING_SMS_RECEIVER);
@@ -28,15 +30,17 @@ public class SMSForwardingProcessor extends BaseMessageProcessor {
         Log.v(TAG, "Sending SMS...");
         SmsManager smsManager = SmsManager.getDefault();
         List<String> textContents = smsManager.divideMessage(messageContent);
+
         for (String text : textContents) {
-            smsManager.sendTextMessage(receiver, null, text, null, null);
+            PendingIntent messageState = PendingIntent.getBroadcast(context, messageID, new Intent(SMS_SENDING_RESULT), PendingIntent.FLAG_ONE_SHOT);
+            smsManager.sendTextMessage(receiver, null, text, messageState, null);
+            messageID ++;
         }
     }
 
     @Override
     protected void onTaskFinished() {
         Log.i(TAG, "SMS sent");
-        context.sendBroadcast(new Intent(SMS_SENT));
     }
 
     @Override
