@@ -37,9 +37,9 @@ import static net.renoseven.informationcenter.preference.ApplicationPreferences.
 public class InformationService extends NIAService {
 
     private final static ExecutorService executor = Executors.newCachedThreadPool();
-    private final static Map<String, TrayPreferences> preferencesMap = new HashMap<>();
-    private final static Set<FilteredBroadcastReceiver> broadcastReceivers = new HashSet<>();
-    private final static Set<Class<? extends BaseMessageProcessor>> messageProcessors = new HashSet<>();
+    private final Map<String, TrayPreferences> preferencesMap = new HashMap<>();
+    private final Set<FilteredBroadcastReceiver> broadcastReceivers = new HashSet<>();
+    private final Set<Class<? extends BaseMessageProcessor>> messageProcessors = new HashSet<>();
     private final int pid = android.os.Process.myPid();
 
     @Override
@@ -82,6 +82,8 @@ public class InformationService extends NIAService {
             messageProcessors.add(MailForwardingProcessor.class);
         }
 
+        Log.d(TAG, "Receiver number = " + (broadcastReceivers.size() - 2));
+        Log.d(TAG, "Processor number = " + messageProcessors.size());
         // start foreground w/ notification
         startForeground(pid, new Notification());
     }
