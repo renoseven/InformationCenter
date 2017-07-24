@@ -65,7 +65,6 @@ public class InformationService extends NIAService {
         broadcastReceivers.add(new ApplicationStateReceiver(statsPref));
 
         Log.d(TAG, "Initializing modules...");
-
         if (appPref.getBoolean(CONFIG_RECEIVER_SMS_ENABLED, false)) {
             Log.v(TAG, "CONFIG_RECEIVER_SMS_ENABLED = TRUE");
             broadcastReceivers.add(new SMSReceiver());
@@ -83,8 +82,7 @@ public class InformationService extends NIAService {
             messageProcessors.add(MailForwardingProcessor.class);
         }
 
-        // register broadcastReceivers
-        Log.d(TAG, "Registering receivers...");
+        Log.d(TAG, "Registering components...");
         for (FilteredBroadcastReceiver receiver : broadcastReceivers) {
             Log.v(TAG, receiver.getClass().getName());
             registerReceiver(receiver, receiver.getIntentFilter());
