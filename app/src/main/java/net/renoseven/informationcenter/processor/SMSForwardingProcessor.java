@@ -10,15 +10,14 @@ import net.renoseven.informationcenter.preference.ApplicationPreferences;
 
 import java.util.List;
 
+import static net.renoseven.informationcenter.receiver.SMSForwardingStateReceiver.SMS_SENDING_RESULT;
+
 /**
  * SMS Forwarding Processor
  * Created by RenoSeven on 2016/10/22.
  */
 
 public class SMSForwardingProcessor extends BaseMessageProcessor {
-    public final static String SMS_SENDING_RESULT = SMSForwardingProcessor.class.getName() + ".SMS_SENDING_RESULT";
-
-    private static int messageID = 0;
 
     @Override
     protected synchronized void doTask() throws Exception {
@@ -32,19 +31,18 @@ public class SMSForwardingProcessor extends BaseMessageProcessor {
         List<String> textContents = smsManager.divideMessage(messageContent);
 
         for (String text : textContents) {
-            PendingIntent messageState = PendingIntent.getBroadcast(context, messageID, new Intent(SMS_SENDING_RESULT), PendingIntent.FLAG_ONE_SHOT);
+            PendingIntent messageState = PendingIntent.getBroadcast(context, 0, new Intent(SMS_SENDING_RESULT), PendingIntent.FLAG_ONE_SHOT);
             smsManager.sendTextMessage(receiver, null, text, messageState, null);
-            messageID ++;
         }
     }
 
     @Override
     protected void onTaskFinished() {
-        Log.i(TAG, "SMS sent");
+        Log.d(TAG, "SMS sending task finished");
     }
 
     @Override
     protected void onTaskFailed(Exception e) {
-        Log.e(TAG, "SMS sending failed: " + e.getMessage());
+        Log.e(TAG, "SMS sending task failed: " + e.getMessage());
     }
 }

@@ -1,5 +1,7 @@
 package net.renoseven.informationcenter.processor;
 
+import android.app.Activity;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.util.Log;
 
@@ -9,7 +11,6 @@ import net.renoseven.informationcenter.message.MessageType;
 import net.renoseven.informationcenter.preference.ApplicationPreferences;
 import net.renoseven.informationcenter.preference.MailPreferences;
 import net.renoseven.util.PreferencesUtil;
-import net.renoseven.util.ToastUtil;
 
 import java.util.Date;
 import java.util.Properties;
@@ -21,13 +22,13 @@ import javax.mail.internet.MimeMessage;
 
 import static net.renoseven.informationcenter.preference.MailPreferences.CONFIG_MAIL_AUTH_PASSWORD;
 import static net.renoseven.informationcenter.preference.MailPreferences.CONFIG_MAIL_AUTH_USERNAME;
+import static net.renoseven.informationcenter.receiver.MailForwardingStateReceiver.MAIL_SENDING_RESULT;
 
 /**
  * Mail Forwarding Processor
  * Created by RenoSeven on 2016/9/22.
  */
 public class MailForwardingProcessor extends BaseMessageProcessor {
-    public final static String MAIL_SENT = MailForwardingProcessor.class.getName() + ".MAIL_SENT";
 
     @Override
     protected void doTask() throws Exception {
@@ -68,16 +69,23 @@ public class MailForwardingProcessor extends BaseMessageProcessor {
         transport.close();
     }
 
+    private void broadcastResult(int resultCode) {
+        PendingIntent messageState = PendingIntent.getBroadcast(context, 0, new Intent(MAIL_SENDING_RESULT), PendingIntent.FLAG_ONE_SHOT);
+        try {
+            messageState.send(resultCode);
+        } catch (PendingIntent.CanceledException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     protected void onTaskFinished() {
-        Log.i(TAG, "Mail sent");
-        context.sendBroadcast(new Intent(MAIL_SENT));
-       // ToastUtil.showToast(context, "Mail Sent");
+        broadcastResult(Activity.RESULT_OK);
     }
 
     @Override
     protected void onTaskFailed(Exception e) {
         Log.e(TAG, "Mail sending failed: " + e.getMessage());
-        //ToastUtil.showToast(context, "Mail sending failed");
+        broadcastResult(Activity.RESULT_CANCELED);
     }
 }

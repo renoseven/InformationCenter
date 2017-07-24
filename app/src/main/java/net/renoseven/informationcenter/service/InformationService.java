@@ -16,7 +16,9 @@ import net.renoseven.informationcenter.processor.BaseMessageProcessor;
 import net.renoseven.informationcenter.processor.MailForwardingProcessor;
 import net.renoseven.informationcenter.processor.SMSForwardingProcessor;
 import net.renoseven.informationcenter.receiver.ApplicationStateReceiver;
+import net.renoseven.informationcenter.receiver.MailForwardingStateReceiver;
 import net.renoseven.informationcenter.receiver.MessageReceiver;
+import net.renoseven.informationcenter.receiver.SMSForwardingStateReceiver;
 import net.renoseven.informationcenter.receiver.SMSReceiver;
 
 import java.util.HashMap;
@@ -52,8 +54,7 @@ public class InformationService extends NIAService {
         preferencesMap.put(StatisticsPreferences.MODULE_NAME, statsPref);
         preferencesMap.put(MailPreferences.MODULE_NAME, new MailPreferences(this));
 
-        // init broadcastReceivers
-        Log.v(TAG, "Initializing receivers...");
+        Log.d(TAG, "Initializing system receivers...");
         broadcastReceivers.add(new MessageReceiver() {
             @Override
             protected void onMessageReceived(MessageHolder msg) {
@@ -63,27 +64,38 @@ public class InformationService extends NIAService {
         });
         broadcastReceivers.add(new ApplicationStateReceiver(statsPref));
 
+        Log.d(TAG, "Initializing modules...");
+
         if (appPref.getBoolean(CONFIG_RECEIVER_SMS_ENABLED, false)) {
+            Log.v(TAG, "CONFIG_RECEIVER_SMS_ENABLED = TRUE");
             broadcastReceivers.add(new SMSReceiver());
         }
 
-        // register broadcastReceivers
-        Log.v(TAG, "Registering receivers...");
-        for (FilteredBroadcastReceiver receiver : broadcastReceivers) {
-            registerReceiver(receiver, receiver.getIntentFilter());
-        }
-
-        // register message processors
-        Log.v(TAG, "Registering processors...");
         if (appPref.getBoolean(CONFIG_FORWARDING_SMS_ENABLED, false)) {
+            Log.v(TAG, "CONFIG_FORWARDING_SMS_ENABLED = TRUE");
+            broadcastReceivers.add(new SMSForwardingStateReceiver());
             messageProcessors.add(SMSForwardingProcessor.class);
         }
+
         if (appPref.getBoolean(CONFIG_FORWARDING_MAIL_ENABLED, false)) {
+            Log.v(TAG, "CONFIG_FORWARDING_MAIL_ENABLED = TRUE");
+            broadcastReceivers.add(new MailForwardingStateReceiver());
             messageProcessors.add(MailForwardingProcessor.class);
         }
 
-        Log.d(TAG, "Receiver number = " + (broadcastReceivers.size() - 2));
+        // register broadcastReceivers
+        Log.d(TAG, "Registering receivers...");
+        for (FilteredBroadcastReceiver receiver : broadcastReceivers) {
+            Log.v(TAG, receiver.getClass().getName());
+            registerReceiver(receiver, receiver.getIntentFilter());
+        }
+        Log.d(TAG, "Receiver number = " + broadcastReceivers.size());
+
+        for (Class<? extends BaseMessageProcessor> processorClass : messageProcessors) {
+            Log.v(TAG, processorClass.getName());
+        }
         Log.d(TAG, "Processor number = " + messageProcessors.size());
+
         // start foreground w/ notification
         startForeground(pid, new Notification());
     }
