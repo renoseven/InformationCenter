@@ -2,7 +2,13 @@ package net.renoseven.informationcenter.processor;
 
 import android.content.Context;
 import android.content.ContextWrapper;
+import android.os.Bundle;
+import android.preference.Preference;
 
+import net.grandcentrix.tray.TrayPreferences;
+import net.renoseven.informationcenter.message.MessageHolder;
+
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -12,17 +18,33 @@ import java.util.concurrent.Executors;
  * Created by RenoSeven on 2016/10/23.
  */
 
-public abstract class BaseMessageProcessor extends ContextWrapper implements MessageProcessor {
-    private final static ExecutorService executor = Executors.newCachedThreadPool();
+public abstract class BaseMessageProcessor implements Runnable {
+    protected final String TAG = this.getClass().getSimpleName() + "@" + this.hashCode();
 
-    protected final String TAG;
+    protected Map<String, TrayPreferences> preferencesMap;
+    protected MessageHolder message;
+    protected Context context;
 
-    public BaseMessageProcessor(Context base) {
-        super(base);
-        TAG = this.getClass().getSimpleName();
+    public void init(Context context, Map<String, TrayPreferences> preferencesMap, MessageHolder message) {
+        this.context = context;
+        this.preferencesMap = preferencesMap;
+        this.message = message;
     }
 
-    protected void runTask(Runnable task) {
-        executor.execute(task);
+    @Override
+    public void run() {
+        try {
+            doTask();
+           onTaskFinished();
+        }
+        catch (Exception e) {
+            onTaskFailed(e);
+        }
     }
+
+    protected abstract void doTask() throws Exception;
+
+    protected abstract void onTaskFinished();
+
+    protected abstract void onTaskFailed(Exception e);
 }

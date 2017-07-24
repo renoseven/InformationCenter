@@ -12,8 +12,8 @@ import net.renoseven.informationcenter.message.MessageHolder;
 import net.renoseven.informationcenter.preference.ApplicationPreferences;
 import net.renoseven.informationcenter.preference.MailPreferences;
 import net.renoseven.informationcenter.preference.StatisticsPreferences;
+import net.renoseven.informationcenter.processor.BaseMessageProcessor;
 import net.renoseven.informationcenter.processor.MailForwardingProcessor;
-import net.renoseven.informationcenter.processor.MessageProcessor;
 import net.renoseven.informationcenter.processor.SMSForwardingProcessor;
 import net.renoseven.informationcenter.receiver.ApplicationStateReceiver;
 import net.renoseven.informationcenter.receiver.MessageReceiver;
@@ -23,6 +23,8 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import static net.renoseven.informationcenter.preference.ApplicationPreferences.CONFIG_FORWARDING_MAIL_ENABLED;
 import static net.renoseven.informationcenter.preference.ApplicationPreferences.CONFIG_FORWARDING_SMS_ENABLED;
@@ -34,9 +36,10 @@ import static net.renoseven.informationcenter.preference.ApplicationPreferences.
  */
 public class InformationService extends NIAService {
 
-    private final Map<String, TrayPreferences> preferencesMap = new HashMap<>();
-    private final Set<MessageProcessor> messageProcessors = new HashSet<>();
-    private final Set<FilteredBroadcastReceiver> broadcastReceivers = new HashSet<>();
+    private final static ExecutorService executor = Executors.newCachedThreadPool();
+    private final static Map<String, TrayPreferences> preferencesMap = new HashMap<>();
+    private final static Set<FilteredBroadcastReceiver> broadcastReceivers = new HashSet<>();
+    private final static Set<Class<? extends BaseMessageProcessor>> messageProcessors = new HashSet<>();
     private final int pid = android.os.Process.myPid();
 
     @Override
@@ -73,10 +76,10 @@ public class InformationService extends NIAService {
         // register message processors
         Log.v(TAG, "Registering processors...");
         if (appPref.getBoolean(CONFIG_FORWARDING_SMS_ENABLED, false)) {
-            messageProcessors.add(new SMSForwardingProcessor(this));
+            messageProcessors.add(SMSForwardingProcessor.class);
         }
         if (appPref.getBoolean(CONFIG_FORWARDING_MAIL_ENABLED, false)) {
-            messageProcessors.add(new MailForwardingProcessor(this));
+            messageProcessors.add(MailForwardingProcessor.class);
         }
 
         // start foreground w/ notification
@@ -99,10 +102,17 @@ public class InformationService extends NIAService {
         return null;
     }
 
-    private void processMessage(MessageHolder msg) {
-        Log.i(TAG, msg.toString());
-        for (MessageProcessor processor : messageProcessors) {
-            processor.processMessage(preferencesMap, msg);
+    private void processMessage(MessageHolder message) {
+        Log.i(TAG, message.toString());
+        for (Class<? extends BaseMessageProcessor> processorClass : messageProcessors) {
+            try {
+                BaseMessageProcessor processor = processorClass.newInstance();
+                processor.init(getBaseContext(), preferencesMap, message);
+                executor.execute(processor);
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
         }
     }
 }

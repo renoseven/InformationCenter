@@ -12,8 +12,8 @@ import static net.renoseven.informationcenter.preference.StatisticsPreferences.S
 import static net.renoseven.informationcenter.preference.StatisticsPreferences.STAT_MESSAGE_RECEIVED;
 import static net.renoseven.informationcenter.preference.StatisticsPreferences.STAT_SMS_SENT;
 import static net.renoseven.informationcenter.receiver.MessageReceiver.MESSAGE_RECEIVED;
-import static net.renoseven.informationcenter.task.MailSendingTask.MAIL_SENT;
-import static net.renoseven.informationcenter.task.SMSSendingTask.SMS_SENT;
+import static net.renoseven.informationcenter.processor.MailForwardingProcessor.MAIL_SENT;
+import static net.renoseven.informationcenter.processor.SMSForwardingProcessor.SMS_SENT;
 
 /**
  * Application State Receiver
