@@ -9,6 +9,7 @@ import net.renoseven.informationcenter.message.MessageType;
 import net.renoseven.informationcenter.preference.ApplicationPreferences;
 import net.renoseven.informationcenter.preference.MailPreferences;
 import net.renoseven.util.PreferencesUtil;
+import net.renoseven.util.ToastUtil;
 
 import java.util.Date;
 import java.util.Properties;
@@ -71,10 +72,12 @@ public class MailForwardingProcessor extends BaseMessageProcessor {
     protected void onTaskFinished() {
         Log.i(TAG, "Mail sent");
         context.sendBroadcast(new Intent(MAIL_SENT));
+        ToastUtil.showToast(context, "Mail Sent");
     }
 
     @Override
     protected void onTaskFailed(Exception e) {
         Log.e(TAG, "Mail sending failed: " + e.getMessage());
+        ToastUtil.showToast(context, "Mail sending failed");
     }
 }

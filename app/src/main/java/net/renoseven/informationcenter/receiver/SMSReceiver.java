@@ -54,7 +54,7 @@ public class SMSReceiver extends FilteredBroadcastReceiver {
                     ToastUtil.showToast(context, "SMS Sent");
                     break;
                 default:
-                    ToastUtil.showToast(context, "SMS Send failed");
+                    ToastUtil.showToast(context, "SMS Sending failed");
                     break;
             }
         }
