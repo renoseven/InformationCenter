@@ -28,8 +28,6 @@ import static net.renoseven.informationcenter.preference.MailPreferences.CONFIG_
 public class MailForwardingProcessor extends BaseMessageProcessor {
     public final static String MAIL_SENT = MailForwardingProcessor.class.getName() + ".MAIL_SENT";
 
-
-
     @Override
     protected void doTask() throws Exception {
         Log.i(TAG, "Forward as mail");
