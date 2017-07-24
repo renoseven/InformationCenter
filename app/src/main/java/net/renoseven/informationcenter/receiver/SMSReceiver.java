@@ -10,7 +10,6 @@ import android.util.Log;
 
 import net.renoseven.framework.FilteredBroadcastReceiver;
 import net.renoseven.informationcenter.message.MessageHolder;
-import net.renoseven.informationcenter.message.MessageType;
 
 /**
  * SMS Receiver
@@ -32,7 +31,7 @@ public class SMSReceiver extends FilteredBroadcastReceiver {
                 content.append(msg.getDisplayMessageBody());
             }
 
-            MessageHolder msg = new MessageHolder(MessageType.SMS);
+            MessageHolder msg = new MessageHolder();
             msg.setTimeStamp(messages[0].getTimestampMillis());
             msg.setSender(messages[0].getOriginatingAddress());
             msg.setCharset("utf-8");

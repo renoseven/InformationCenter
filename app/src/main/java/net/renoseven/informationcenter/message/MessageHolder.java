@@ -9,7 +9,6 @@ import java.util.Date;
  */
 public class MessageHolder implements Serializable, Cloneable {
 
-    private MessageType msgType;
     private long timeStamp;
     private String charset;
     private String sender;
@@ -18,18 +17,6 @@ public class MessageHolder implements Serializable, Cloneable {
     private String receiverName;
     private String subject;
     private String text;
-
-    public MessageHolder(MessageType msgType) {
-        this.msgType = msgType;
-    }
-
-    public MessageType getMsgType() {
-        return msgType;
-    }
-
-    public void setMsgType(MessageType msgType) {
-        this.msgType = msgType;
-    }
 
     public long getTimeStamp() {
         return timeStamp;
@@ -97,7 +84,7 @@ public class MessageHolder implements Serializable, Cloneable {
 
     @Override
     public String toString() {
-        return "[" + msgType.toString() + "] " + new Date(timeStamp).toString() + " Subject: " + subject + " From: " + senderName + "(" + sender + ")" + " To: " + receiverName + "(" + receiver + ") " + text;
+        return "[Message] " + new Date(timeStamp).toString() + " Subject: " + subject + " From: " + senderName + "(" + sender + ")" + " To: " + receiverName + "(" + receiver + ") " + text;
     }
 
     @Override

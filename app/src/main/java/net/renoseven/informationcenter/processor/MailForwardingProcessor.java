@@ -7,7 +7,6 @@ import android.util.Log;
 
 import net.grandcentrix.tray.TrayPreferences;
 import net.renoseven.informationcenter.message.MessageHolder;
-import net.renoseven.informationcenter.message.MessageType;
 import net.renoseven.informationcenter.preference.ApplicationPreferences;
 import net.renoseven.informationcenter.preference.MailPreferences;
 import net.renoseven.util.PreferencesUtil;
@@ -41,7 +40,6 @@ public class MailForwardingProcessor extends BaseMessageProcessor {
         serverConfig.setProperty(MailPreferences.CONFIG_MAIL_TRANSPORT_PROTOCOL, "smtp");
 
         MessageHolder mail = (MessageHolder) message.clone();
-        mail.setMsgType(MessageType.MAIL);
         mail.setSubject(message.getSender());
         mail.setSenderName(appPref.getString(ApplicationPreferences.CONFIG_FORWARDING_MAIL_SENDER_NAME, null));
         mail.setSender(appPref.getString(ApplicationPreferences.CONFIG_FORWARDING_MAIL_SENDER, null));
