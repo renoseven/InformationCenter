@@ -37,10 +37,10 @@ public class MainActivity extends NIAActivity implements View.OnClickListener, O
 
         loadSettings();
 
-        btnStartService = (Button) findViewById(R.id.btn_start_service);
-        btnStopService = (Button) findViewById(R.id.btn_stop_service);
-        btnSettings = (Button) findViewById(R.id.btn_settings);
-        txtServiceState = (TextView) findViewById(R.id.txt_service_state);
+        btnStartService = findViewById(R.id.btn_start_service);
+        btnStopService = findViewById(R.id.btn_stop_service);
+        btnSettings = findViewById(R.id.btn_settings);
+        txtServiceState = findViewById(R.id.txt_service_state);
 
         btnStartService.setOnClickListener(this);
         btnStopService.setOnClickListener(this);
