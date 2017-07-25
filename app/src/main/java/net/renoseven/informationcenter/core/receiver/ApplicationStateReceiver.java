@@ -1,4 +1,4 @@
-package net.renoseven.informationcenter.receiver;
+package net.renoseven.informationcenter.core.receiver;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,12 +9,12 @@ import android.support.annotation.NonNull;
 import net.grandcentrix.tray.TrayPreferences;
 import net.renoseven.framework.FilteredBroadcastReceiver;
 
-import static net.renoseven.informationcenter.preference.StatisticsPreferences.STAT_MAIL_SENT;
-import static net.renoseven.informationcenter.preference.StatisticsPreferences.STAT_MESSAGE_RECEIVED;
-import static net.renoseven.informationcenter.preference.StatisticsPreferences.STAT_SMS_SENT;
-import static net.renoseven.informationcenter.receiver.MailForwardingStateReceiver.MAIL_SENDING_RESULT;
-import static net.renoseven.informationcenter.receiver.MessageReceiver.MESSAGE_RECEIVED;
-import static net.renoseven.informationcenter.receiver.SMSForwardingStateReceiver.SMS_SENDING_RESULT;
+import static net.renoseven.informationcenter.core.preference.StatisticsPreferences.STAT_MAIL_SENT;
+import static net.renoseven.informationcenter.core.preference.StatisticsPreferences.STAT_MESSAGE_RECEIVED;
+import static net.renoseven.informationcenter.core.preference.StatisticsPreferences.STAT_SMS_SENT;
+import static net.renoseven.informationcenter.core.receiver.MessageReceiver.MESSAGE_RECEIVED;
+import static net.renoseven.informationcenter.module.MailForwarding.MailForwardingStateReceiver.MAIL_SENDING_RESULT;
+import static net.renoseven.informationcenter.module.SMSForwarding.SMSForwardingStateReceiver.SMS_SENDING_RESULT;
 
 /**
  * Application State Receiver

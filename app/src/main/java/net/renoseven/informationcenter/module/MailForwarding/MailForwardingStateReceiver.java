@@ -1,4 +1,4 @@
-package net.renoseven.informationcenter.receiver;
+package net.renoseven.informationcenter.module.MailForwarding;
 
 import android.app.Activity;
 import android.content.Context;

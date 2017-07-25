@@ -1,4 +1,4 @@
-package net.renoseven.informationcenter.receiver;
+package net.renoseven.informationcenter.core.receiver;
 
 import android.content.Context;
 import android.content.Intent;
@@ -6,7 +6,7 @@ import android.content.IntentFilter;
 import android.support.annotation.NonNull;
 
 import net.renoseven.framework.FilteredBroadcastReceiver;
-import net.renoseven.informationcenter.message.MessageHolder;
+import net.renoseven.informationcenter.core.message.MessageHolder;
 
 /**
  * Universal MessageHolder Receiver

@@ -1,4 +1,4 @@
-package net.renoseven.informationcenter.receiver;
+package net.renoseven.informationcenter.module.SMSMonitor;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,16 +9,17 @@ import android.telephony.SmsMessage;
 import android.util.Log;
 
 import net.renoseven.framework.FilteredBroadcastReceiver;
-import net.renoseven.informationcenter.message.MessageHolder;
+import net.renoseven.informationcenter.core.message.MessageHolder;
+import net.renoseven.informationcenter.core.receiver.MessageReceiver;
 
 /**
  * SMS Receiver
  * Created by RenoSeven on 2016/9/8.
  */
 
-public class SMSReceiver extends FilteredBroadcastReceiver {
+public class SMSMonitor extends FilteredBroadcastReceiver {
     public final static String SMS_RECEIVED = "android.provider.Telephony.SMS_RECEIVED";
-    protected static String TAG = SMSReceiver.class.getSimpleName();
+    protected static String TAG = SMSMonitor.class.getSimpleName();
 
     @Override
     public void onReceive(Context context, Intent intent) {

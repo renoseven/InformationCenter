@@ -13,8 +13,8 @@ import net.grandcentrix.tray.core.OnTrayPreferenceChangeListener;
 import net.grandcentrix.tray.core.TrayItem;
 import net.renoseven.framework.nias.NIAActivity;
 import net.renoseven.informationcenter.R;
-import net.renoseven.informationcenter.preference.StatisticsPreferences;
-import net.renoseven.informationcenter.service.InformationService;
+import net.renoseven.informationcenter.core.preference.StatisticsPreferences;
+import net.renoseven.informationcenter.core.service.InformationService;
 
 import java.util.Collection;
 import java.util.Set;

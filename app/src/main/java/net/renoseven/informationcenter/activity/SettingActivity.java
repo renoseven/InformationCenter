@@ -9,8 +9,8 @@ import android.widget.EditText;
 import net.grandcentrix.tray.TrayPreferences;
 import net.renoseven.framework.ExtendedActivity;
 import net.renoseven.informationcenter.R;
-import net.renoseven.informationcenter.preference.ApplicationPreferences;
-import net.renoseven.informationcenter.preference.MailPreferences;
+import net.renoseven.informationcenter.core.preference.ApplicationPreferences;
+import net.renoseven.informationcenter.core.preference.MailPreferences;
 
 import java.util.HashMap;
 import java.util.Map;

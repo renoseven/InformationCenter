@@ -1,17 +1,20 @@
-package net.renoseven.informationcenter.processor;
+package net.renoseven.informationcenter.module.MailForwarding;
 
 import android.app.Activity;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
 import net.grandcentrix.tray.TrayPreferences;
-import net.renoseven.informationcenter.message.MessageHolder;
-import net.renoseven.informationcenter.preference.ApplicationPreferences;
-import net.renoseven.informationcenter.preference.MailPreferences;
+import net.renoseven.informationcenter.core.message.MessageHolder;
+import net.renoseven.informationcenter.core.preference.ApplicationPreferences;
+import net.renoseven.informationcenter.core.preference.MailPreferences;
+import net.renoseven.informationcenter.core.processor.BaseMessageProcessor;
 import net.renoseven.util.PreferencesUtil;
 
 import java.util.Date;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.mail.Session;
@@ -19,15 +22,19 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import static net.renoseven.informationcenter.preference.MailPreferences.CONFIG_MAIL_AUTH_PASSWORD;
-import static net.renoseven.informationcenter.preference.MailPreferences.CONFIG_MAIL_AUTH_USERNAME;
-import static net.renoseven.informationcenter.receiver.MailForwardingStateReceiver.MAIL_SENDING_RESULT;
+import static net.renoseven.informationcenter.core.preference.MailPreferences.CONFIG_MAIL_AUTH_PASSWORD;
+import static net.renoseven.informationcenter.core.preference.MailPreferences.CONFIG_MAIL_AUTH_USERNAME;
+import static net.renoseven.informationcenter.module.MailForwarding.MailForwardingStateReceiver.MAIL_SENDING_RESULT;
 
 /**
  * Mail Forwarding Processor
  * Created by RenoSeven on 2016/9/22.
  */
-public class MailForwardingProcessor extends BaseMessageProcessor {
+class MailForwardingProcessor extends BaseMessageProcessor {
+
+    MailForwardingProcessor(Context context, Map<String, TrayPreferences> preferencesMap, MessageHolder message) {
+        super(context, preferencesMap, message);
+    }
 
     @Override
     protected void doTask() throws Exception {

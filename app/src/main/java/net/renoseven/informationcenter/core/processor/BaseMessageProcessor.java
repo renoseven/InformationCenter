@@ -1,16 +1,11 @@
-package net.renoseven.informationcenter.processor;
+package net.renoseven.informationcenter.core.processor;
 
 import android.content.Context;
-import android.content.ContextWrapper;
-import android.os.Bundle;
-import android.preference.Preference;
 
 import net.grandcentrix.tray.TrayPreferences;
-import net.renoseven.informationcenter.message.MessageHolder;
+import net.renoseven.informationcenter.core.message.MessageHolder;
 
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
  * Base Message Processor
@@ -25,7 +20,7 @@ public abstract class BaseMessageProcessor implements Runnable {
     protected MessageHolder message;
     protected Context context;
 
-    public void init(Context context, Map<String, TrayPreferences> preferencesMap, MessageHolder message) {
+    public BaseMessageProcessor(Context context, Map<String, TrayPreferences> preferencesMap, MessageHolder message) {
         this.context = context;
         this.preferencesMap = preferencesMap;
         this.message = message;

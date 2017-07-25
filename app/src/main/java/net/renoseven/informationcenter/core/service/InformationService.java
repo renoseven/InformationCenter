@@ -1,4 +1,4 @@
-package net.renoseven.informationcenter.service;
+package net.renoseven.informationcenter.core.service;
 
 import android.app.Notification;
 import android.content.BroadcastReceiver;
@@ -8,18 +8,15 @@ import android.util.Log;
 import net.grandcentrix.tray.TrayPreferences;
 import net.renoseven.framework.FilteredBroadcastReceiver;
 import net.renoseven.framework.nias.NIAService;
-import net.renoseven.informationcenter.message.MessageHolder;
-import net.renoseven.informationcenter.preference.ApplicationPreferences;
-import net.renoseven.informationcenter.preference.MailPreferences;
-import net.renoseven.informationcenter.preference.StatisticsPreferences;
-import net.renoseven.informationcenter.processor.BaseMessageProcessor;
-import net.renoseven.informationcenter.processor.MailForwardingProcessor;
-import net.renoseven.informationcenter.processor.SMSForwardingProcessor;
-import net.renoseven.informationcenter.receiver.ApplicationStateReceiver;
-import net.renoseven.informationcenter.receiver.MailForwardingStateReceiver;
-import net.renoseven.informationcenter.receiver.MessageReceiver;
-import net.renoseven.informationcenter.receiver.SMSForwardingStateReceiver;
-import net.renoseven.informationcenter.receiver.SMSReceiver;
+import net.renoseven.informationcenter.core.message.MessageHolder;
+import net.renoseven.informationcenter.core.preference.ApplicationPreferences;
+import net.renoseven.informationcenter.core.preference.MailPreferences;
+import net.renoseven.informationcenter.core.preference.StatisticsPreferences;
+import net.renoseven.informationcenter.core.receiver.ApplicationStateReceiver;
+import net.renoseven.informationcenter.core.receiver.MessageReceiver;
+import net.renoseven.informationcenter.module.MailForwarding.MailForwardingModule;
+import net.renoseven.informationcenter.module.SMSForwarding.SMSForwardingModule;
+import net.renoseven.informationcenter.module.SMSMonitor.SMSMonitorModule;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -28,9 +25,9 @@ import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import static net.renoseven.informationcenter.preference.ApplicationPreferences.CONFIG_FORWARDING_MAIL_ENABLED;
-import static net.renoseven.informationcenter.preference.ApplicationPreferences.CONFIG_FORWARDING_SMS_ENABLED;
-import static net.renoseven.informationcenter.preference.ApplicationPreferences.CONFIG_RECEIVER_SMS_ENABLED;
+import static net.renoseven.informationcenter.core.preference.ApplicationPreferences.CONFIG_FORWARDING_MAIL_ENABLED;
+import static net.renoseven.informationcenter.core.preference.ApplicationPreferences.CONFIG_FORWARDING_SMS_ENABLED;
+import static net.renoseven.informationcenter.core.preference.ApplicationPreferences.CONFIG_RECEIVER_SMS_ENABLED;
 
 /**
  * Core Service Implementation
@@ -39,9 +36,9 @@ import static net.renoseven.informationcenter.preference.ApplicationPreferences.
 public class InformationService extends NIAService {
 
     private final static ExecutorService executor = Executors.newCachedThreadPool();
-    private final Map<String, TrayPreferences> preferencesMap = new HashMap<>();
+    private final Map<String, TrayPreferences> preferences = new HashMap<>();
+    private final Set<ServiceModule> serviceModules = new HashSet<>();
     private final Set<FilteredBroadcastReceiver> broadcastReceivers = new HashSet<>();
-    private final Set<Class<? extends BaseMessageProcessor>> messageProcessors = new HashSet<>();
     private final int pid = android.os.Process.myPid();
 
     @Override
@@ -50,9 +47,9 @@ public class InformationService extends NIAService {
         Log.v(TAG, "Loading settings...");
         final TrayPreferences appPref = new ApplicationPreferences(this);
         final TrayPreferences statsPref = new StatisticsPreferences(this);
-        preferencesMap.put(ApplicationPreferences.MODULE_NAME, appPref);
-        preferencesMap.put(StatisticsPreferences.MODULE_NAME, statsPref);
-        preferencesMap.put(MailPreferences.MODULE_NAME, new MailPreferences(this));
+        preferences.put(ApplicationPreferences.MODULE_NAME, appPref);
+        preferences.put(StatisticsPreferences.MODULE_NAME, statsPref);
+        preferences.put(MailPreferences.MODULE_NAME, new MailPreferences(this));
 
         Log.d(TAG, "Initializing system receivers...");
         broadcastReceivers.add(new MessageReceiver() {
@@ -64,35 +61,32 @@ public class InformationService extends NIAService {
         });
         broadcastReceivers.add(new ApplicationStateReceiver(statsPref));
 
-        Log.d(TAG, "Initializing modules...");
+        Log.d(TAG, "Registering modules...");
         if (appPref.getBoolean(CONFIG_RECEIVER_SMS_ENABLED, false)) {
             Log.v(TAG, "CONFIG_RECEIVER_SMS_ENABLED = TRUE");
-            broadcastReceivers.add(new SMSReceiver());
+            serviceModules.add(new SMSMonitorModule());
         }
-
         if (appPref.getBoolean(CONFIG_FORWARDING_SMS_ENABLED, false)) {
             Log.v(TAG, "CONFIG_FORWARDING_SMS_ENABLED = TRUE");
-            broadcastReceivers.add(new SMSForwardingStateReceiver());
-            messageProcessors.add(SMSForwardingProcessor.class);
+            serviceModules.add(new SMSForwardingModule());
         }
-
         if (appPref.getBoolean(CONFIG_FORWARDING_MAIL_ENABLED, false)) {
             Log.v(TAG, "CONFIG_FORWARDING_MAIL_ENABLED = TRUE");
-            broadcastReceivers.add(new MailForwardingStateReceiver());
-            messageProcessors.add(MailForwardingProcessor.class);
+            serviceModules.add(new MailForwardingModule());
         }
 
-        Log.d(TAG, "Registering components...");
+        Log.d(TAG, "Initializing modules...");
+        for (ServiceModule module : serviceModules) {
+            Log.v(TAG, module.getModuleName());
+            broadcastReceivers.addAll(module.getReceivers());
+        }
+
+        Log.d(TAG, "Registering receivers...");
         for (FilteredBroadcastReceiver receiver : broadcastReceivers) {
             Log.v(TAG, receiver.getClass().getName());
             registerReceiver(receiver, receiver.getIntentFilter());
         }
         Log.d(TAG, "Receiver number = " + broadcastReceivers.size());
-
-        for (Class<? extends BaseMessageProcessor> processorClass : messageProcessors) {
-            Log.v(TAG, processorClass.getName());
-        }
-        Log.d(TAG, "Processor number = " + messageProcessors.size());
 
         // start foreground w/ notification
         startForeground(pid, new Notification());
@@ -116,14 +110,10 @@ public class InformationService extends NIAService {
 
     private void processMessage(MessageHolder message) {
         Log.i(TAG, message.toString());
-        for (Class<? extends BaseMessageProcessor> processorClass : messageProcessors) {
-            try {
-                BaseMessageProcessor processor = processorClass.newInstance();
-                processor.init(getBaseContext(), preferencesMap, message);
+        for (ServiceModule module : serviceModules) {
+            Set<? extends Runnable> processors = module.getProcessors(getBaseContext(), preferences, message);
+            for (Runnable processor : processors) {
                 executor.execute(processor);
-            }
-            catch (Exception e) {
-                e.printStackTrace();
             }
         }
     }
