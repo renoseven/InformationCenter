@@ -1,4 +1,4 @@
-package net.renoseven.informationcenter.module.MailForwarding;
+package net.renoseven.informationcenter.module.mailforwarding;
 
 import android.app.Activity;
 import android.app.PendingIntent;
@@ -24,7 +24,7 @@ import javax.mail.internet.MimeMessage;
 
 import static net.renoseven.informationcenter.core.preference.MailPreferences.CONFIG_MAIL_AUTH_PASSWORD;
 import static net.renoseven.informationcenter.core.preference.MailPreferences.CONFIG_MAIL_AUTH_USERNAME;
-import static net.renoseven.informationcenter.module.MailForwarding.MailForwardingStateReceiver.MAIL_SENDING_RESULT;
+import static net.renoseven.informationcenter.module.mailforwarding.MailForwardingStateReceiver.MAIL_SENDING_RESULT;
 
 /**
  * Mail Forwarding Processor

@@ -1,4 +1,4 @@
-package net.renoseven.informationcenter.module.SMSMonitor;
+package net.renoseven.informationcenter.module.smsmonitor;
 
 import android.content.Context;
 import android.content.Intent;

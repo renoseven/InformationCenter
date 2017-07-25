@@ -1,4 +1,4 @@
-package net.renoseven.informationcenter.module.SMSForwarding;
+package net.renoseven.informationcenter.module.smsforwarding;
 
 import android.app.PendingIntent;
 import android.content.Context;
@@ -14,7 +14,7 @@ import net.renoseven.informationcenter.core.processor.BaseMessageProcessor;
 import java.util.List;
 import java.util.Map;
 
-import static net.renoseven.informationcenter.module.SMSForwarding.SMSForwardingStateReceiver.SMS_SENDING_RESULT;
+import static net.renoseven.informationcenter.module.smsforwarding.SMSForwardingStateReceiver.SMS_SENDING_RESULT;
 
 /**
  * SMS Forwarding Processor

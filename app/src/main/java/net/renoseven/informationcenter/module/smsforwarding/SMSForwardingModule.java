@@ -1,4 +1,4 @@
-package net.renoseven.informationcenter.module.SMSForwarding;
+package net.renoseven.informationcenter.module.smsforwarding;
 
 import android.content.Context;
 

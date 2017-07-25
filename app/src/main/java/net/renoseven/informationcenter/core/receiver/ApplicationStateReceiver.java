@@ -13,8 +13,8 @@ import static net.renoseven.informationcenter.core.preference.StatisticsPreferen
 import static net.renoseven.informationcenter.core.preference.StatisticsPreferences.STAT_MESSAGE_RECEIVED;
 import static net.renoseven.informationcenter.core.preference.StatisticsPreferences.STAT_SMS_SENT;
 import static net.renoseven.informationcenter.core.receiver.MessageReceiver.MESSAGE_RECEIVED;
-import static net.renoseven.informationcenter.module.MailForwarding.MailForwardingStateReceiver.MAIL_SENDING_RESULT;
-import static net.renoseven.informationcenter.module.SMSForwarding.SMSForwardingStateReceiver.SMS_SENDING_RESULT;
+import static net.renoseven.informationcenter.module.mailforwarding.MailForwardingStateReceiver.MAIL_SENDING_RESULT;
+import static net.renoseven.informationcenter.module.smsforwarding.SMSForwardingStateReceiver.SMS_SENDING_RESULT;
 
 /**
  * Application State Receiver

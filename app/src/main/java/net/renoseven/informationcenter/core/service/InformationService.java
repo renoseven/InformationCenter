@@ -14,9 +14,9 @@ import net.renoseven.informationcenter.core.preference.MailPreferences;
 import net.renoseven.informationcenter.core.preference.StatisticsPreferences;
 import net.renoseven.informationcenter.core.receiver.ApplicationStateReceiver;
 import net.renoseven.informationcenter.core.receiver.MessageReceiver;
-import net.renoseven.informationcenter.module.MailForwarding.MailForwardingModule;
-import net.renoseven.informationcenter.module.SMSForwarding.SMSForwardingModule;
-import net.renoseven.informationcenter.module.SMSMonitor.SMSMonitorModule;
+import net.renoseven.informationcenter.module.mailforwarding.MailForwardingModule;
+import net.renoseven.informationcenter.module.smsforwarding.SMSForwardingModule;
+import net.renoseven.informationcenter.module.smsmonitor.SMSMonitorModule;
 
 import java.util.HashMap;
 import java.util.HashSet;

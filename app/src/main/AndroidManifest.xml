@@ -14,13 +14,13 @@
         android:theme="@style/AppTheme">
 
         <service
-            android:name=".service.InformationService"
+            android:name=".core.service.InformationService"
             android:process=":InformationService" />
 
         <activity android:name=".activity.MainActivity">
             <meta-data
                 android:name="service"
-                android:value=".service.InformationService" />
+                android:value=".core.service.InformationService" />
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
