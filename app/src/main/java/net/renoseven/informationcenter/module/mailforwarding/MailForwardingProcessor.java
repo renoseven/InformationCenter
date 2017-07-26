@@ -8,9 +8,9 @@ import android.util.Log;
 
 import net.grandcentrix.tray.TrayPreferences;
 import net.renoseven.informationcenter.core.message.MessageHolder;
-import net.renoseven.informationcenter.core.preference.ApplicationPreferences;
-import net.renoseven.informationcenter.core.preference.MailPreferences;
 import net.renoseven.informationcenter.core.processor.BaseMessageProcessor;
+import net.renoseven.informationcenter.preference.ApplicationPreferences;
+import net.renoseven.informationcenter.preference.MailPreferences;
 import net.renoseven.util.PreferencesUtil;
 
 import java.util.Date;
@@ -22,9 +22,9 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import static net.renoseven.informationcenter.core.preference.MailPreferences.CONFIG_MAIL_AUTH_PASSWORD;
-import static net.renoseven.informationcenter.core.preference.MailPreferences.CONFIG_MAIL_AUTH_USERNAME;
 import static net.renoseven.informationcenter.module.mailforwarding.MailForwardingStateReceiver.MAIL_SENDING_RESULT;
+import static net.renoseven.informationcenter.preference.MailPreferences.CONFIG_MAIL_AUTH_PASSWORD;
+import static net.renoseven.informationcenter.preference.MailPreferences.CONFIG_MAIL_AUTH_USERNAME;
 
 /**
  * Mail Forwarding Processor

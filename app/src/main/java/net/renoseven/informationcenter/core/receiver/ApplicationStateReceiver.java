@@ -9,12 +9,12 @@ import android.support.annotation.NonNull;
 import net.grandcentrix.tray.TrayPreferences;
 import net.renoseven.framework.FilteredBroadcastReceiver;
 
-import static net.renoseven.informationcenter.core.preference.StatisticsPreferences.STAT_MAIL_SENT;
-import static net.renoseven.informationcenter.core.preference.StatisticsPreferences.STAT_MESSAGE_RECEIVED;
-import static net.renoseven.informationcenter.core.preference.StatisticsPreferences.STAT_SMS_SENT;
 import static net.renoseven.informationcenter.core.receiver.MessageReceiver.MESSAGE_RECEIVED;
 import static net.renoseven.informationcenter.module.mailforwarding.MailForwardingStateReceiver.MAIL_SENDING_RESULT;
 import static net.renoseven.informationcenter.module.smsforwarding.SMSForwardingStateReceiver.SMS_SENDING_RESULT;
+import static net.renoseven.informationcenter.preference.StatisticsPreferences.STAT_MAIL_SENT;
+import static net.renoseven.informationcenter.preference.StatisticsPreferences.STAT_MESSAGE_RECEIVED;
+import static net.renoseven.informationcenter.preference.StatisticsPreferences.STAT_SMS_SENT;
 
 /**
  * Application State Receiver

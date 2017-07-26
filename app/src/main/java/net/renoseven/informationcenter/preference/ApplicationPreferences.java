@@ -1,4 +1,4 @@
-package net.renoseven.informationcenter.core.preference;
+package net.renoseven.informationcenter.preference;
 
 import android.content.Context;
 

@@ -9,14 +9,14 @@ import net.grandcentrix.tray.TrayPreferences;
 import net.renoseven.framework.FilteredBroadcastReceiver;
 import net.renoseven.framework.nias.NIAService;
 import net.renoseven.informationcenter.core.message.MessageHolder;
-import net.renoseven.informationcenter.core.preference.ApplicationPreferences;
-import net.renoseven.informationcenter.core.preference.MailPreferences;
-import net.renoseven.informationcenter.core.preference.StatisticsPreferences;
 import net.renoseven.informationcenter.core.receiver.ApplicationStateReceiver;
 import net.renoseven.informationcenter.core.receiver.MessageReceiver;
 import net.renoseven.informationcenter.module.mailforwarding.MailForwardingModule;
 import net.renoseven.informationcenter.module.smsforwarding.SMSForwardingModule;
 import net.renoseven.informationcenter.module.smsmonitor.SMSMonitorModule;
+import net.renoseven.informationcenter.preference.ApplicationPreferences;
+import net.renoseven.informationcenter.preference.MailPreferences;
+import net.renoseven.informationcenter.preference.StatisticsPreferences;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -25,9 +25,9 @@ import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import static net.renoseven.informationcenter.core.preference.ApplicationPreferences.CONFIG_FORWARDING_MAIL_ENABLED;
-import static net.renoseven.informationcenter.core.preference.ApplicationPreferences.CONFIG_FORWARDING_SMS_ENABLED;
-import static net.renoseven.informationcenter.core.preference.ApplicationPreferences.CONFIG_RECEIVER_SMS_ENABLED;
+import static net.renoseven.informationcenter.preference.ApplicationPreferences.CONFIG_FORWARDING_MAIL_ENABLED;
+import static net.renoseven.informationcenter.preference.ApplicationPreferences.CONFIG_FORWARDING_SMS_ENABLED;
+import static net.renoseven.informationcenter.preference.ApplicationPreferences.CONFIG_RECEIVER_SMS_ENABLED;
 
 /**
  * Core Service Implementation
@@ -111,7 +111,7 @@ public class InformationService extends NIAService {
     private void processMessage(MessageHolder message) {
         Log.i(TAG, message.toString());
         for (ServiceModule module : serviceModules) {
-            Set<? extends Runnable> processors = module.getProcessors(getBaseContext(), preferences, message);
+            Set<? extends Runnable> processors = module.getProcessors(this, preferences, message);
             for (Runnable processor : processors) {
                 executor.execute(processor);
             }

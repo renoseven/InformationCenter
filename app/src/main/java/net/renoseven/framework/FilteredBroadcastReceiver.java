@@ -11,6 +11,8 @@ import android.support.annotation.NonNull;
  */
 
 public abstract class FilteredBroadcastReceiver extends BroadcastReceiver {
+    protected static int FILTER_PRIORITY_MAX = 1000;
+    protected static int FILTER_PRIORITY_MIN = 0;
     protected final String TAG = this.getClass().getSimpleName();
 
     @NonNull

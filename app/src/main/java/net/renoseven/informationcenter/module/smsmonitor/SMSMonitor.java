@@ -49,6 +49,8 @@ public class SMSMonitor extends FilteredBroadcastReceiver {
     @Override
     public IntentFilter getIntentFilter()
     {
+        IntentFilter intentFilter = new IntentFilter(SMS_RECEIVED);
+        intentFilter.setPriority(FILTER_PRIORITY_MAX);
         return new IntentFilter(SMS_RECEIVED);
     }
 }

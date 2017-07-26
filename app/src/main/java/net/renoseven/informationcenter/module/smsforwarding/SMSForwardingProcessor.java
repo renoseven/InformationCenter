@@ -8,8 +8,8 @@ import android.util.Log;
 
 import net.grandcentrix.tray.TrayPreferences;
 import net.renoseven.informationcenter.core.message.MessageHolder;
-import net.renoseven.informationcenter.core.preference.ApplicationPreferences;
 import net.renoseven.informationcenter.core.processor.BaseMessageProcessor;
+import net.renoseven.informationcenter.preference.ApplicationPreferences;
 
 import java.util.List;
 import java.util.Map;
