@@ -14,21 +14,21 @@ import net.renoseven.framework.DynamicClassReceiver;
  * Created by RenoSeven on 2016/9/9.
  */
 public abstract class NIAService extends Service implements NIAActivityListener {
-    public final static String SERVICE_ACTION_UPDATE = ".SERVICE_ACTION_UPDATE";
-    public final static String SERVICE_ACTION_SUBMIT = ".SERVICE_ACTION_SUBMIT";
-    public final static String SERVICE_ACTION_STOP = ".SERVICE_ACTION_STOP";
-    public final static String SERVICE_STATE_BORN = ".SERVICE_STATE_BORN";
-    public final static String SERVICE_STATE_DEAD = ".SERVICE_STATE_DEAD";
+    public final static String SERVICE_BORN = "SERVICE_BORN";
+    public final static String SERVICE_DEAD = "SERVICE_DEAD";
+    public final static String SERVICE_RESPONSE = "SERVICE_RESPONSE";
+    public final static String SERVICE_REQUIRED_UPDATE = "SERVICE_REQUIRED_UPDATE";
+    public final static String SERVICE_REQUIRED_STOP = "SERVICE_REQUIRED_STOP";
 
     protected final String TAG;
-    private final String SERVICE_CLASS_NAME;
+    private final String serviceClassName;
     private final DynamicClassReceiver serviceReceiver;
 
     public NIAService() {
         super();
         TAG = this.getClass().getSimpleName();
-        SERVICE_CLASS_NAME = this.getClass().getName();
-        serviceReceiver = new NIAActivityReceiver(SERVICE_CLASS_NAME, this);
+        serviceClassName = this.getClass().getName();
+        serviceReceiver = new NIAActivityReceiver(serviceClassName, this);
     }
 
     @Override
@@ -43,7 +43,7 @@ public abstract class NIAService extends Service implements NIAActivityListener 
         registerReceiver(serviceReceiver, serviceReceiver.getIntentFilter());
         onServiceBorn();
         Log.i(TAG, "Service started");
-        broadcastMessage(SERVICE_STATE_BORN);
+        broadcastMessage(SERVICE_BORN);
     }
 
     @Override
@@ -87,7 +87,7 @@ public abstract class NIAService extends Service implements NIAActivityListener 
     public void onRequestedUpdate(@Nullable Bundle request) {
         Bundle reply = onServiceUpdate(request);
         Log.i(TAG, "Service updated");
-        broadcastMessage(SERVICE_ACTION_SUBMIT, reply);
+        broadcastMessage(SERVICE_RESPONSE, reply);
     }
 
     /**
@@ -102,7 +102,7 @@ public abstract class NIAService extends Service implements NIAActivityListener 
         onServiceDead();
         unregisterReceiver(serviceReceiver);
         Log.i(TAG, "Service stopped");
-        broadcastMessage(SERVICE_STATE_DEAD);
+        broadcastMessage(SERVICE_DEAD);
         this.stopSelf();
     }
 
@@ -119,7 +119,7 @@ public abstract class NIAService extends Service implements NIAActivityListener 
 
     protected void broadcastMessage(String actionName, @Nullable Bundle bundle) {
         Intent intent = new Intent();
-        intent.setAction(SERVICE_CLASS_NAME + actionName);
+        intent.setAction(serviceClassName + '.' + actionName);
         if (bundle != null) {
             intent.putExtras(bundle);
         }

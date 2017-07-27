@@ -13,9 +13,8 @@ import net.renoseven.framework.ExtendedActivity;
  * Created by RenoSeven on 2016/9/9.
  */
 public abstract class NIAActivity extends ExtendedActivity implements NIAServiceListener {
-    protected final String TAG;
     private final static String META_KEY_BIND_SERVICE = "service";
-
+    protected final String TAG;
     private String serviceClassName;
     private DynamicClassReceiver serviceStateReceiver;
     private boolean isServiceRunning;
@@ -74,7 +73,7 @@ public abstract class NIAActivity extends ExtendedActivity implements NIAService
     }
 
     @Override
-    public void onServiceSubmit(@Nullable Bundle reply) {
+    public void onServiceRespond(@Nullable Bundle reply) {
         Log.i(TAG, "Service updated");
         isServiceRunning = true;
         updateUI(reply);
@@ -110,7 +109,7 @@ public abstract class NIAActivity extends ExtendedActivity implements NIAService
 
     protected void updateService(@Nullable Bundle request) {
         Log.d(TAG, "Request service update");
-        broadcastMessage(NIAService.SERVICE_ACTION_UPDATE, request);
+        broadcastMessage(NIAService.SERVICE_REQUIRED_UPDATE, request);
     }
 
     /**
@@ -121,7 +120,7 @@ public abstract class NIAActivity extends ExtendedActivity implements NIAService
      */
     protected void stopService() {
         Log.d(TAG, "Request service stop");
-        broadcastMessage(NIAService.SERVICE_ACTION_STOP);
+        broadcastMessage(NIAService.SERVICE_REQUIRED_STOP);
     }
 
     /**
@@ -137,7 +136,7 @@ public abstract class NIAActivity extends ExtendedActivity implements NIAService
 
     protected void broadcastMessage(String actionName, @Nullable Bundle bundle) {
         Intent intent = new Intent();
-        intent.setAction(serviceClassName + actionName);
+        intent.setAction(serviceClassName + '.' + actionName);
         if (bundle != null) {
             intent.putExtras(bundle);
         }

@@ -23,10 +23,10 @@ public class NIAActivityReceiver extends DynamicClassReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         String actionName = intent.getAction();
-        if (actionName.equals(getFullActionName(NIAService.SERVICE_ACTION_UPDATE))) {
+        if (actionName.equals(getFullActionName(NIAService.SERVICE_REQUIRED_UPDATE))) {
             Log.d(TAG, "Received service update request");
             actionListener.onRequestedUpdate(intent.getExtras());
-        } else if (actionName.equals(getFullActionName(NIAService.SERVICE_ACTION_STOP))) {
+        } else if (actionName.equals(getFullActionName(NIAService.SERVICE_REQUIRED_STOP))) {
             Log.d(TAG, "Received service stop request");
             actionListener.onRequestedStop();
         }
@@ -36,8 +36,8 @@ public class NIAActivityReceiver extends DynamicClassReceiver {
     @Override
     public IntentFilter getIntentFilter() {
         IntentFilter actionFilter = new IntentFilter();
-        actionFilter.addAction(getFullActionName(NIAService.SERVICE_ACTION_UPDATE));
-        actionFilter.addAction(getFullActionName(NIAService.SERVICE_ACTION_STOP));
+        actionFilter.addAction(getFullActionName(NIAService.SERVICE_REQUIRED_UPDATE));
+        actionFilter.addAction(getFullActionName(NIAService.SERVICE_REQUIRED_STOP));
         return actionFilter;
     }
 }

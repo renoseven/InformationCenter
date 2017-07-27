@@ -5,13 +5,13 @@ package net.renoseven.framework;
  * Created by RenoSeven on 2016/9/9.
  */
 public abstract class DynamicClassReceiver extends FilteredBroadcastReceiver {
-    private final String SERVICE_CLASS_NAME;
+    private final String serviceClassName;
 
     public DynamicClassReceiver(String serviceClassName) {
-        SERVICE_CLASS_NAME = serviceClassName;
+        this.serviceClassName = serviceClassName;
     }
 
     public String getFullActionName(String actionName) {
-        return SERVICE_CLASS_NAME + actionName;
+        return serviceClassName + '.' + actionName;
     }
 }

@@ -26,10 +26,10 @@ interface NIAServiceListener {
     void onServiceDead();
 
     /**
-     * Function: onServiceSubmit
+     * Function: onServiceRespond
      * Params: Bundle reply (optional)
      * Description: triggers when a service submits data.
      * Return: void
      */
-    void onServiceSubmit(@Nullable Bundle reply);
+    void onServiceRespond(@Nullable Bundle reply);
 }

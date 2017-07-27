@@ -24,13 +24,13 @@ public class NIAServiceReceiver extends DynamicClassReceiver {
     public void onReceive(Context context, Intent intent) {
         String actionName = intent.getAction();
 
-        if (actionName.equals(getFullActionName(NIAService.SERVICE_ACTION_SUBMIT))) {
+        if (actionName.equals(getFullActionName(NIAService.SERVICE_RESPONSE))) {
             Log.d(TAG, "Received service submit");
             // read data from bundles
-            stateListener.onServiceSubmit(intent.getExtras());
-        } else if (actionName.equals(getFullActionName(NIAService.SERVICE_STATE_BORN))) {
+            stateListener.onServiceRespond(intent.getExtras());
+        } else if (actionName.equals(getFullActionName(NIAService.SERVICE_BORN))) {
             stateListener.onServiceBorn();
-        } else if (actionName.equals(getFullActionName(NIAService.SERVICE_STATE_DEAD))) {
+        } else if (actionName.equals(getFullActionName(NIAService.SERVICE_DEAD))) {
             stateListener.onServiceDead();
         }
     }
@@ -39,9 +39,9 @@ public class NIAServiceReceiver extends DynamicClassReceiver {
     @Override
     public IntentFilter getIntentFilter() {
         IntentFilter actionFilter = new IntentFilter();
-        actionFilter.addAction(getFullActionName(NIAService.SERVICE_ACTION_SUBMIT));
-        actionFilter.addAction(getFullActionName(NIAService.SERVICE_STATE_BORN));
-        actionFilter.addAction(getFullActionName(NIAService.SERVICE_STATE_DEAD));
+        actionFilter.addAction(getFullActionName(NIAService.SERVICE_RESPONSE));
+        actionFilter.addAction(getFullActionName(NIAService.SERVICE_BORN));
+        actionFilter.addAction(getFullActionName(NIAService.SERVICE_DEAD));
         return actionFilter;
     }
 }
