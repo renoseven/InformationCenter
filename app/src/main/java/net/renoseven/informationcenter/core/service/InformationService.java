@@ -97,7 +97,7 @@ public class InformationService extends NIAService {
         // remove notification
         stopForeground(true);
 
-        Log.v(TAG, "Unregistering message receivers...");
+        Log.v(TAG, "Unregister message receivers...");
         for (BroadcastReceiver receiver : broadcastReceivers) {
             unregisterReceiver(receiver);
         }
