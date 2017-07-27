@@ -3,7 +3,7 @@ package net.renoseven.informationcenter.core.processor;
 import android.content.Context;
 
 import net.grandcentrix.tray.TrayPreferences;
-import net.renoseven.informationcenter.core.message.MessageHolder;
+import net.renoseven.informationcenter.core.message.Message;
 
 import java.util.Map;
 
@@ -17,10 +17,10 @@ public abstract class BaseMessageProcessor implements Runnable {
     protected final String TAG = this.getClass().getSimpleName() + "@" + this.hashCode();
 
     protected Map<String, TrayPreferences> preferencesMap;
-    protected MessageHolder message;
+    protected Message message;
     protected Context context;
 
-    public BaseMessageProcessor(Context context, Map<String, TrayPreferences> preferencesMap, MessageHolder message) {
+    public BaseMessageProcessor(Context context, Map<String, TrayPreferences> preferencesMap, Message message) {
         this.context = context;
         this.preferencesMap = preferencesMap;
         this.message = message;

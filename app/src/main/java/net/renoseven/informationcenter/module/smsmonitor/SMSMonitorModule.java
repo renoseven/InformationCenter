@@ -4,7 +4,7 @@ import android.content.Context;
 
 import net.grandcentrix.tray.TrayPreferences;
 import net.renoseven.framework.FilteredBroadcastReceiver;
-import net.renoseven.informationcenter.core.message.MessageHolder;
+import net.renoseven.informationcenter.core.message.Message;
 import net.renoseven.informationcenter.core.service.ServiceModule;
 
 import java.util.HashSet;
@@ -32,7 +32,7 @@ public class SMSMonitorModule implements ServiceModule {
     }
 
     @Override
-    public Set<Runnable> getProcessors(Context context, Map<String, TrayPreferences> preferencesMap, MessageHolder message) {
+    public Set<Runnable> getProcessors(Context context, Map<String, TrayPreferences> preferencesMap, Message message) {
         return new HashSet<>();
     }
 }

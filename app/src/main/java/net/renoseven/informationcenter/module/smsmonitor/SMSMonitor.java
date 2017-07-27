@@ -9,7 +9,7 @@ import android.telephony.SmsMessage;
 import android.util.Log;
 
 import net.renoseven.framework.FilteredBroadcastReceiver;
-import net.renoseven.informationcenter.core.message.MessageHolder;
+import net.renoseven.informationcenter.core.message.Message;
 import net.renoseven.informationcenter.core.receiver.MessageReceiver;
 
 /**
@@ -34,7 +34,7 @@ public class SMSMonitor extends FilteredBroadcastReceiver {
                 content.append(msg.getDisplayMessageBody());
             }
 
-            MessageHolder msg = new MessageHolder();
+            Message msg = new Message();
             msg.setTimeStamp(messages[0].getTimestampMillis());
             msg.setSender(messages[0].getOriginatingAddress());
             msg.setCharset("utf-8");

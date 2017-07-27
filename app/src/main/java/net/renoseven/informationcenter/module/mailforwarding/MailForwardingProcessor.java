@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import net.grandcentrix.tray.TrayPreferences;
-import net.renoseven.informationcenter.core.message.MessageHolder;
+import net.renoseven.informationcenter.core.message.Message;
 import net.renoseven.informationcenter.core.processor.BaseMessageProcessor;
 import net.renoseven.informationcenter.preference.ApplicationPreferences;
 import net.renoseven.informationcenter.preference.MailPreferences;
@@ -32,7 +32,7 @@ import static net.renoseven.informationcenter.preference.MailPreferences.CONFIG_
  */
 class MailForwardingProcessor extends BaseMessageProcessor {
 
-    MailForwardingProcessor(Context context, Map<String, TrayPreferences> preferencesMap, MessageHolder message) {
+    MailForwardingProcessor(Context context, Map<String, TrayPreferences> preferencesMap, Message message) {
         super(context, preferencesMap, message);
     }
 
@@ -46,7 +46,7 @@ class MailForwardingProcessor extends BaseMessageProcessor {
         serverConfig.setProperty(MailPreferences.CONFIG_MAIL_DEBUG, "false");
         serverConfig.setProperty(MailPreferences.CONFIG_MAIL_TRANSPORT_PROTOCOL, "smtp");
 
-        MessageHolder mail = (MessageHolder) message.clone();
+        Message mail = (Message) message.clone();
         mail.setSubject(message.getSender());
         mail.setSenderName(appPref.getString(ApplicationPreferences.CONFIG_FORWARDING_MAIL_SENDER_NAME, null));
         mail.setSender(appPref.getString(ApplicationPreferences.CONFIG_FORWARDING_MAIL_SENDER, null));

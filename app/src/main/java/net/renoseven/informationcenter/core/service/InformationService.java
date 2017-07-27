@@ -8,7 +8,7 @@ import android.util.Log;
 import net.grandcentrix.tray.TrayPreferences;
 import net.renoseven.framework.FilteredBroadcastReceiver;
 import net.renoseven.framework.nias.NIAService;
-import net.renoseven.informationcenter.core.message.MessageHolder;
+import net.renoseven.informationcenter.core.message.Message;
 import net.renoseven.informationcenter.core.receiver.ApplicationStateReceiver;
 import net.renoseven.informationcenter.core.receiver.MessageReceiver;
 import net.renoseven.informationcenter.module.mailforwarding.MailForwardingModule;
@@ -54,7 +54,7 @@ public class InformationService extends NIAService {
         Log.d(TAG, "Initializing system receivers...");
         broadcastReceivers.add(new MessageReceiver() {
             @Override
-            protected void onMessageReceived(MessageHolder msg) {
+            protected void onMessageReceived(Message msg) {
                 Log.i(TAG, "Message received");
                 processMessage(msg);
             }
@@ -108,7 +108,7 @@ public class InformationService extends NIAService {
         return null;
     }
 
-    private void processMessage(MessageHolder message) {
+    private void processMessage(Message message) {
         Log.i(TAG, message.toString());
         for (ServiceModule module : serviceModules) {
             Set<? extends Runnable> processors = module.getProcessors(this, preferences, message);

@@ -4,10 +4,10 @@ import java.io.Serializable;
 import java.util.Date;
 
 /**
- * Serializable MessageHolder Object
+ * Serializable Message Object
  * Created by RenoSeven on 2016/9/8.
  */
-public class MessageHolder implements Serializable, Cloneable {
+public class Message implements Serializable, Cloneable {
 
     private long timeStamp;
     private String charset;

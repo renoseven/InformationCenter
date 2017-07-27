@@ -4,7 +4,7 @@ import android.content.Context;
 
 import net.grandcentrix.tray.TrayPreferences;
 import net.renoseven.framework.FilteredBroadcastReceiver;
-import net.renoseven.informationcenter.core.message.MessageHolder;
+import net.renoseven.informationcenter.core.message.Message;
 
 import java.util.Map;
 import java.util.Set;
@@ -19,5 +19,5 @@ public interface ServiceModule {
 
     Set<FilteredBroadcastReceiver> getReceivers();
 
-    Set<Runnable> getProcessors(Context context, Map<String, TrayPreferences> preferencesMap, MessageHolder message);
+    Set<Runnable> getProcessors(Context context, Map<String, TrayPreferences> preferencesMap, Message message);
 }

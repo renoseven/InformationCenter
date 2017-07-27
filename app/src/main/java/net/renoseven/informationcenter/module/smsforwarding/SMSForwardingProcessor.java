@@ -7,7 +7,7 @@ import android.telephony.SmsManager;
 import android.util.Log;
 
 import net.grandcentrix.tray.TrayPreferences;
-import net.renoseven.informationcenter.core.message.MessageHolder;
+import net.renoseven.informationcenter.core.message.Message;
 import net.renoseven.informationcenter.core.processor.BaseMessageProcessor;
 import net.renoseven.informationcenter.preference.ApplicationPreferences;
 
@@ -23,7 +23,7 @@ import static net.renoseven.informationcenter.module.smsforwarding.SMSForwarding
 
 class SMSForwardingProcessor extends BaseMessageProcessor {
 
-    SMSForwardingProcessor(Context context, Map<String, TrayPreferences> preferencesMap, MessageHolder message) {
+    SMSForwardingProcessor(Context context, Map<String, TrayPreferences> preferencesMap, Message message) {
         super(context, preferencesMap, message);
     }
 

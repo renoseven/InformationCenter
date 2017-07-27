@@ -6,10 +6,10 @@ import android.content.IntentFilter;
 import android.support.annotation.NonNull;
 
 import net.renoseven.framework.FilteredBroadcastReceiver;
-import net.renoseven.informationcenter.core.message.MessageHolder;
+import net.renoseven.informationcenter.core.message.Message;
 
 /**
- * Universal MessageHolder Receiver
+ * Universal Message Receiver
  * Created by RenoSeven on 2016/9/8.
  */
 public abstract class MessageReceiver extends FilteredBroadcastReceiver {
@@ -18,12 +18,12 @@ public abstract class MessageReceiver extends FilteredBroadcastReceiver {
     public final static String MESSAGE_RECEIVED = CLASS_NAME + ".MESSAGE_RECEIVED";
     public final static String MESSAGE_CONTENT = CLASS_NAME + ".MESSAGE_CONTENT";
 
-    protected abstract void onMessageReceived(MessageHolder msg);
+    protected abstract void onMessageReceived(Message msg);
 
     @Override
     public void onReceive(Context context, Intent intent) {
         if (intent.getAction().equals(MESSAGE_RECEIVED)) {
-            MessageHolder msg = (MessageHolder) intent.getSerializableExtra(MESSAGE_CONTENT);
+            Message msg = (Message) intent.getSerializableExtra(MESSAGE_CONTENT);
             onMessageReceived(msg);
         }
     }
