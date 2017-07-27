@@ -19,10 +19,12 @@ import net.renoseven.informationcenter.core.receiver.MessageReceiver;
 
 public class SMSMonitor extends FilteredBroadcastReceiver {
     public final static String SMS_RECEIVED = "android.provider.Telephony.SMS_RECEIVED";
+
     protected static String TAG = SMSMonitor.class.getSimpleName();
 
     @Override
     public void onReceive(Context context, Intent intent) {
+        Log.e(TAG, intent.toString());
         if (intent.getAction().equals(SMS_RECEIVED)) {
             Log.d(TAG, "Incoming SMS");
             SmsMessage[] messages = Telephony.Sms.Intents.getMessagesFromIntent(intent);
@@ -49,8 +51,9 @@ public class SMSMonitor extends FilteredBroadcastReceiver {
     @Override
     public IntentFilter getIntentFilter()
     {
-        IntentFilter intentFilter = new IntentFilter(SMS_RECEIVED);
+        IntentFilter intentFilter = new IntentFilter();
         intentFilter.setPriority(FILTER_PRIORITY_MAX);
-        return new IntentFilter(SMS_RECEIVED);
+        intentFilter.addAction(SMS_RECEIVED);
+        return intentFilter;
     }
 }
