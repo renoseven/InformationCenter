@@ -16,7 +16,7 @@ import net.renoseven.util.ToastUtil;
  */
 
 public class MailForwardingStateReceiver extends FilteredBroadcastReceiver {
-    public final static String MAIL_SENDING_RESULT = MailForwardingStateReceiver.class.getName() + ".SMS_SENDING_RESULT";
+    public final static String MAIL_SENDING_RESULT = MailForwardingStateReceiver.class.getName() + ".MAIL_SENDING_RESULT";
     protected final static String TAG = MailForwardingStateReceiver.class.getSimpleName();
 
     @Override
