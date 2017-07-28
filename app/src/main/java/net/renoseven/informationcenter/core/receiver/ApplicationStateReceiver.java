@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 
 import net.grandcentrix.tray.TrayPreferences;
@@ -52,5 +53,15 @@ public class ApplicationStateReceiver extends FilteredBroadcastReceiver {
         filter.addAction(SMS_SENDING_RESULT);
         filter.addAction(MAIL_SENDING_RESULT);
         return filter;
+    }
+
+    @Override
+    public String getPermission() {
+        return null;
+    }
+
+    @Override
+    public Handler getHandler() {
+        return null;
     }
 }

@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -17,7 +18,7 @@ import net.renoseven.util.ToastUtil;
 
 public class MailForwardingStateReceiver extends FilteredBroadcastReceiver {
     public final static String MAIL_SENDING_RESULT = MailForwardingStateReceiver.class.getName() + ".MAIL_SENDING_RESULT";
-    protected final static String TAG = MailForwardingStateReceiver.class.getSimpleName();
+    private final static String TAG = MailForwardingStateReceiver.class.getSimpleName();
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -39,6 +40,16 @@ public class MailForwardingStateReceiver extends FilteredBroadcastReceiver {
     @Override
     public IntentFilter getIntentFilter() {
         return new IntentFilter(MAIL_SENDING_RESULT);
+    }
+
+    @Override
+    public String getPermission() {
+        return null;
+    }
+
+    @Override
+    public Handler getHandler() {
+        return null;
     }
 
 }

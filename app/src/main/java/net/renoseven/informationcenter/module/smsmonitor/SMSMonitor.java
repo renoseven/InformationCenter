@@ -3,6 +3,7 @@ package net.renoseven.informationcenter.module.smsmonitor;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.os.Handler;
 import android.provider.Telephony;
 import android.support.annotation.NonNull;
 import android.telephony.SmsMessage;
@@ -18,7 +19,7 @@ import net.renoseven.informationcenter.core.receiver.MessageReceiver;
  */
 
 public class SMSMonitor extends FilteredBroadcastReceiver {
-    public final static String SMS_RECEIVED = "android.provider.Telephony.SMS_RECEIVED";
+    private final static String SMS_RECEIVED = Telephony.Sms.Intents.SMS_RECEIVED_ACTION;
 
     protected static String TAG = SMSMonitor.class.getSimpleName();
 
@@ -55,5 +56,15 @@ public class SMSMonitor extends FilteredBroadcastReceiver {
         intentFilter.setPriority(FILTER_PRIORITY_MAX);
         intentFilter.addAction(SMS_RECEIVED);
         return intentFilter;
+    }
+
+    @Override
+    public String getPermission() {
+        return null;
+    }
+
+    @Override
+    public Handler getHandler() {
+        return null;
     }
 }
