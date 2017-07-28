@@ -1,4 +1,4 @@
-package net.renoseven.informationcenter.core.message;
+package net.renoseven.informationcenter.core.bean;
 
 import java.io.Serializable;
 import java.util.Date;

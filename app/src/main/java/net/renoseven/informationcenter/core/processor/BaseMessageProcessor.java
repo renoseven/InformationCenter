@@ -3,7 +3,7 @@ package net.renoseven.informationcenter.core.processor;
 import android.content.Context;
 
 import net.grandcentrix.tray.TrayPreferences;
-import net.renoseven.informationcenter.core.message.Message;
+import net.renoseven.informationcenter.core.bean.Message;
 
 import java.util.Map;
 

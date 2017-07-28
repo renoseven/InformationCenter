@@ -6,7 +6,7 @@ import android.content.IntentFilter;
 import android.support.annotation.NonNull;
 
 import net.renoseven.framework.FilteredBroadcastReceiver;
-import net.renoseven.informationcenter.core.message.Message;
+import net.renoseven.informationcenter.core.bean.Message;
 
 /**
  * Universal Message Receiver

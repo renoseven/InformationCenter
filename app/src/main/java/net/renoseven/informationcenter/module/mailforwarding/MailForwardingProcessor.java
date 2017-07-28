@@ -7,7 +7,7 @@ import android.content.Intent;
 import android.util.Log;
 
 import net.grandcentrix.tray.TrayPreferences;
-import net.renoseven.informationcenter.core.message.Message;
+import net.renoseven.informationcenter.core.bean.Message;
 import net.renoseven.informationcenter.core.processor.BaseMessageProcessor;
 import net.renoseven.informationcenter.preference.ApplicationPreferences;
 import net.renoseven.informationcenter.preference.MailPreferences;

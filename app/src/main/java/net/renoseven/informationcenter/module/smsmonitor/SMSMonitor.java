@@ -9,7 +9,7 @@ import android.telephony.SmsMessage;
 import android.util.Log;
 
 import net.renoseven.framework.FilteredBroadcastReceiver;
-import net.renoseven.informationcenter.core.message.Message;
+import net.renoseven.informationcenter.core.bean.Message;
 import net.renoseven.informationcenter.core.receiver.MessageReceiver;
 
 /**

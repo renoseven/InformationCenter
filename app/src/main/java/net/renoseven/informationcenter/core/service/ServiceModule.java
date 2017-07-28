@@ -4,7 +4,7 @@ import android.content.Context;
 
 import net.grandcentrix.tray.TrayPreferences;
 import net.renoseven.framework.FilteredBroadcastReceiver;
-import net.renoseven.informationcenter.core.message.Message;
+import net.renoseven.informationcenter.core.bean.Message;
 
 import java.util.Map;
 import java.util.Set;

@@ -8,7 +8,7 @@ import android.util.Log;
 import net.grandcentrix.tray.TrayPreferences;
 import net.renoseven.framework.FilteredBroadcastReceiver;
 import net.renoseven.framework.nias.NIAService;
-import net.renoseven.informationcenter.core.message.Message;
+import net.renoseven.informationcenter.core.bean.Message;
 import net.renoseven.informationcenter.core.receiver.ApplicationStateReceiver;
 import net.renoseven.informationcenter.core.receiver.MessageReceiver;
 import net.renoseven.informationcenter.module.mailforwarding.MailForwardingModule;
