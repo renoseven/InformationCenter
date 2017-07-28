@@ -3,7 +3,6 @@ package net.renoseven.framework.nias;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -48,11 +47,6 @@ public class NIAServiceReceiver extends DynamicClassReceiver {
 
     @Override
     public String getPermission() {
-        return null;
-    }
-
-    @Override
-    public Handler getHandler() {
         return null;
     }
 }

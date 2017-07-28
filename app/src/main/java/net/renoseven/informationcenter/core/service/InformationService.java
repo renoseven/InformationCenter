@@ -84,7 +84,7 @@ public class InformationService extends NIAService {
         Log.d(TAG, "Registering receivers...");
         for (FilteredBroadcastReceiver receiver : broadcastReceivers) {
             Log.v(TAG, receiver.getClass().getName());
-            registerReceiver(receiver, receiver.getIntentFilter(), receiver.getPermission(), receiver.getHandler());
+            registerReceiver(receiver, receiver.getIntentFilter(), receiver.getPermission(), null);
         }
         Log.d(TAG, "Receiver number = " + broadcastReceivers.size());
 

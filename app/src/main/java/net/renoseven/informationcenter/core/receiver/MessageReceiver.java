@@ -3,7 +3,6 @@ package net.renoseven.informationcenter.core.receiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 
 import net.renoseven.framework.FilteredBroadcastReceiver;
@@ -36,11 +35,6 @@ public abstract class MessageReceiver extends FilteredBroadcastReceiver {
 
     @Override
     public String getPermission() {
-        return null;
-    }
-
-    @Override
-    public Handler getHandler() {
         return null;
     }
 }

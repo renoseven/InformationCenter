@@ -4,7 +4,6 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
@@ -46,10 +45,4 @@ public class SMSForwardingStateReceiver extends FilteredBroadcastReceiver {
     public String getPermission() {
         return null;
     }
-
-    @Override
-    public Handler getHandler() {
-        return null;
-    }
-
 }

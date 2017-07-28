@@ -3,7 +3,6 @@ package net.renoseven.informationcenter.module.smsmonitor;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.os.Handler;
 import android.provider.Telephony;
 import android.support.annotation.NonNull;
 import android.telephony.SmsMessage;
@@ -60,11 +59,6 @@ public class SMSMonitor extends FilteredBroadcastReceiver {
 
     @Override
     public String getPermission() {
-        return null;
-    }
-
-    @Override
-    public Handler getHandler() {
         return null;
     }
 }

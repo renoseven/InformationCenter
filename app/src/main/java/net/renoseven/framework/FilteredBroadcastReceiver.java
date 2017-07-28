@@ -2,7 +2,6 @@ package net.renoseven.framework;
 
 import android.content.BroadcastReceiver;
 import android.content.IntentFilter;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 
 import static android.content.IntentFilter.SYSTEM_HIGH_PRIORITY;
@@ -24,5 +23,4 @@ public abstract class FilteredBroadcastReceiver extends BroadcastReceiver {
 
     public abstract String getPermission();
 
-    public abstract Handler getHandler();
 }
