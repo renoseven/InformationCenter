@@ -113,6 +113,22 @@ public abstract class NIAActivity extends ExtendedActivity implements NIAService
     }
 
     /**
+     * Function: startService
+     * Params: void
+     * Description: start tagged service
+     * Return: void
+     */
+    protected void startService() {
+        Intent startIntent = null;
+        try {
+            startIntent = new Intent(this, Class.forName(serviceClassName));
+        } catch (ClassNotFoundException e) {
+            Log.d(TAG, e.toString());
+        }
+        super.startService(startIntent);
+    }
+
+    /**
      * Function: stopService
      * Params: void
      * Description: send a service stop request

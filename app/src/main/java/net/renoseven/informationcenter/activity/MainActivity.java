@@ -13,7 +13,6 @@ import net.grandcentrix.tray.core.OnTrayPreferenceChangeListener;
 import net.grandcentrix.tray.core.TrayItem;
 import net.renoseven.framework.nias.NIAActivity;
 import net.renoseven.informationcenter.R;
-import net.renoseven.informationcenter.core.service.InformationService;
 import net.renoseven.informationcenter.preference.StatisticsPreferences;
 
 import java.util.Collection;
@@ -56,8 +55,7 @@ public class MainActivity extends NIAActivity implements View.OnClickListener, O
     @Override
     public void onClick(View v) {
         if (v.equals(btnStartService)) {
-            Intent startIntent = new Intent(this, InformationService.class);
-            startService(startIntent);
+            startService();
         }
         if (v.equals(btnStopService)) {
             stopService();
