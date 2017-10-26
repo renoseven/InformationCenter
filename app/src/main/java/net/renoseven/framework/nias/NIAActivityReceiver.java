@@ -9,7 +9,7 @@ import android.util.Log;
 import net.renoseven.framework.DynamicClassReceiver;
 
 /**
- * Service Controller (Used in Service)
+ * Service Controller (for Service)
  * Created by RenoSeven on 2016/9/9.
  */
 public class NIAActivityReceiver extends DynamicClassReceiver {
@@ -23,10 +23,10 @@ public class NIAActivityReceiver extends DynamicClassReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         String actionName = intent.getAction();
-        if (actionName.equals(getFullActionName(NIAService.SERVICE_REQUIRED_UPDATE))) {
+        if (actionName.equals(getFullActionName(NIAService.SERVICE_REQUESTED_UPDATE))) {
             Log.d(TAG, "Received service update request");
             actionListener.onRequestedUpdate(intent.getExtras());
-        } else if (actionName.equals(getFullActionName(NIAService.SERVICE_REQUIRED_STOP))) {
+        } else if (actionName.equals(getFullActionName(NIAService.SERVICE_REQUESTED_STOP))) {
             Log.d(TAG, "Received service stop request");
             actionListener.onRequestedStop();
         }
@@ -36,8 +36,8 @@ public class NIAActivityReceiver extends DynamicClassReceiver {
     @Override
     public IntentFilter getIntentFilter() {
         IntentFilter actionFilter = new IntentFilter();
-        actionFilter.addAction(getFullActionName(NIAService.SERVICE_REQUIRED_UPDATE));
-        actionFilter.addAction(getFullActionName(NIAService.SERVICE_REQUIRED_STOP));
+        actionFilter.addAction(getFullActionName(NIAService.SERVICE_REQUESTED_UPDATE));
+        actionFilter.addAction(getFullActionName(NIAService.SERVICE_REQUESTED_STOP));
         return actionFilter;
     }
 

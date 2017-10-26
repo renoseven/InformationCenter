@@ -24,7 +24,6 @@ public class SMSMonitor extends FilteredBroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Log.e(TAG, intent.toString());
         if (intent.getAction().equals(SMS_RECEIVED)) {
             Log.d(TAG, "Incoming SMS");
             SmsMessage[] messages = Telephony.Sms.Intents.getMessagesFromIntent(intent);

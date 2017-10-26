@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 /**
- * NIAService Action Listener
+ * NIAService Action Listener (for service)
  * Created by RenoSeven on 2016/9/10.
  */
 interface NIAActivityListener {
@@ -20,7 +20,7 @@ interface NIAActivityListener {
     /**
      * Function: onRequestedUpdate
      * Params: Bundle request (optional)
-     * Description: response to service update request from UI
+     * Description: response to service notifyUpdate request from UI
      * Return: void
      */
     void onRequestedUpdate(@Nullable Bundle request);

@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 
 /**
- * NIAService State Listener
+ * NIAService State Listener (for Activity)
  * Created by RenoSeven on 2016/9/10.
  */
 interface NIAServiceListener {
@@ -26,10 +26,10 @@ interface NIAServiceListener {
     void onServiceDead();
 
     /**
-     * Function: onServiceRespond
+     * Function: processUpdateRequest
      * Params: Bundle reply (optional)
      * Description: triggers when a service submits data.
      * Return: void
      */
-    void onServiceRespond(@Nullable Bundle reply);
+    void onServiceUpdate(@Nullable Bundle bundle);
 }

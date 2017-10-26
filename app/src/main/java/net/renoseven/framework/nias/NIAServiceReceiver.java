@@ -9,7 +9,7 @@ import android.util.Log;
 import net.renoseven.framework.DynamicClassReceiver;
 
 /**
- * Service State Receiver (Used in UI)
+ * Service State Receiver (for Activity)
  * Created by RenoSeven on 2016/9/9.
  */
 public class NIAServiceReceiver extends DynamicClassReceiver {
@@ -24,10 +24,10 @@ public class NIAServiceReceiver extends DynamicClassReceiver {
     public void onReceive(Context context, Intent intent) {
         String actionName = intent.getAction();
 
-        if (actionName.equals(getFullActionName(NIAService.SERVICE_RESPONSE))) {
-            Log.d(TAG, "Received service submit");
+        if (actionName.equals(getFullActionName(NIAService.SERVICE_UPDATE))) {
+            Log.d(TAG, "Received service update");
             // read data from bundles
-            stateListener.onServiceRespond(intent.getExtras());
+            stateListener.onServiceUpdate(intent.getExtras());
         } else if (actionName.equals(getFullActionName(NIAService.SERVICE_BORN))) {
             stateListener.onServiceBorn();
         } else if (actionName.equals(getFullActionName(NIAService.SERVICE_DEAD))) {
@@ -39,7 +39,7 @@ public class NIAServiceReceiver extends DynamicClassReceiver {
     @Override
     public IntentFilter getIntentFilter() {
         IntentFilter actionFilter = new IntentFilter();
-        actionFilter.addAction(getFullActionName(NIAService.SERVICE_RESPONSE));
+        actionFilter.addAction(getFullActionName(NIAService.SERVICE_UPDATE));
         actionFilter.addAction(getFullActionName(NIAService.SERVICE_BORN));
         actionFilter.addAction(getFullActionName(NIAService.SERVICE_DEAD));
         return actionFilter;

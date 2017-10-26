@@ -85,6 +85,7 @@ class MailForwardingProcessor extends BaseMessageProcessor {
 
     @Override
     protected void onTaskFinished() {
+        Log.d(TAG, "Mail sending task finished");
         broadcastResult(Activity.RESULT_OK);
     }
 

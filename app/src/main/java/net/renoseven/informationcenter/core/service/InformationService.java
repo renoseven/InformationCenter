@@ -47,9 +47,10 @@ public class InformationService extends NIAService {
         Log.v(TAG, "Loading settings...");
         final TrayPreferences appPref = new ApplicationPreferences(this);
         final TrayPreferences statsPref = new StatisticsPreferences(this);
+        final TrayPreferences mailPref =  new MailPreferences(this);
         preferences.put(ApplicationPreferences.MODULE_NAME, appPref);
         preferences.put(StatisticsPreferences.MODULE_NAME, statsPref);
-        preferences.put(MailPreferences.MODULE_NAME, new MailPreferences(this));
+        preferences.put(MailPreferences.MODULE_NAME, mailPref);
 
         Log.d(TAG, "Initializing system receivers...");
         broadcastReceivers.add(new MessageReceiver() {
@@ -105,7 +106,7 @@ public class InformationService extends NIAService {
     }
 
     @Override
-    protected Bundle onServiceUpdate(Bundle request) {
+    protected Bundle processUpdateRequest(Bundle request) {
         return null;
     }
 
