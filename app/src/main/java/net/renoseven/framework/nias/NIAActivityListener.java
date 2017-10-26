@@ -20,7 +20,7 @@ interface NIAActivityListener {
     /**
      * Function: onRequestedUpdate
      * Params: Bundle request (optional)
-     * Description: response to service notifyUpdate request from UI
+     * Description: response to service update request from UI
      * Return: void
      */
     void onRequestedUpdate(@Nullable Bundle request);

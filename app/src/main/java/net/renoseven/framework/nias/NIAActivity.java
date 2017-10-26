@@ -82,7 +82,7 @@ public abstract class NIAActivity extends ExtendedActivity implements NIAService
     /**
      * Function: updateUI
      * Params: Bundle bundle ()
-     * Description: notifyUpdate UI by additional data (optional).
+     * Description: update UI by additional data (optional).
      * Return: void
      */
     protected abstract void updateUI(@Nullable Bundle bundle);
@@ -100,7 +100,7 @@ public abstract class NIAActivity extends ExtendedActivity implements NIAService
     /**
      * Function: updateService
      * Params: Bundle request (optional)
-     * Description: send a service notifyUpdate request
+     * Description: send a service update request
      * Return: void
      */
     protected void updateService() {

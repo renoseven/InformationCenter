@@ -70,7 +70,7 @@ public abstract class NIAService extends Service implements NIAActivityListener 
     /**
      * Function: processUpdateRequest
      * Params: Bundle request (optional)
-     * Description: notifyUpdate service & return changes as a bundle.
+     * Description: process service update request & return changes as a bundle.
      * Return: Bundle reply (optional)
      */
     protected abstract @Nullable Bundle processUpdateRequest(@Nullable Bundle request);
@@ -78,7 +78,7 @@ public abstract class NIAService extends Service implements NIAActivityListener 
     /**
      * Function: processUpdateRequest
      * Params: Bundle request (optional)
-     * Description: notifyUpdate service & return changes as a bundle.
+     * Description: update service & return changes as a bundle.
      * Return: Bundle reply (optional)
      */
     protected void notifyUpdate(@Nullable Bundle reply) {
@@ -89,7 +89,7 @@ public abstract class NIAService extends Service implements NIAActivityListener 
     /**
      * Function: onRequestedUpdate
      * Params: Bundle request (optional)
-     * Description: response to service notifyUpdate request from UI
+     * Description: response to service update request from UI
      * Return: void
      */
     @Override
