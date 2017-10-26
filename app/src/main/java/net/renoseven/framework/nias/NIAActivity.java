@@ -55,7 +55,7 @@ public abstract class NIAActivity extends ExtendedActivity implements NIAService
             updateUI(null);
         }
         // try updating service to check if it is running
-        updateService();
+        requestServiceUpdate();
     }
 
     @Override
@@ -98,16 +98,16 @@ public abstract class NIAActivity extends ExtendedActivity implements NIAService
     }
 
     /**
-     * Function: updateService
+     * Function: requestServiceUpdate
      * Params: Bundle request (optional)
      * Description: send a service update request
      * Return: void
      */
-    protected void updateService() {
-        updateService(null);
+    protected void requestServiceUpdate() {
+        requestServiceUpdate(null);
     }
 
-    protected void updateService(@Nullable Bundle request) {
+    protected void requestServiceUpdate(@Nullable Bundle request) {
         Log.d(TAG, "Request service update");
         broadcastMessage(NIAService.SERVICE_REQUESTED_UPDATE, request);
     }
@@ -143,7 +143,7 @@ public abstract class NIAActivity extends ExtendedActivity implements NIAService
      * Function: broadcastMessage
      * Params: String actionName
      * Bundle bundle (optional)
-     * Description: broadcast service state
+     * Description: broadcast action to service
      * Return: void
      */
     protected void broadcastMessage(String actionName) {

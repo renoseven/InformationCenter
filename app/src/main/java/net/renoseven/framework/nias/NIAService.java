@@ -68,18 +68,18 @@ public abstract class NIAService extends Service implements NIAActivityListener 
     protected abstract void onServiceDead();
 
     /**
-     * Function: processUpdateRequest
+     * Function: onServiceUpdateRequested
      * Params: Bundle request (optional)
-     * Description: process service update request & return changes as a bundle.
+     * Description: process service update request & return changes as a bundle
      * Return: Bundle reply (optional)
      */
-    protected abstract @Nullable Bundle processUpdateRequest(@Nullable Bundle request);
+    protected abstract @Nullable Bundle onServiceUpdateRequested(@Nullable Bundle request);
 
     /**
-     * Function: processUpdateRequest
-     * Params: Bundle request (optional)
-     * Description: update service & return changes as a bundle.
-     * Return: Bundle reply (optional)
+     * Function: notifyUpdate
+     * Params: Bundle reply (optional)
+     * Description: notify UI service updated
+     * Return: void
      */
     protected void notifyUpdate(@Nullable Bundle reply) {
         Log.i(TAG, "Service updated");
@@ -89,19 +89,19 @@ public abstract class NIAService extends Service implements NIAActivityListener 
     /**
      * Function: onRequestedUpdate
      * Params: Bundle request (optional)
-     * Description: response to service update request from UI
+     * Description: response to service update request
      * Return: void
      */
     @Override
     public void onRequestedUpdate(@Nullable Bundle request) {
-        Bundle reply = processUpdateRequest(request);
+        Bundle reply = onServiceUpdateRequested(request);
         notifyUpdate(reply);
     }
 
     /**
      * Function: onRequestedStop
      * Params: void
-     * Description: response to service stop request from UI
+     * Description: response to service stop request
      * Return: void
      */
     @Override

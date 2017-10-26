@@ -26,7 +26,7 @@ interface NIAServiceListener {
     void onServiceDead();
 
     /**
-     * Function: processUpdateRequest
+     * Function: onServiceUpdateRequested
      * Params: Bundle reply (optional)
      * Description: triggers when a service submits data.
      * Return: void
