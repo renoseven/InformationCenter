@@ -106,7 +106,7 @@ public class InformationService extends NIAService {
     }
 
     @Override
-    protected Bundle processUpdateRequest(Bundle request) {
+    protected Bundle onServiceUpdateRequested(Bundle request) {
         return null;
     }
 
