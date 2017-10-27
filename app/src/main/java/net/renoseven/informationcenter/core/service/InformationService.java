@@ -38,7 +38,7 @@ public class InformationService extends NIAService {
     protected void onServiceBorn() {
         // load configurations
         Log.d(TAG, "Loading settings...");
-        final String[] modules = this.getMetaValue("modules").split(";");
+        final String[] modules = getMetaValue("modules").split(";");
         final TrayPreferences appPref = new ApplicationPreferences(this);
         final TrayPreferences statsPref = new StatisticsPreferences(this);
         final TrayPreferences mailPref =  new MailPreferences(this);
