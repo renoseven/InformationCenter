@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 import android.view.View;
@@ -17,7 +18,7 @@ import java.util.Set;
  * Created by RenoSeven on 2016/10/23.
  */
 
-public class ExtendedActivity extends Activity {
+public abstract class ExtendedActivity extends Activity {
     protected final String TAG;
     protected View rootView;
 
@@ -37,13 +38,16 @@ public class ExtendedActivity extends Activity {
      * Description: read meta data from AndroidManifest.xml
      * Return: String
      */
-    protected String getMetaValue(String metaKey) {
+    protected @NonNull String getMetaValue(String metaKey) {
         String value = null;
         try {
             ActivityInfo info = getPackageManager().getActivityInfo(getComponentName(), PackageManager.GET_META_DATA);
             value = info.metaData.getString(metaKey);
-        } catch (PackageManager.NameNotFoundException e) {
-            Log.e(TAG, "Meta doesn't exist");
+        } catch (Exception e) {
+            Log.e(TAG, e.toString());
+        }
+        if(value == null) {
+            throw new RuntimeException("Cannot find Metadata");
         }
         return value;
     }
