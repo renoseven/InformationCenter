@@ -1,7 +1,6 @@
 package net.renoseven.framework;
 
 import android.app.Activity;
-import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -38,11 +37,12 @@ public abstract class ExtendedActivity extends Activity {
      * Description: read meta data from AndroidManifest.xml
      * Return: String
      */
-    protected @NonNull String getMetaValue(String metaKey) {
+    @NonNull
+    protected String getMetaValue(String metaKey) {
         String value = null;
         try {
-            ActivityInfo info = getPackageManager().getActivityInfo(getComponentName(), PackageManager.GET_META_DATA);
-            value = info.metaData.getString(metaKey);
+            Bundle metaData = getPackageManager().getActivityInfo(getComponentName(), PackageManager.GET_META_DATA).metaData;
+            value = metaData.getString(metaKey);
         } catch (Exception e) {
             Log.e(TAG, e.toString());
         }
