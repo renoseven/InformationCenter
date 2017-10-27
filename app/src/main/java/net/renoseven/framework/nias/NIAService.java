@@ -1,9 +1,12 @@
 package net.renoseven.framework.nias;
 
 import android.app.Service;
+import android.content.ComponentName;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.IBinder;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.util.Log;
 
@@ -124,7 +127,6 @@ public abstract class NIAService extends Service implements NIAActivityListener 
     protected void broadcastMessage(String actionName) {
         broadcastMessage(actionName, null);
     }
-
     protected void broadcastMessage(String actionName, @Nullable Bundle bundle) {
         Intent intent = new Intent();
         intent.setAction(serviceClassName + '.' + actionName);
@@ -134,4 +136,24 @@ public abstract class NIAService extends Service implements NIAActivityListener 
         sendBroadcast(intent);
     }
 
+    /**
+     * Function: getMetaValue
+     * Params: String metaKey
+     * Description: read meta data from AndroidManifest.xml
+     * Return: String
+     */
+    @NonNull
+    protected String getMetaValue(String metaKey) {
+        String value = null;
+        try {
+            Bundle metaData = getPackageManager().getServiceInfo(new ComponentName(this, this.getClass()), PackageManager.GET_META_DATA).metaData;
+            value = metaData.getString(metaKey);
+        } catch (Exception e) {
+            Log.e(TAG, e.toString());
+        }
+        if(value == null) {
+            throw new RuntimeException("Cannot find Metadata");
+        }
+        return value;
+    }
 }
