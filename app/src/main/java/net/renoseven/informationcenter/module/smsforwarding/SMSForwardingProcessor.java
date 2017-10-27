@@ -30,7 +30,7 @@ class SMSForwardingProcessor extends BaseMessageProcessor {
     @Override
     protected synchronized void doTask() throws Exception {
         Log.i(TAG, "Forward as SMS");
-        TrayPreferences appPref = preferencesMap.get(ApplicationPreferences.MODULE_NAME);
+        TrayPreferences appPref = preferencesMap.get(ApplicationPreferences.DB_NAME);
         String receiverAddress = appPref.getString(ApplicationPreferences.CONFIG_FORWARDING_SMS_RECEIVER);
         String messageContent = message.getText();
 

@@ -11,9 +11,6 @@ import net.renoseven.framework.nias.NIAService;
 import net.renoseven.informationcenter.core.bean.Message;
 import net.renoseven.informationcenter.core.receiver.ApplicationStateReceiver;
 import net.renoseven.informationcenter.core.receiver.MessageReceiver;
-import net.renoseven.informationcenter.module.mailforwarding.MailForwardingModule;
-import net.renoseven.informationcenter.module.smsforwarding.SMSForwardingModule;
-import net.renoseven.informationcenter.module.smsmonitor.SMSMonitorModule;
 import net.renoseven.informationcenter.preference.ApplicationPreferences;
 import net.renoseven.informationcenter.preference.MailPreferences;
 import net.renoseven.informationcenter.preference.StatisticsPreferences;
@@ -24,10 +21,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
-import static net.renoseven.informationcenter.preference.ApplicationPreferences.CONFIG_FORWARDING_MAIL_ENABLED;
-import static net.renoseven.informationcenter.preference.ApplicationPreferences.CONFIG_FORWARDING_SMS_ENABLED;
-import static net.renoseven.informationcenter.preference.ApplicationPreferences.CONFIG_RECEIVER_SMS_ENABLED;
 
 /**
  * Core Service Implementation
@@ -45,12 +38,14 @@ public class InformationService extends NIAService {
     protected void onServiceBorn() {
         // load configurations
         Log.v(TAG, "Loading settings...");
+        String[] modules = this.getMetaValue("modules").split(";");
+
         final TrayPreferences appPref = new ApplicationPreferences(this);
         final TrayPreferences statsPref = new StatisticsPreferences(this);
         final TrayPreferences mailPref =  new MailPreferences(this);
-        preferences.put(ApplicationPreferences.MODULE_NAME, appPref);
-        preferences.put(StatisticsPreferences.MODULE_NAME, statsPref);
-        preferences.put(MailPreferences.MODULE_NAME, mailPref);
+        preferences.put(ApplicationPreferences.DB_NAME, appPref);
+        preferences.put(StatisticsPreferences.DB_NAME, statsPref);
+        preferences.put(MailPreferences.DB_NAME, mailPref);
 
         Log.d(TAG, "Initializing system receivers...");
         broadcastReceivers.add(new MessageReceiver() {
@@ -62,21 +57,22 @@ public class InformationService extends NIAService {
         });
         broadcastReceivers.add(new ApplicationStateReceiver(statsPref));
 
-        Log.d(TAG, "Registering modules...");
-        if (appPref.getBoolean(CONFIG_RECEIVER_SMS_ENABLED, false)) {
-            Log.v(TAG, "CONFIG_RECEIVER_SMS_ENABLED = TRUE");
-            serviceModules.add(new SMSMonitorModule());
-        }
-        if (appPref.getBoolean(CONFIG_FORWARDING_SMS_ENABLED, false)) {
-            Log.v(TAG, "CONFIG_FORWARDING_SMS_ENABLED = TRUE");
-            serviceModules.add(new SMSForwardingModule());
-        }
-        if (appPref.getBoolean(CONFIG_FORWARDING_MAIL_ENABLED, false)) {
-            Log.v(TAG, "CONFIG_FORWARDING_MAIL_ENABLED = TRUE");
-            serviceModules.add(new MailForwardingModule());
+        Log.d(TAG, "Initializing modules...");
+        for(String moduleName : modules) {
+            moduleName = moduleName.trim();
+            Log.v(TAG, getPackageName() + moduleName);
+            // 'app' is the prefix of database name
+            if(appPref.getBoolean( "app" + moduleName, false)) {
+                try {
+                    ServiceModule serviceModule = (ServiceModule) Class.forName(getPackageName() + moduleName).newInstance();
+                    serviceModules.add(serviceModule);
+                } catch (Exception e) {
+                    Log.e(TAG, "Cannot initialize" + moduleName);
+                }
+            }
         }
 
-        Log.d(TAG, "Initializing modules...");
+        Log.d(TAG, "Registering modules...");
         for (ServiceModule module : serviceModules) {
             Log.v(TAG, module.getModuleName());
             broadcastReceivers.addAll(module.getReceivers());

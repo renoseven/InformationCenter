@@ -1,23 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="service_modules">
+        .module.smsmonitor.SMSMonitorModule;
+        .module.smsforwarding.SMSForwardingModule;
+        .module.mailforwarding.MailForwardingModule;
+    </string>
+
     <string name="pref_stat_message_received">stat.message.received</string>
     <string name="pref_stat_sms_sent">stat.sms.sent</string>
     <string name="pref_stat_mail_sent">stat.mail.sent</string>
 
-    <string name="pref_app_receiver_sms_enable">app.receiver.sms.enable</string>
-    <string name="pref_app_receiver_mail_enable">app.receiver.mail.enable</string>
+    <string name="pref_app_receiver_sms_enable">app.module.smsmonitor.SMSMonitorModule</string>
 
-    <string name="pref_app_forwarding_sms_enable">app.forwarding.sms.enable</string>
-    <string name="pref_app_forwarding_sms_receiver">app.forwarding.sms.receiver</string>
-    <string name="pref_app_forwarding_mail_enable">app.forwarding.mail.enable</string>
-    <string name="pref_app_forwarding_mail_sender">app.forwarding.mail.sender</string>
-    <string name="pref_app_forwarding_mail_sender_name">app.forwarding.mail.sender.name</string>
-    <string name="pref_app_forwarding_mail_receiver">app.forwarding.mail.receiver</string>
-    <string name="pref_app_forwarding_mail_receiver_name">app.forwarding.mail.receiver.name</string>
+    <string name="pref_app_receiver_mail_enable">app.module.mailmonitor.MailMonitorModule</string>
+
+    <string name="pref_app_forwarding_sms_enable">app.module.smsforwarding.SMSForwardingModule</string>
+    <string name="pref_app_forwarding_sms_receiver">app.module.smsforwarding.SMSForwardingModule.receiver</string>
+
+    <string name="pref_app_forwarding_mail_enable">app.module.mailforwarding.MailForwardingModule</string>
+    <string name="pref_app_forwarding_mail_sender">app.module.mailforwarding.MailForwardingModule.sender</string>
+    <string name="pref_app_forwarding_mail_sender_name">app.module.mailforwarding.MailForwardingModule.sender.name</string>
+    <string name="pref_app_forwarding_mail_receiver">app.module.mailforwarding.MailForwardingModule.receiver</string>
+    <string name="pref_app_forwarding_mail_receiver_name">app.module.mailforwarding.MailForwardingModule.receiver.name</string>
 
     <string name="pref_mail_auth_username">mail.auth.username</string>
     <string name="pref_mail_auth_password">mail.auth.password</string>
-
     <string name="pref_mail_smtp_host">mail.smtp.host</string>
     <string name="pref_mail_smtp_port">mail.smtp.port</string>
     <string name="pref_mail_smtp_ssl_enable">mail.smtp.ssl.enable</string>

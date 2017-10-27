@@ -34,8 +34,8 @@ public class SettingActivity extends ExtendedActivity implements CompoundButton.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_setting);
 
-        preferencesMap.put(ApplicationPreferences.MODULE_NAME, new ApplicationPreferences(this));
-        preferencesMap.put(MailPreferences.MODULE_NAME, new MailPreferences(this));
+        preferencesMap.put(ApplicationPreferences.DB_NAME, new ApplicationPreferences(this));
+        preferencesMap.put(MailPreferences.DB_NAME, new MailPreferences(this));
 
         loadSettings();
         initComponents();

@@ -15,7 +15,11 @@
 
         <service
             android:name=".core.service.InformationService"
-            android:process=":InformationService" />
+            android:process=":InformationService">
+            <meta-data
+                android:name="modules"
+                android:value="@string/service_modules" />
+        </service>
 
         <activity android:name=".activity.MainActivity">
             <meta-data

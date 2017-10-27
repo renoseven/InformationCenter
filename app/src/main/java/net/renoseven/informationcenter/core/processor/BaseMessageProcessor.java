@@ -30,7 +30,7 @@ public abstract class BaseMessageProcessor implements Runnable {
     public void run() {
         try {
             doTask();
-           onTaskFinished();
+            onTaskFinished();
         }
         catch (Exception e) {
             onTaskFailed(e);

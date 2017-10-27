@@ -39,8 +39,8 @@ class MailForwardingProcessor extends BaseMessageProcessor {
     @Override
     protected void doTask() throws Exception {
         Log.i(TAG, "Forward as mail");
-        TrayPreferences appPref = preferencesMap.get(ApplicationPreferences.MODULE_NAME);
-        TrayPreferences mailPref = preferencesMap.get(MailPreferences.MODULE_NAME);
+        TrayPreferences appPref = preferencesMap.get(ApplicationPreferences.DB_NAME);
+        TrayPreferences mailPref = preferencesMap.get(MailPreferences.DB_NAME);
 
         Properties serverConfig = PreferencesUtil.convertToProperties(mailPref);
         serverConfig.setProperty(MailPreferences.CONFIG_MAIL_DEBUG, "false");
