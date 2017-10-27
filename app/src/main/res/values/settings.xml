@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <string name="service_name">.core.service.InformationService</string>
     <string name="service_modules">
         .module.smsmonitor.SMSMonitorModule;
         .module.smsforwarding.SMSForwardingModule;
