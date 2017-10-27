@@ -60,14 +60,15 @@ public class InformationService extends NIAService {
         Log.d(TAG, "Initializing modules...");
         for(String moduleName : modules) {
             moduleName = moduleName.trim();
-            Log.v(TAG, getPackageName() + moduleName);
+            String fullModuleName = getPackageName() + moduleName;
+            Log.v(TAG, fullModuleName);
             // 'app' is the prefix of database name
             if(appPref.getBoolean( "app" + moduleName, false)) {
                 try {
-                    ServiceModule serviceModule = (ServiceModule) Class.forName(getPackageName() + moduleName).newInstance();
+                    ServiceModule serviceModule = (ServiceModule) Class.forName(fullModuleName).newInstance();
                     serviceModules.add(serviceModule);
                 } catch (Exception e) {
-                    Log.e(TAG, "Cannot initialize" + moduleName);
+                    Log.e(TAG, "Cannot initialize " + fullModuleName);
                 }
             }
         }
